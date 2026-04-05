@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dl2giksr5stij"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oh6kn"]
+
+[node name="wall" type="AnimatableBody2D" unique_id=1775459361]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1991606695]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=22594969]
+shape = SubResource("RectangleShape2D_oh6kn")

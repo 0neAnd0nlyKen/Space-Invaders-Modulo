@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bca2fj0u0tbni"]
+
+[ext_resource type="Script" uid="uid://b2ueiii8ikh7g" path="res://scripts/character_controller.gd" id="1_4flbx"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_sh265"]
+radius = 20.0
+height = 40.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=339184942 node_paths=PackedStringArray("muzzle")]
+script = ExtResource("1_4flbx")
+muzzle = NodePath("muzzle")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1479625545]
+mesh = SubResource("SphereMesh_sh265")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1404395139]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_4flbx")
+
+[node name="muzzle" type="Node2D" parent="." unique_id=1564871202]

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cjc11r5t65yox"]
+
+[ext_resource type="Script" uid="uid://dfnl4jf31upom" path="res://weapon.gd" id="1_swcir"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_swcir"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o2wld"]
+radius = 10.0
+height = 30.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8xwfw"]
+
+[node name="weapon" type="Area2D" unique_id=155060632]
+script = ExtResource("1_swcir")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1606087718]
+shape = SubResource("CapsuleShape2D_swcir")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1574184940]
+mesh = SubResource("CapsuleMesh_o2wld")
+texture = SubResource("PlaceholderTexture2D_8xwfw")

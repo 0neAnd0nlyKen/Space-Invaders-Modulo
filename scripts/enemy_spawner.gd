@@ -22,7 +22,3 @@ func _process(delta: float) -> void:
 			add_child(newEnemy)
 			newEnemy.position = spawnPoint
 	
-
-#func _on_any_child_exiting(child_node: Node):
-	#print("A child is being removed: ", child_node.name)
-	#print("Child type: ", child_node.get_class())

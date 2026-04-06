@@ -11,7 +11,13 @@ func _ready():
 
 func _on_play_pressed():
 	print("Play button pressed - Starting game...")
-	get_tree().change_scene_to_file("res://scenes/world.tscn")
+	SelectionInstructions.data = {
+		"type": 0,
+		"next": "world",
+		"title": "Choose Weapon"
+	}
+	get_tree().change_scene_to_file("res://scenes/selection_screen.tscn")
+	
 
 func _on_credits_pressed():
 	print("Credits button pressed - Showing credits...")

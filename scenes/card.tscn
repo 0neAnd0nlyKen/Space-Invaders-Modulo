@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://ld7yg6n3wn6v"]
 
+[ext_resource type="Script" uid="uid://brmyv8vgvmqpc" path="res://scripts/card.gd" id="1_6u4wf"]
 [ext_resource type="Texture2D" uid="uid://bylbxqgt88l4e" path="res://assets/gun sprites/1 9.png" id="1_d81rb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_up0cc"]
@@ -7,20 +8,23 @@ font_size = 25
 
 [sub_resource type="LabelSettings" id="LabelSettings_d81rb"]
 
-[node name="Card" type="Control" unique_id=1832861386]
-layout_mode = 3
+[node name="Card" type="TextureButton" unique_id=956046575]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -852.0
-offset_bottom = -248.0
+offset_bottom = -298.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6u4wf")
 
 [node name="Background2" type="ColorRect" parent="." unique_id=792466693]
-layout_mode = 0
-offset_right = 300.0
-offset_bottom = 400.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(150, 200)
 color = Color(0.23154128, 0.015890138, 0.08664464, 1)
 

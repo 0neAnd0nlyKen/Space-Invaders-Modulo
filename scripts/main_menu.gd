@@ -3,7 +3,7 @@ extends Control
 @onready var play_button = $PlayButton
 @onready var credits_button = $CreditsButton
 @onready var exit_button = $ExitButton
-@onready var default_button = $DefaultButton
+@onready var leaderboard_button = $LeaderboardButton
 
 func _ready():
 	# Set focus to play button by default
@@ -31,5 +31,6 @@ func _on_exit_pressed():
 	print("Exit button pressed - Quitting game...")
 	get_tree().quit()
 
-func _on_default_pressed():
-	print("Default button pressed - Loading default settings...")
+func _on_leaderboard_button_pressed():
+	print("leaderboard button pressed - Loading leaderboard...")
+	get_tree().change_scene_to_file("res://scenes/leaderboard.tscn")

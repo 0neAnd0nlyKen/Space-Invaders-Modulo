@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bgkrgfyjdcbu8"]
+
+[ext_resource type="Texture2D" uid="uid://b64y6jixhrni3" path="res://icon.svg" id="1_mrg81"]
+
+[node name="Leaderboard" type="Node2D" unique_id=1533360782]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1194892965]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_mrg81")

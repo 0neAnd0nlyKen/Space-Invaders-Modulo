@@ -3,32 +3,41 @@ extends CharacterBody2D
 #@export var charVis:Sprite2D
 @export var muzzle:Node2D
 @export var speed:float = 300
-@export var weaponType:int
-var weapon
+@export var weaponType:String
 var move:Vector2
 var moveDir
+var weapon
 var fire
-var fireRate:float = 0.5
+var fireRate:float
 var count:float = 0
 
 func _ready() -> void:
-	pass
-	#if charVis == null:
-		#charVis = $Sprite2D
-	
+	setup(SelectionInstructions.playerData)
+
+func setup(data:Dictionary):
+	if data["type"] == 0:
+		weapon = load("res://scenes/" + data["ID"] + ".tscn")
+		weaponType = data["ID"]
+		var initial:FriendlyWeapon = weapon.instantiate()
+		add_child(initial)
+		initial.setup(weaponType, muzzle.position)
+		fireRate = initial.fireRate
+		initial.queue_free()
+
+func get_input():
+	moveDir = Input.get_axis("left", "right")
+	fire = Input.is_action_pressed("fire")
+
 func _physics_process(delta: float) -> void:
 	count += delta
 	get_input()
-	CheckGunType()
 	var xMove:float = moveDir * speed
 	
 	if fire and count >= fireRate:
 		count = 0
 		var bullet:FriendlyWeapon = weapon.instantiate()
 		add_child(bullet)
-		fireRate = bullet.fireRate
-		bullet.gunType = weaponType
-		bullet.position = muzzle.position
+		bullet.setup(weaponType, muzzle.position)
 	
 	if xMove: #apply horizontal movement
 		velocity.x = xMove
@@ -37,22 +46,3 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide() #move
 	
-
-func get_input():
-	moveDir = Input.get_axis("left", "right")
-	fire = Input.is_action_pressed("fire")
-	if Input.is_action_just_pressed("weapon 1"):
-			weaponType = 0
-	elif Input.is_action_just_pressed("weapon 2"):
-		weaponType = 1
-	elif Input.is_action_just_pressed("weapon 3"):
-		weaponType = 2
-
-func CheckGunType():
-	match weaponType:
-		0:
-			weapon = load("res://scenes/rifle.tscn")
-		1:
-			weapon = load("res://scenes/sniper.tscn")
-		2:
-			weapon = load("res://scenes/shotgun.tscn")

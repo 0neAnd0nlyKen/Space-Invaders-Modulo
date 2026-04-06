@@ -13,7 +13,7 @@ var selected:Array = []
 var selectedIcons:Array = []
 var weapons:Array = ["rifle", "sniper", "shotgun", "explosive", "sword", "saw", "repulsar"]
 var perks:Array = ["shield", "sprint", "rewind", "ZAWARUDO", "repair", "summon", "revive"]
-var upgrades:Array = ["damage", "HF", "shrapnel", "throwable", "inversion", "OHE", "DOT"]
+var upgrades:Array = ["damage", "HF", "shrapnel", "throwable", "inversion", "OHE", "DOT", "metal pipe"]
 var icons:Array = [
 	"res://assets/weapon sprites/rifle.png", "res://assets/weapon sprites/railgun.png",
 	"res://assets/weapon sprites/shotgun.png", "res://assets/weapon sprites/explosive.png",
@@ -54,19 +54,31 @@ func setup(instructions:Dictionary) -> void:
 	C1.setup(selected[0], selectedIcons[0])
 	C2.setup(selected[1], selectedIcons[1])
 	C3.setup(selected[2], selectedIcons[2])
+	
 
 func _process(_delta: float) -> void:
 	if picked:
 		nextButton.disabled = false
 
+func FillData(itemID:String):
+	SelectionInstructions.playerData = {}
+	SelectionInstructions.playerData = {
+		"type": SelectionInstructions.data["type"],
+		"ID": itemID
+	}
+
 func _on_card_1_pressed() -> void:
+	FillData(selected[0])
 	picked = true
 
 func _on_card_2_pressed() -> void:
+	FillData(selected[1])
 	picked = true
 
 func _on_card_3_pressed() -> void:
+	FillData(selected[2])
 	picked = true
 
 func _on_next_button_pressed() -> void:
-	get_tree().change_scene_to_file(nextScene)
+	if SelectionInstructions.data["type"] == 0:
+		get_tree().change_scene_to_file(nextScene)

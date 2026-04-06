@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cjc11r5t65yox"]
 
-[ext_resource type="Script" uid="uid://dfnl4jf31upom" path="res://weapon.gd" id="1_swcir"]
+[ext_resource type="Script" uid="uid://dfnl4jf31upom" path="res://scripts/ranged_weapon.gd" id="1_20e1h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_swcir"]
 
@@ -11,7 +11,8 @@ height = 30.0
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8xwfw"]
 
 [node name="weapon" type="Area2D" unique_id=155060632]
-script = ExtResource("1_swcir")
+script = ExtResource("1_20e1h")
+fireRate = 0.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1606087718]
 shape = SubResource("CapsuleShape2D_swcir")

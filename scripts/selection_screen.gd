@@ -10,9 +10,16 @@ extends Control
 var picked:bool
 var nextScene:String
 var selected:Array = []
-var weapons:Array = ["rifle", "sniper", "shotgun", "explosive", "sword", "saw", "repulser"]
+var selectedIcons:Array = []
+var weapons:Array = ["rifle", "sniper", "shotgun", "explosive", "sword", "saw", "repulsar"]
 var perks:Array = ["shield", "sprint", "rewind", "ZAWARUDO", "repair", "summon", "revive"]
 var upgrades:Array = ["damage", "HF", "shrapnel", "throwable", "inversion", "OHE", "DOT"]
+var icons:Array = [
+	"res://assets/weapon sprites/rifle.png", "res://assets/weapon sprites/railgun.png",
+	"res://assets/weapon sprites/shotgun.png", "res://assets/weapon sprites/explosive.png",
+	"res://assets/weapon sprites/sword.png", "res://assets/weapon sprites/saw.png",
+	"res://assets/weapon sprites/repulsar.png"
+	]
 
 func _ready() -> void:
 	setup(SelectionInstructions.data)
@@ -26,17 +33,27 @@ func setup(instructions:Dictionary) -> void:
 			while selected.size() < 3:
 				var pick = weapons.pick_random()
 				if pick not in selected:
+					var index = weapons.find(pick)
 					selected.append(pick)
+					selectedIcons.append(icons[index])
 		1:
 			while selected.size() < 3:
 				var pick = perks.pick_random()
 				if pick not in selected:
+					var index = weapons.find(pick)
 					selected.append(pick)
+					selectedIcons.append(icons[index])
 		2:
 			while selected.size() < 3:
 				var pick = upgrades.pick_random()
 				if pick not in selected:
+					var index = weapons.find(pick)
 					selected.append(pick)
+					selectedIcons.append(icons[index])
+	
+	C1.setup(selected[0], selectedIcons[0])
+	C2.setup(selected[1], selectedIcons[1])
+	C3.setup(selected[2], selectedIcons[2])
 
 func _process(_delta: float) -> void:
 	if picked:

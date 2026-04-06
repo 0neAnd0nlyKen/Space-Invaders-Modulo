@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bylbxqgt88l4e"
-path="res://.godot/imported/1 9.png-9a4316248d5c1c81a9f75eeafee67eb1.ctex"
+uid="uid://bj83oy8jrndh1"
+path="res://.godot/imported/repulsar.png-97e4f53ece821eba3710ea69170f749e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gun sprites/1 9.png"
-dest_files=["res://.godot/imported/1 9.png-9a4316248d5c1c81a9f75eeafee67eb1.ctex"]
+source_file="res://assets/weapon sprites/repulsar.png"
+dest_files=["res://.godot/imported/repulsar.png-97e4f53ece821eba3710ea69170f749e.ctex"]
 
 [params]
 

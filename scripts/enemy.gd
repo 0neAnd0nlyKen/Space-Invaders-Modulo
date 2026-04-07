@@ -1,37 +1,47 @@
 extends CharacterBody2D
 class_name Enemy
 
-@export var hitbox:Area2D
-@export var speed:float = 30
-var health:int = 15
+@export var hitbox: Area2D
+@export var max_health: int = 15
+@export var enemy_score: int = 100
+@export var base_speed: float = 30
 
-@export var enemy_score: int = 100  # Each enemy can have different score values
+var health: int
+var time_alive: float = 0.0
 
 signal enemy_defeated(score_value: int)
 signal enemy_landed(enemy_health: int)
 
-func die():
-	# When enemy dies (collision, health reaches 0, etc.)
-	enemy_defeated.emit(enemy_score)
-	queue_free()  # Remove the enemy from the scene
-
 func _ready() -> void:
-	if hitbox == null:
-		hitbox = $CollisionShape2D
+	health = max_health
+	
+	# Connect damage detection
+	if hitbox and hitbox.area_entered.is_connected(_on_area_2d_area_entered) == false:
+		hitbox.area_entered.connect(_on_area_2d_area_entered)
 
-func _process(_delta: float) -> void:
-	velocity.y = 50
+func _process(delta: float) -> void:
+	time_alive += delta
+	move_enemy(delta)
 	move_and_slide()
+
+# Override this in subclasses for different movement patterns
+func move_enemy(_delta: float) -> void:
+	velocity.y = base_speed
+
+func take_damage(damage: int) -> void:
+	health -= damage
+	if health <= 0:
+		die()
+
+func die() -> void:
+	enemy_defeated.emit(enemy_score)
+	queue_free()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is FriendlyWeapon:
-		health -= area.damage
-		if health <= 0:
-			die()
-		#print_debug("health is ", health)
-	#print_debug(area.name)
+		take_damage(area.damage)
 
-func enemy_lands():
+func enemy_lands() -> void:
 	queue_free()
 	enemy_landed.emit(health)
 

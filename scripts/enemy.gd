@@ -8,6 +8,7 @@ var health:int = 15
 @export var enemy_score: int = 100  # Each enemy can have different score values
 
 signal enemy_defeated(score_value: int)
+signal enemy_landed(enemy_health: int)
 
 func die():
 	# When enemy dies (collision, health reaches 0, etc.)
@@ -29,3 +30,11 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			die()
 		#print_debug("health is ", health)
 	#print_debug(area.name)
+
+func enemy_lands():
+	queue_free()
+	enemy_landed.emit(health)
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is AnimatableBody2D:
+		enemy_lands()

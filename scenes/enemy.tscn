@@ -7,10 +7,11 @@ radius = 3.5
 height = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7p1mj"]
-radius = 35.0
+radius = 48.4
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=58177044]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=58177044 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("1_7k104")
+hitbox = NodePath("Area2D")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=632733248]
 position = Vector2(1, 0)
@@ -25,4 +26,11 @@ shape = SubResource("CircleShape2D_7p1mj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=552375236]
 shape = SubResource("CircleShape2D_7p1mj")
 
+[node name="EnemyMovementNode" type="Node" parent="." unique_id=1218931699]
+
+[node name="EnemyHealthNode" type="Node" parent="." unique_id=1675518477]
+
+[node name="EnemyScoreNode" type="Node" parent="." unique_id=680154934]
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -25,3 +25,4 @@ func _process(delta: float) -> void:
 			if world != null and world.has_method("_on_enemy_defeated"):
 				print("Connecting enemy defeated signal to world")
 				newEnemy.enemy_defeated.connect(world._on_enemy_defeated)
+				newEnemy.enemy_landed.connect(world._on_enemy_landed)

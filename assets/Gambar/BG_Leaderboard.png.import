@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgra5adif10p6"
-path="res://.godot/imported/credits_button.svg-b2b1e9db6fb816f577dae2c8a1e8cefe.ctex"
+uid="uid://bpfrput2k42i0"
+path="res://.godot/imported/BG_Leaderboard.png-b7a220df8ce431f668f66d833708273b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/main_menu/credits/credits_button.svg"
-dest_files=["res://.godot/imported/credits_button.svg-b2b1e9db6fb816f577dae2c8a1e8cefe.ctex"]
+source_file="res://assets/Gambar/BG_Leaderboard.png"
+dest_files=["res://.godot/imported/BG_Leaderboard.png-b7a220df8ce431f668f66d833708273b.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

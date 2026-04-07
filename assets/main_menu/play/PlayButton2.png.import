@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caaryqct8gmvl"
-path="res://.godot/imported/exit_button.svg-867f72994e3dfd2ab3cf994039b151da.ctex"
+uid="uid://3nqndim7ubka"
+path="res://.godot/imported/PlayButton2.png-2336e534017be312a912e679144864b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/main_menu/exit/exit_button.svg"
-dest_files=["res://.godot/imported/exit_button.svg-867f72994e3dfd2ab3cf994039b151da.ctex"]
+source_file="res://assets/main_menu/play/PlayButton2.png"
+dest_files=["res://.godot/imported/PlayButton2.png-2336e534017be312a912e679144864b5.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

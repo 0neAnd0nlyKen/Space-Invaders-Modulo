@@ -49,6 +49,14 @@ func spawn_enemy_variation(spawn_point: Vector2) -> Enemy:
 			else:
 				newEnemy = enemy_base.instantiate()
 				newEnemy.set_script(preload("res://scripts/enemy/basic_enemy.gd"))
+		3:
+			if wave_counter > 5:  # Only spawn shooters after wave 5
+				newEnemy = enemy_base.instantiate()
+				newEnemy.set_script(preload("res://scripts/enemy/shooter_enemy.gd"))
+			else:
+				newEnemy = enemy_base.instantiate()
+				newEnemy.set_script(preload("res://scripts/enemy/basic_enemy.gd"))
+	
 	add_child(newEnemy)
 	newEnemy.position = spawn_point
 	wave_counter += 1

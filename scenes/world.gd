@@ -20,12 +20,18 @@ func _on_enemy_defeated(enemyScore: int):
 func _on_enemy_landed(enemyHealth: int):
 	health -= enemyHealth
 	updateLabel(healthLabel, health)
+	if health <= 0:
+		gameOver()
 
 func gameOver():
 	get_tree().paused = true
 	updateHighscore()
+	sfx_game_over()
 	# buka scene/overlay game over
 	pass
 	
 func updateHighscore():
+	pass
+
+func sfx_game_over():
 	pass

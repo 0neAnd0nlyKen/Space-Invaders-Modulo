@@ -34,6 +34,7 @@ func take_damage(damage: int) -> void:
 		die()
 
 func die() -> void:
+	sfx_enemy_died()
 	enemy_defeated.emit(enemy_score)
 	queue_free()
 
@@ -42,9 +43,16 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		take_damage(area.damage)
 
 func enemy_lands() -> void:
-	queue_free()
+	sfx_enemy_landed()
 	enemy_landed.emit(health)
+	queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is AnimatableBody2D:
 		enemy_lands()
+
+func sfx_enemy_landed(): #musuh sampai lantai
+	pass
+
+func sfx_enemy_died(): #musuh dibunuh
+	pass

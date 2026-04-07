@@ -26,11 +26,13 @@ func _physics_process(delta: float) -> void:
 		count = 0
 		var bullet:FriendlyWeapon = weapon.instantiate()
 		add_child(bullet)
+		sfx_fire_weapon()
 		fireRate = bullet.fireRate
 		bullet.gunType = weaponType
 		bullet.position = muzzle.position
 	
 	if xMove: #apply horizontal movement
+		sfx_move_player()
 		velocity.x = xMove
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
@@ -42,7 +44,7 @@ func get_input():
 	moveDir = Input.get_axis("left", "right")
 	fire = Input.is_action_pressed("fire")
 	if Input.is_action_just_pressed("weapon 1"):
-			weaponType = 0
+		weaponType = 0
 	elif Input.is_action_just_pressed("weapon 2"):
 		weaponType = 1
 	elif Input.is_action_just_pressed("weapon 3"):
@@ -56,3 +58,9 @@ func CheckGunType():
 			weapon = load("res://scenes/sniper.tscn")
 		2:
 			weapon = load("res://scenes/shotgun.tscn")
+
+func sfx_fire_weapon(): # player tembak
+	pass
+
+funx sfx_move_player(): # player gerak kiri/kanan
+	pass

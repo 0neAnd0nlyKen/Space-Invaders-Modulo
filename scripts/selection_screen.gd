@@ -60,13 +60,19 @@ func _process(_delta: float) -> void:
 		nextButton.disabled = false
 
 func _on_card_1_pressed() -> void:
+	sfx_weapon_picked()
 	picked = true
 
 func _on_card_2_pressed() -> void:
+	sfx_weapon_picked()
 	picked = true
 
 func _on_card_3_pressed() -> void:
+	sfx_weapon_picked()
 	picked = true
 
 func _on_next_button_pressed() -> void:
 	get_tree().change_scene_to_file(nextScene)
+
+func sfx_weapon_picked(): #memilih satu senjata
+	pass

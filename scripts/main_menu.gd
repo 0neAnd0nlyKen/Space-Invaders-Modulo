@@ -10,6 +10,7 @@ func _ready():
 	play_button.grab_focus()
 
 func _on_play_pressed():
+	sfx_button_pressed()
 	print("Play button pressed - Starting game...")
 	SelectionInstructions.data = {
 		"type": 0,
@@ -20,6 +21,7 @@ func _on_play_pressed():
 	
 
 func _on_credits_pressed():
+	sfx_button_pressed()
 	print("Credits button pressed - Showing credits...")
 	# For now, just show a simple message. You can create a credits scene later
 	var credits_text = """
@@ -34,9 +36,14 @@ Thank you for playing!
 	print(credits_text)
 
 func _on_exit_pressed():
+	sfx_button_pressed()
 	print("Exit button pressed - Quitting game...")
 	get_tree().quit()
 
 func _on_leaderboard_button_pressed():
+	sfx_button_pressed()
 	print("leaderboard button pressed - Loading leaderboard...")
 	get_tree().change_scene_to_file("res://scenes/leaderboard.tscn")
+
+func sfx_button_pressed(): #salah satu menu dipilih
+	pass

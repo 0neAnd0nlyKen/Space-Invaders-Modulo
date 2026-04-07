@@ -5,6 +5,7 @@ class_name EnemySpawner
 @export var enemy:  = preload("res://scenes/enemy.tscn")
 @export var maxEnemies: int = 10
 @export var spawnRate: float = 2.0
+@export var world: World
 var spawnTimer: float = 0.0
 
 func _ready() -> void:
@@ -21,4 +22,6 @@ func _process(delta: float) -> void:
 			var newEnemy: Enemy = enemy.instantiate()
 			add_child(newEnemy)
 			newEnemy.position = spawnPoint
-	
+			if world != null and world.has_method("_on_enemy_defeated"):
+				print("Connecting enemy defeated signal to world")
+				newEnemy.enemy_defeated.connect(world._on_enemy_defeated)

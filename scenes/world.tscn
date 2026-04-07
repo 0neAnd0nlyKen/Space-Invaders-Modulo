@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://dnegevopexb88"]
 
 [ext_resource type="PackedScene" uid="uid://bca2fj0u0tbni" path="res://scenes/player.tscn" id="1_fj7yv"]
+[ext_resource type="Script" uid="uid://08onpqgp8kdv" path="res://scenes/world.gd" id="1_k0juu"]
 [ext_resource type="PackedScene" uid="uid://dl2giksr5stij" path="res://scenes/wall.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://bqc8atpjvo1x1" path="res://scenes/spawner.tscn" id="3_tlwt5"]
 
-[node name="world" type="Node2D" unique_id=1081092939]
+[node name="world" type="Node2D" unique_id=1081092939 node_paths=PackedStringArray("healthLabel", "scoreLabel")]
+script = ExtResource("1_k0juu")
+scoreLabel = NodePath("ScoreLabel")
 
 [node name="player" parent="." unique_id=339184942 instance=ExtResource("1_fj7yv")]
 position = Vector2(0, 20)
@@ -28,7 +31,14 @@ scale = Vector2(58, 0.5)
 
 [node name="enemy_environmnet" type="Node2D" parent="Environment" unique_id=106923971]
 
-[node name="spawner" parent="Environment/enemy_environmnet" unique_id=908297173 instance=ExtResource("3_tlwt5")]
+[node name="spawner" parent="Environment/enemy_environmnet" unique_id=908297173 node_paths=PackedStringArray("world") instance=ExtResource("3_tlwt5")]
+world = NodePath("../../..")
 
 [node name="spawnpoint" type="Node2D" parent="Environment/enemy_environmnet" unique_id=175468928]
 position = Vector2(0, -550)
+[node name="ScoreLabel" type="Label" parent="." unique_id=1327052509]
+offset_left = 377.0
+offset_top = -489.0
+offset_right = 417.0
+offset_bottom = -466.0
+text = "0"

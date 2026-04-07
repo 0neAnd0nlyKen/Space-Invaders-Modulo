@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://diji0b6osyma5"]
+
+[ext_resource type="Script" uid="uid://d0oh3dv2utfo" path="res://scripts/selection_screen.gd" id="1_dyftk"]
+[ext_resource type="PackedScene" uid="uid://ld7yg6n3wn6v" path="res://scenes/card.tscn" id="2_ednkh"]
+[ext_resource type="Texture2D" uid="uid://i8yd1esvtkdt" path="res://assets/next_button.svg" id="3_2nlgg"]
+
+[node name="Selection_Screen" type="Control" unique_id=1460960415]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dyftk")
+
+[node name="Background" type="ColorRect" parent="." unique_id=491348166]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.2, 1)
+
+[node name="Title" type="Label" parent="." unique_id=2094188417]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -209.0
+offset_top = 70.0
+offset_right = 209.0
+offset_bottom = 137.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 48
+text = "Pick Your Weapon"
+horizontal_alignment = 1
+
+[node name="Card1" parent="." unique_id=956046575 instance=ExtResource("2_ednkh")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 76.0
+offset_top = 220.0
+offset_right = 376.0
+offset_bottom = 580.0
+
+[node name="Card2" parent="." unique_id=145042403 instance=ExtResource("2_ednkh")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 426.0
+offset_top = 220.0
+offset_right = 726.0
+offset_bottom = 580.0
+
+[node name="Card3" parent="." unique_id=62717962 instance=ExtResource("2_ednkh")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 776.0
+offset_top = 220.0
+offset_right = 1076.0
+offset_bottom = 580.0
+
+[node name="Next_Button" type="TextureButton" parent="." unique_id=961357624]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 418.0
+offset_top = 152.0
+offset_right = 470.0
+offset_bottom = 192.0
+grow_horizontal = 2
+texture_normal = ExtResource("3_2nlgg")
+
+[connection signal="pressed" from="Card1" to="." method="_on_card_1_pressed"]
+[connection signal="pressed" from="Card2" to="." method="_on_card_2_pressed"]
+[connection signal="pressed" from="Card3" to="." method="_on_card_3_pressed"]
+[connection signal="pressed" from="Next_Button" to="." method="_on_next_button_pressed"]

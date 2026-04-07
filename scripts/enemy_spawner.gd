@@ -38,6 +38,17 @@ func spawn_enemy_variation(spawn_point: Vector2) -> Enemy:
 			# BasicEnemy
 			newEnemy = enemy_base.instantiate()
 			newEnemy.set_script(preload("res://scripts/enemy/basic_enemy.gd"))
+		1:
+			# WaveEnemy
+			newEnemy = enemy_base.instantiate()
+			newEnemy.set_script(preload("res://scripts/enemy/wave_enemy.gd"))
+		2:
+			if wave_counter > 3:  # Only spawn heavy after wave 3
+				newEnemy = enemy_base.instantiate()
+				newEnemy.set_script(preload("res://scripts/enemy/heavy_enemy.gd"))
+			else:
+				newEnemy = enemy_base.instantiate()
+				newEnemy.set_script(preload("res://scripts/enemy/basic_enemy.gd"))
 	add_child(newEnemy)
 	newEnemy.position = spawn_point
 	wave_counter += 1

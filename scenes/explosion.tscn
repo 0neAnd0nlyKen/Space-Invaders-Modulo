@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://be7tsrwuschn4"]
+
+[ext_resource type="Texture2D" uid="uid://cb2nmskhgqsjh" path="res://assets/weapon sprites/explosive bullet.png" id="1_17npe"]
+[ext_resource type="Script" uid="uid://dtfshtc4nln27" path="res://scenes/explosion.gd" id="1_nfeox"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nfeox"]
+radius = 50.0
+
+[node name="weapon" type="Area2D" unique_id=155060632]
+script = ExtResource("1_nfeox")
+damage = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1606087718]
+shape = SubResource("CircleShape2D_nfeox")
+
+[node name="Travel_Sprite" type="Sprite2D" parent="." unique_id=1098441787]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_17npe")

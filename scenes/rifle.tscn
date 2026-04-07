@@ -1,14 +1,9 @@
 [gd_scene format=3 uid="uid://cjc11r5t65yox"]
 
 [ext_resource type="Script" uid="uid://dfnl4jf31upom" path="res://scripts/ranged_weapon.gd" id="1_20e1h"]
+[ext_resource type="Texture2D" uid="uid://c07m6ijy78uul" path="res://assets/weapon sprites/rifle bullet.png" id="2_l7v2r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_swcir"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_o2wld"]
-radius = 10.0
-height = 30.0
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8xwfw"]
 
 [node name="weapon" type="Area2D" unique_id=155060632]
 script = ExtResource("1_20e1h")
@@ -17,6 +12,6 @@ fireRate = 0.2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1606087718]
 shape = SubResource("CapsuleShape2D_swcir")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1574184940]
-mesh = SubResource("CapsuleMesh_o2wld")
-texture = SubResource("PlaceholderTexture2D_8xwfw")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=60114665]
+position = Vector2(0, 3)
+texture = ExtResource("2_l7v2r")

@@ -1,16 +1,11 @@
 [gd_scene format=3 uid="uid://p5y7iahaufkw"]
 
 [ext_resource type="Script" uid="uid://dfnl4jf31upom" path="res://scripts/ranged_weapon.gd" id="1_voyse"]
+[ext_resource type="Texture2D" uid="uid://p7r4kr6gvj80" path="res://assets/weapon sprites/shotgun bullet.png" id="2_gnj2g"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_swcir"]
 radius = 5.0
 height = 10.0
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_o2wld"]
-radius = 5.0
-height = 10.0
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8xwfw"]
 
 [node name="weapon" type="Area2D" unique_id=155060632]
 script = ExtResource("1_voyse")
@@ -19,6 +14,5 @@ fireRate = 0.65
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1606087718]
 shape = SubResource("CapsuleShape2D_swcir")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1574184940]
-mesh = SubResource("CapsuleMesh_o2wld")
-texture = SubResource("PlaceholderTexture2D_8xwfw")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2143995152]
+texture = ExtResource("2_gnj2g")

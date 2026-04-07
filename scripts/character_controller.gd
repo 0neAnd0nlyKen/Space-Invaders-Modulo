@@ -38,9 +38,7 @@ func _physics_process(delta: float) -> void:
 		spinned = false
 	
 	if weaponType == "saw":
-		#print_debug(get_children())
 		if fire and not spinned:
-			print_debug("wkwek")
 			var sawblade:FriendlyWeapon = weapon.instantiate()
 			add_child(sawblade)
 			sawblade.setup(weaponType, muzzle.position)

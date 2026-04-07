@@ -9,8 +9,10 @@ var explosion: = preload("res://scenes/weapons/explosion.tscn")
 var origin:Vector2
 var wType:String
 var hitbox:CollisionShape2D
+var sprite:Sprite2D
 var objHit:Node2D
 var die:bool = false
+const meleeWeapons:Array = ["sword", "saw", "repulsar"]
 
 func setup(type:String, pos:Vector2):
 	hitbox = $CollisionShape2D
@@ -37,15 +39,15 @@ func setup(type:String, pos:Vector2):
 	
 
 func _process(_delta: float) -> void:
-	position.y += speed
-	
-	if (is_instance_valid(objHit) and objHit is Enemy) or position.y < -1000:
-		if wType == "explosive":
-			var hit:FriendlyWeapon = explosion.instantiate()
-			var par = get_parent()
-			par.add_child(hit)
-			hit.explode(position)
-		queue_free()
+	if not meleeWeapons.has(wType):
+		position.y += speed
+		if (is_instance_valid(objHit) and objHit is Enemy) or position.y < -1000:
+			if wType == "explosive":
+				var hit:FriendlyWeapon = explosion.instantiate()
+				var par = get_parent()
+				par.add_child(hit)
+				hit.explode(position)
+			queue_free()
 
 func _bullet_hit(target:Node2D):
 	objHit = target

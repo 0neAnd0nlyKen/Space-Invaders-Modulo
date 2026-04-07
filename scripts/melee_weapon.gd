@@ -18,23 +18,24 @@ func setup(type:String, pos:Vector2):
 		"sword":
 			reach = 170
 			damage = 13.0
-			fireRate = 0.6
+			fireRate = 1.0
 			position.y += (reach/2 + 30)
 			radius = -(position.distance_to(pos))
 		"saw":
 			reach = 140
-			damage = 0.3
-			fireRate = 0.05
+			damage = 3.0
+			fireRate = 0.2
 			position.y += -(reach/2 + 10)
 			rotateSpeed = -1
+			sprite = $Sprite
 		"repulsar":
-			reach = 80
+			reach = 180
 			damage = 8.0
-			fireRate = 1.0
+			fireRate = 0.8
+			#position.y += -(reach/2 + 10)
 	
 
 func _physics_process(delta: float) -> void:
-	#print_debug(wType)
 	match wType:
 		"sword":
 			if rotateTimer > .35:
@@ -47,7 +48,6 @@ func _physics_process(delta: float) -> void:
 					sin(rotateAngle) * radius
 				)
 				rotation = (rotateAngle + 29.8)
-				print_debug(rotateAngle)
 			else:
 				queue_free()
 		"saw":
@@ -55,10 +55,14 @@ func _physics_process(delta: float) -> void:
 			press = Input.is_action_pressed("fire")
 			if press and count >= fireRate:
 				DealDamage()
-			else:
-				damage = 0
-			rotate(rotateSpeed)
-			if count > 5:
+			sprite.rotate(rotateSpeed)
+			if count > 3:
+				queue_free()
+			if is_instance_valid(objHit) and objHit is Enemy:
+				print_debug("yea")
+		"repulsar":
+			count += delta
+			if count > .3:
 				queue_free()
 		
 
@@ -67,4 +71,4 @@ func _bullet_hit(target:Node2D):
 
 func DealDamage():
 	count = 0
-	damage = 0.3
+	damage = 5

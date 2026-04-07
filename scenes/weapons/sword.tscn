@@ -1,20 +1,20 @@
 [gd_scene format=3 uid="uid://cldejupmaq46"]
 
-[ext_resource type="Script" uid="uid://btglcs0k838gt" path="res://scenes/melee_weapon.gd" id="1_n355p"]
-[ext_resource type="Texture2D" uid="uid://bt3otufjfv84j" path="res://assets/weapon sprites/sword.png" id="2_n355p"]
+[ext_resource type="Script" uid="uid://btglcs0k838gt" path="res://scripts/melee_weapon.gd" id="1_3pnln"]
+[ext_resource type="Texture2D" uid="uid://bt3otufjfv84j" path="res://assets/weapon sprites/sword.png" id="2_58ehi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o2ns3"]
 radius = 15.0
 height = 170.0
 
 [node name="weapon" type="Area2D" unique_id=155060632]
-script = ExtResource("1_n355p")
+script = ExtResource("1_3pnln")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1606087718]
 shape = SubResource("CapsuleShape2D_o2ns3")
 
-[node name="Travel_Sprite" type="Sprite2D" parent="." unique_id=1098441787]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1098441787]
 position = Vector2(0, 25)
 rotation = -1.5707964
 scale = Vector2(0.8, 0.8)
-texture = ExtResource("2_n355p")
+texture = ExtResource("2_58ehi")

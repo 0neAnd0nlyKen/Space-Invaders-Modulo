@@ -4,12 +4,13 @@ class_name FriendlyWeapon
 @export var speed:float
 @export var damage:float
 @export var fireRate:float
-@export var range:float
-var explosion: = preload("res://scenes/explosion.tscn")
+@export var reach:float
+var explosion: = preload("res://scenes/weapons/explosion.tscn")
 var origin:Vector2
 var wType:String
 var hitbox:CollisionShape2D
 var objHit:Node2D
+var die:bool = false
 
 func setup(type:String, pos:Vector2):
 	hitbox = $CollisionShape2D

@@ -10,13 +10,14 @@ var weapon
 var fire
 var fireRate:float
 var count:float = 0
+var spinned:bool = false
 
 func _ready() -> void:
 	setup(SelectionInstructions.playerData)
 
 func setup(data:Dictionary):
 	if data["type"] == 0:
-		weapon = load("res://scenes/" + data["ID"] + ".tscn")
+		weapon = load("res://scenes/weapons/" + data["ID"] + ".tscn")
 		weaponType = data["ID"]
 		var initial:FriendlyWeapon = weapon.instantiate()
 		add_child(initial)
@@ -33,7 +34,19 @@ func _physics_process(delta: float) -> void:
 	get_input()
 	var xMove:float = moveDir * speed
 	
-	if fire and count >= fireRate:
+	if len(get_children()) < 4:
+		spinned = false
+	
+	if weaponType == "saw":
+		#print_debug(get_children())
+		if fire and not spinned:
+			print_debug("wkwek")
+			var sawblade:FriendlyWeapon = weapon.instantiate()
+			add_child(sawblade)
+			sawblade.setup(weaponType, muzzle.position)
+			spinned = true
+	
+	elif fire and count >= fireRate:
 		count = 0
 		var bullet:FriendlyWeapon = weapon.instantiate()
 		add_child(bullet)

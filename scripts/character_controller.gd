@@ -1,4 +1,5 @@
 extends CharacterBody2D
+@onready var shoot_sound = $ShootSound #Sound tembak
 
 #@export var charVis:Sprite2D
 @export var muzzle:Node2D
@@ -10,6 +11,10 @@ var moveDir
 var fire
 var fireRate:float = 0.5
 var count:float = 0
+
+var rifle_sound = preload("res://assets/sound/laserShoot1.wav")
+var sniper_sound = preload("res://assets/sound/laserShoot2.wav")
+var shotgun_sound = preload("res://assets/sound/laserShoot3.wav")
 
 func _ready() -> void:
 	pass
@@ -24,6 +29,7 @@ func _physics_process(delta: float) -> void:
 	
 	if fire and count >= fireRate:
 		count = 0
+		play_shoot_sound()
 		var bullet:FriendlyWeapon = weapon.instantiate()
 		add_child(bullet)
 		fireRate = bullet.fireRate
@@ -56,3 +62,16 @@ func CheckGunType():
 			weapon = load("res://scenes/sniper.tscn")
 		2:
 			weapon = load("res://scenes/shotgun.tscn")
+			
+func play_shoot_sound(): #Fungsi sound tembak
+	match weaponType:
+		0:
+			shoot_sound.stream = rifle_sound
+		1:
+			shoot_sound.stream = sniper_sound
+		2:
+			shoot_sound.stream = shotgun_sound
+	
+	shoot_sound.play()
+	
+		

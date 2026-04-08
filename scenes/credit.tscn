@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bg34xc1ff3duq"]
 
+[ext_resource type="Script" uid="uid://dg2di34bsog4j" path="res://scripts/credit.gd" id="1_5egdn"]
 [ext_resource type="Texture2D" uid="uid://b2g020pir826o" path="res://assets/Gambar/BG_Credit.png" id="1_kmqx5"]
 
 [node name="Credit" type="Control" unique_id=314018314]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_5egdn")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1708730347]
 layout_mode = 1
@@ -29,3 +31,11 @@ grow_vertical = 2
 text = "CREDITS GAME:
 "
 horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="." unique_id=2022273275]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

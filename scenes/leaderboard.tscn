@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bgkrgfyjdcbu8"]
 
 [ext_resource type="Texture2D" uid="uid://bpfrput2k42i0" path="res://assets/Gambar/BG_Leaderboard.png" id="1_mrg81"]
+[ext_resource type="Script" uid="uid://duokkil6oyen1" path="res://scripts/leaderboard.gd" id="1_wgq7h"]
 
 [node name="Leaderboard" type="Control" unique_id=584679960]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_wgq7h")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1194892965]
 texture_filter = 1
@@ -31,3 +33,11 @@ theme_override_font_sizes/font_size = 48
 text = "LEADERBOARD 
 CHECK YOUR SCORE"
 horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="." unique_id=1683581876]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

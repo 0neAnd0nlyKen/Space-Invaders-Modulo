@@ -13,20 +13,22 @@ var picked:bool
 var nextScene:String
 var selected:Array = []
 var selectedIcons:Array = []
-var weapons:Array = ["rifle", "sniper", "shotgun", "explosive", "sword", "saw", "repulsar"]
-var perks:Array = ["shield", "sprint", "rewind", "ZAWARUDO", "repair", "revive"]
-var upgrades:Array = ["damage", "HF", "throwable", "double", "metal pipe"]
-var weaponIcons:Array = [
+var selectedCDs:Array = []
+const weapons:Array = ["rifle", "sniper", "shotgun", "explosive", "sword", "saw", "repulsar"]
+const perks:Array = ["shield", "sprint", "ZAWARUDO", "repair", "revive"]
+const upgrades:Array = ["damage", "HF", "throwable", "double", "metal pipe"]
+const weaponIcons:Array = [
 	"res://assets/weapon sprites/rifle.png", "res://assets/weapon sprites/railgun.png",
 	"res://assets/weapon sprites/shotgun.png", "res://assets/weapon sprites/explosive.png",
 	"res://assets/weapon sprites/sword.png", "res://assets/weapon sprites/saw.png",
 	"res://assets/weapon sprites/repulsar.png"
 	]
-var perkIcons:Array = ["res://assets/perk_sprites/shield.png", "res://assets/perk_sprites/sprint.png", 
-	"res://assets/perk_sprites/rewind.png", "res://assets/perk_sprites/ZAWARUDO.png", 
-	"res://assets/perk_sprites/repair.png", "res://assets/perk_sprites/revive.png"
+const perkIcons:Array = ["res://assets/perk_sprites/shield.png", "res://assets/perk_sprites/sprint.png", 
+	"res://assets/perk_sprites/ZAWARUDO.png", "res://assets/perk_sprites/repair.png", 
+	"res://assets/perk_sprites/revive.png"
 	]
-var upgradeIcons:Array = []
+const upgradeIcons:Array = []
+const perkCDs:Array = [8.0, 3.0, 20.0, 8.0, 90.0]
 
 func _ready() -> void:
 	setup(SelectionInstructions.data)
@@ -44,6 +46,7 @@ func setup(instructions:Dictionary) -> void:
 				if pick not in selected:
 					var index = weapons.find(pick)
 					selected.append(pick)
+					selectedCDs.append(0)
 					selectedIcons.append(weaponIcons[index])
 		1:
 			while selected.size() < 3:
@@ -51,6 +54,7 @@ func setup(instructions:Dictionary) -> void:
 				if pick not in selected:
 					var index = perks.find(pick)
 					selected.append(pick)
+					selectedCDs.append(index)
 					selectedIcons.append(perkIcons[index])
 		2:
 			while selected.size() < 3:
@@ -58,6 +62,7 @@ func setup(instructions:Dictionary) -> void:
 				if pick not in selected:
 					var index = upgrades.find(pick)
 					selected.append(pick)
+					selectedCDs.append(0)
 					selectedIcons.append(upgradeIcons[index])
 	
 	C1.setup(selected[0], selectedIcons[0])
@@ -69,23 +74,24 @@ func _process(_delta: float) -> void:
 	if picked:
 		nextButton.disabled = false
 
-func FillData(itemID:String):
+func FillData(itemID:String, cd:float):
 	SelectionInstructions.playerData = {}
 	SelectionInstructions.playerData = {
 		"type": SelectionInstructions.data["type"],
-		"ID": itemID
+		"ID": itemID,
+		"CDs": cd
 	}
 
 func _on_card_1_pressed() -> void:
-	FillData(selected[0])
+	FillData(selected[0], selectedCDs[0])
 	picked = true
 
 func _on_card_2_pressed() -> void:
-	FillData(selected[1])
+	FillData(selected[1], selectedCDs[1])
 	picked = true
 
 func _on_card_3_pressed() -> void:
-	FillData(selected[2])
+	FillData(selected[2], selectedCDs[2])
 	picked = true
 
 func _on_next_button_pressed() -> void:

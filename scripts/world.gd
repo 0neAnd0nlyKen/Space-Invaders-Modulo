@@ -19,7 +19,7 @@ func _on_enemy_defeated(enemyScore: int):
 	score += enemyScore
 	updateLabel(scoreLabel, score)
 	print("detected death")
-	if score >= 300 + (bonusTaken*300):
+	if score >= 1200 + (bonusTaken*1200):
 		var bonusType
 		var selectionText
 		if bonusTaken >= 2:

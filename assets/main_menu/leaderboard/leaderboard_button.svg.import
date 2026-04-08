@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cd0n3h36cvtc0"
-path="res://.godot/imported/default_button.svg-15efd13d405b21f17cea2ecf026687f6.ctex"
+path="res://.godot/imported/leaderboard_button.svg-18038f3e071665ae6660afe0dfa3e3c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/main_menu/default/default_button.svg"
-dest_files=["res://.godot/imported/default_button.svg-15efd13d405b21f17cea2ecf026687f6.ctex"]
+source_file="res://assets/main_menu/leaderboard/leaderboard_button.svg"
+dest_files=["res://.godot/imported/leaderboard_button.svg-18038f3e071665ae6660afe0dfa3e3c2.ctex"]
 
 [params]
 

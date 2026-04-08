@@ -7,6 +7,8 @@ var rotateTimer:float = 0
 var doneRotating: bool = false
 var count:float = 0
 var press
+var enemies:Array = []
+var enemySpeed
 
 func setup(type:String, pos:Vector2):
 	hitbox = $CollisionShape2D
@@ -23,9 +25,9 @@ func setup(type:String, pos:Vector2):
 			radius = -(position.distance_to(pos))
 		"saw":
 			reach = 140
-			damage = 3.0
-			fireRate = 0.2
-			position.y += -(reach/2 + 10)
+			damage = 0.2
+			fireRate = 0.1
+			position.y += -(reach/2 + 20)
 			rotateSpeed = -1
 			sprite = $Sprite
 		"repulsar":
@@ -54,21 +56,33 @@ func _physics_process(delta: float) -> void:
 			count += delta
 			press = Input.is_action_pressed("fire")
 			if press and count >= fireRate:
-				DealDamage()
+				for enemy in enemies:
+					if not is_instance_valid(enemy):
+						enemies.erase(enemy)
+						continue
+					if enemy.name != "Body":
+						enemy.take_damage(damage)
 			sprite.rotate(rotateSpeed)
-			if count > 3:
+			if count > 1:
 				queue_free()
-			if is_instance_valid(objHit) and objHit is Enemy:
-				print_debug("yea")
 		"repulsar":
 			count += delta
-			if count > .3:
+			if count > .2:
 				queue_free()
 		
 
 func _bullet_hit(target:Node2D):
-	objHit = target
+	if is_instance_valid(target) and target is Enemy:
+		enemies.append(target)
+		enemySpeed = target.base_speed
+		match wType:
+			"saw":
+				if target.base_speed > (target.base_speed * 7)/ 10:
+					target.base_speed = (target.base_speed * 7)/ 10
+			"repulsar":
+				target.position.y -= 100
 
-func DealDamage():
-	count = 0
-	damage = 5
+func _left(target:Node2D):
+	if target.base_speed < enemySpeed:
+		target.base_speed = enemySpeed
+	enemies.erase(target)

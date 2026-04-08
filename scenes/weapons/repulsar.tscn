@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://doy53torihar2"]
 
-[ext_resource type="Script" uid="uid://btglcs0k838gt" path="res://scripts/melee_weapon.gd" id="1_owril"]
+[ext_resource type="Script" uid="uid://btglcs0k838gt" path="res://scripts/weapon/melee_weapon.gd" id="1_owril"]
 [ext_resource type="Texture2D" uid="uid://cocntwkbewrk8" path="res://assets/weapon sprites/repulsar blast.png" id="2_owril"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ecy6b"]
@@ -18,3 +18,5 @@ shape = SubResource("CircleShape2D_ecy6b")
 position = Vector2(0, -90)
 scale = Vector2(0.55, 0.55)
 texture = ExtResource("2_owril")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

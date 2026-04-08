@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://p5y7iahaufkw"]
 
-[ext_resource type="Script" uid="uid://dfnl4jf31upom" path="res://scripts/ranged_weapon.gd" id="1_voyse"]
+[ext_resource type="Script" uid="uid://dfnl4jf31upom" path="res://scripts/weapon/ranged_weapon.gd" id="1_voyse"]
 [ext_resource type="Texture2D" uid="uid://p7r4kr6gvj80" path="res://assets/weapon sprites/shotgun bullet.png" id="2_gnj2g"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_swcir"]

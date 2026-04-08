@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cktnnfvmlh1n7" path="res://assets/Gambar/BG_MainMenu.png" id="2_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://bgra5adif10p6" path="res://assets/main_menu/credits/credits_button.svg" id="3_8ln24"]
 [ext_resource type="Texture2D" uid="uid://cd0n3h36cvtc0" path="res://assets/main_menu/leaderboard/leaderboard_button.svg" id="4_8ln24"]
-[ext_resource type="Script" uid="uid://cj5t6mcmgeryh" path="res://scripts/main_menu.gd" id="5"]
+[ext_resource type="Script" uid="uid://cj5t6mcmgeryh" path="res://scripts/UI - Env/main_menu.gd" id="5"]
 [ext_resource type="Texture2D" uid="uid://caaryqct8gmvl" path="res://assets/main_menu/exit/exit_button.svg" id="5_rtw2f"]
 
 [sub_resource type="Theme" id="Theme_rtw2f"]

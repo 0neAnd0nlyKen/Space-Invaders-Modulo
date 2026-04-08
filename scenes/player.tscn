@@ -8,7 +8,7 @@ height = 40.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=339184942 node_paths=PackedStringArray("muzzle")]
+[node name="Body" type="CharacterBody2D" unique_id=339184942 node_paths=PackedStringArray("muzzle")]
 script = ExtResource("1_4flbx")
 muzzle = NodePath("muzzle")
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ld7yg6n3wn6v"]
 
-[ext_resource type="Script" uid="uid://brmyv8vgvmqpc" path="res://scripts/card.gd" id="1_6u4wf"]
+[ext_resource type="Script" uid="uid://brmyv8vgvmqpc" path="res://scripts/UI - Env/card.gd" id="1_6u4wf"]
 [ext_resource type="Texture2D" uid="uid://bj83oy8jrndh1" path="res://assets/weapon sprites/repulsar.png" id="2_6u4wf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_up0cc"]

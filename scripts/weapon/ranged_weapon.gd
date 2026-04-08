@@ -17,6 +17,7 @@ const meleeWeapons:Array = ["sword", "saw", "repulsar"]
 func setup(type:String, pos:Vector2):
 	hitbox = $CollisionShape2D
 	body_entered.connect(_bullet_hit)
+	body_exited.connect(_left)
 	position = pos
 	wType = type
 	match type:
@@ -50,4 +51,8 @@ func _process(_delta: float) -> void:
 			queue_free()
 
 func _bullet_hit(target:Node2D):
-	objHit = target
+	if is_instance_valid(target) and target is Enemy:
+		objHit = target
+
+func _left(target:Node2D):
+	pass

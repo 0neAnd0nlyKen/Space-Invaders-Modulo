@@ -17,8 +17,8 @@ func _on_enemy_defeated(enemyScore: int):
 	updateLabel(scoreLabel, score)
 	print("detected death")
 
-func _on_enemy_landed(enemyHealth: int):
-	health -= enemyHealth
+func _on_enemy_landed(enemyHealth: float):
+	health -= int(enemyHealth)
 	updateLabel(healthLabel, health)
 
 func gameOver():

@@ -2,15 +2,15 @@ extends CharacterBody2D
 class_name Enemy
 
 @export var hitbox: Area2D
-@export var max_health: int = 15
+@export var max_health: float = 15
 @export var enemy_score: int = 100
 @export var base_speed: float = 30
 
-var health: int
+var health: float
 var time_alive: float = 0.0
 
 signal enemy_defeated(score_value: int)
-signal enemy_landed(enemy_health: int)
+signal enemy_landed(enemy_health: float)
 
 func _ready() -> void:
 	health = max_health
@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 func move_enemy(_delta: float) -> void:
 	velocity.y = base_speed
 
-func take_damage(damage: int) -> void:
+func take_damage(damage: float) -> void:
 	health -= damage
 	if health <= 0:
 		die()

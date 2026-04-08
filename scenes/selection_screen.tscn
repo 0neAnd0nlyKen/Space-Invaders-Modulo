@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://i8yd1esvtkdt" path="res://assets/next_button.svg" id="3_2nlgg"]
 
 [node name="Selection_Screen" type="Control" unique_id=1460960415]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,6 +46,8 @@ offset_left = 76.0
 offset_top = 220.0
 offset_right = 376.0
 offset_bottom = 580.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Card2" parent="." unique_id=145042403 instance=ExtResource("2_ednkh")]
 layout_mode = 0
@@ -55,6 +58,8 @@ offset_left = 426.0
 offset_top = 220.0
 offset_right = 726.0
 offset_bottom = 580.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Card3" parent="." unique_id=62717962 instance=ExtResource("2_ednkh")]
 layout_mode = 0
@@ -65,6 +70,8 @@ offset_left = 776.0
 offset_top = 220.0
 offset_right = 1076.0
 offset_bottom = 580.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Next_Button" type="TextureButton" parent="." unique_id=961357624]
 layout_mode = 1

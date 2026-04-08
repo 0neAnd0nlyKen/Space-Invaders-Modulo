@@ -14,6 +14,7 @@ var spinned:bool = false
 
 func _ready() -> void:
 	setup(SelectionInstructions.playerData)
+	SelectionInstructions.on_bonus_select.connect(_on_bonus_recived)
 
 func setup(data:Dictionary):
 	if data["type"] == 0:
@@ -57,3 +58,6 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide() #move
 	
+
+func _on_bonus_recived():
+	pass

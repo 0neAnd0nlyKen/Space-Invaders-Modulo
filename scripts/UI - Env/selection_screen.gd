@@ -3,6 +3,7 @@ extends Control
 #@export var card: = preload("res://scenes/card.tscn")
 #@export var player: = preload("res://scenes/player.tscn")
 @onready var bg:ColorRect = $Background
+@onready var wSelectionBG:TextureRect = $TextureRect
 @onready var nextButton:BaseButton = $Next_Button
 @onready var menuText:Label = $Title
 @onready var C1:TextureButton = $Card1
@@ -17,6 +18,7 @@ var selectedCDs:Array = []
 const weapons:Array = ["rifle", "sniper", "shotgun", "explosive", "sword", "saw", "repulsar"]
 const perks:Array = ["shield", "sprint", "ZAWARUDO", "repair", "revive"]
 const upgrades:Array = ["damage", "HF", "throwable", "double", "metal pipe"]
+const perkCDs:Array = [8.0, 3.0, 20.0, 8.0, 0.0]
 const weaponIcons:Array = [
 	"res://assets/weapon sprites/rifle.png", "res://assets/weapon sprites/railgun.png",
 	"res://assets/weapon sprites/shotgun.png", "res://assets/weapon sprites/explosive.png",
@@ -30,7 +32,6 @@ const perkIcons:Array = ["res://assets/perk_sprites/shield.png", "res://assets/p
 const upgradeIcons:Array = ["res://assets/upgrade_sprites/damage.png", "res://assets/upgrade_sprites/HF.png",
 	"res://assets/upgrade_sprites/throwable.png", "res://assets/upgrade_sprites/recast.png",
 	"res://assets/upgrade_sprites/pipe.png"]
-const perkCDs:Array = [8.0, 3.0, 20.0, 8.0, 0.0]
 
 func _ready() -> void:
 	setup(SelectionInstructions.data)
@@ -39,8 +40,13 @@ func setup(instructions:Dictionary) -> void:
 	nextScene = "res://scenes/" + instructions["next"] + ".tscn"
 	menuText.text = instructions["title"]
 	nextButton.disabled = true
-	if instructions["type"] != 1:
+	if instructions["type"] >= 1:
+		wSelectionBG.hide()
+		bg.show()
 		bg.modulate.a = 0.6
+	else:
+		bg.hide()
+		wSelectionBG.show()
 	match instructions["type"]:
 		0:
 			while selected.size() < 3:
@@ -67,9 +73,9 @@ func setup(instructions:Dictionary) -> void:
 					selectedCDs.append(0)
 					selectedIcons.append(upgradeIcons[index])
 	
-	C1.setup(selected[0], selectedIcons[0])
-	C2.setup(selected[1], selectedIcons[1])
-	C3.setup(selected[2], selectedIcons[2])
+	C1.setup(selected[0], selectedIcons[0], instructions["type"])
+	C2.setup(selected[1], selectedIcons[1], instructions["type"])
+	C3.setup(selected[2], selectedIcons[2], instructions["type"])
 	
 
 func _process(_delta: float) -> void:

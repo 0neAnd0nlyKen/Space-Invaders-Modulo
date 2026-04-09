@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://da4cc68rchv1q"]
+
+[ext_resource type="PackedScene" uid="uid://cmug4h23scmuq" path="res://scenes/enemy.tscn" id="1_hn7s1"]
+[ext_resource type="Script" uid="uid://c0m8dqbus26m7" path="res://scripts/enemy/shielder_enemy.gd" id="2_wunss"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iybbw"]
+
+[node name="ShielderEnemy" unique_id=58177044 instance=ExtResource("1_hn7s1")]
+script = ExtResource("2_wunss")
+
+[node name="ShieldNode" type="Area2D" parent="." index="5" unique_id=1944729850]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldNode" index="0" unique_id=257599564]
+shape = SubResource("RectangleShape2D_iybbw")
+
+[connection signal="area_entered" from="ShieldNode" to="." method="_on_shield_node_area_entered"]

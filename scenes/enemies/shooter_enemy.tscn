@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://shooter_enemy_scene"]
+
+[ext_resource type="PackedScene" uid="uid://cmug4h23scmuq" path="res://scenes/enemy.tscn" id="1_7jpia"]
+[ext_resource type="Script" uid="uid://shooter_enemy_script" path="res://scripts/enemy/shooter_enemy.gd" id="2_shooter"]
+
+[node name="CharacterBody2D" unique_id=58177044 instance=ExtResource("1_7jpia")]
+script = ExtResource("2_shooter")

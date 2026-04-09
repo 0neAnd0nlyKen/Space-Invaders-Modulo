@@ -6,12 +6,16 @@ class_name EnemySpawner
 @export var spawnRate: float = 2.0
 @export var world: World
 
+signal difficulty_increased()
+
 var spawnTimer: float = 0.0
 var wave_counter: int = 0  # Track spawning waves for variety
+var difficulty_level: int = 0
 
 func _ready() -> void:
 	if spawnAnchor == null:
 		spawnAnchor = $"../spawnpoint"
+	difficulty_increased.connect(_on_difficulty_increased)
 
 func _process(delta: float) -> void:
 	var spawnPoint:Vector2 = Vector2(randf_range(-400, 400), spawnAnchor.position.y)
@@ -61,3 +65,9 @@ func spawn_enemy_variation(spawn_point: Vector2) -> Enemy:
 	newEnemy.position = spawn_point
 	wave_counter += 1
 	return newEnemy
+
+
+func _on_difficulty_increased() -> void:
+	difficulty_level += 1
+	spawnRate = max(0.5, spawnRate - 0.3)  # Make spawning more frequent
+	maxEnemies += 1  # Allow more enemies on screen

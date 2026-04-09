@@ -1,6 +1,13 @@
 [gd_scene format=3 uid="uid://bqc8atpjvo1x1"]
 
 [ext_resource type="Script" uid="uid://djiglwhopy8d0" path="res://scripts/UI - Env/enemy_spawner.gd" id="1_yp5lu"]
+[ext_resource type="Script" uid="uid://ca878t2am588e" path="res://resources/enemy_type.gd" id="2_tx2ig"]
+[ext_resource type="Resource" uid="uid://ckau7j035rj0u" path="res://resources/shielder_enemy.tres" id="3_6bbd6"]
+[ext_resource type="Resource" uid="uid://bqcftg7q8810t" path="res://resources/basic_enemy.tres" id="3_cmhla"]
+[ext_resource type="Resource" path="res://resources/wave_enemy.tres" id="4_wave"]
+[ext_resource type="Resource" path="res://resources/heavy_enemy.tres" id="5_heavy"]
+[ext_resource type="Resource" path="res://resources/shooter_enemy.tres" id="6_shooter"]
 
 [node name="spawner" type="Node2D" unique_id=908297173]
 script = ExtResource("1_yp5lu")
+enemy_types = Array[ExtResource("2_tx2ig")]([ExtResource("3_cmhla"), ExtResource("3_6bbd6"), ExtResource("4_wave"), ExtResource("5_heavy"), ExtResource("6_shooter")])

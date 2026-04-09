@@ -5,17 +5,38 @@ class_name EnemySpawner
 @export var maxEnemies: int = 10
 @export var spawnRate: float = 2.0
 @export var world: World
+@export var enemy_types: Array[EnemyType]
+
 
 signal difficulty_increased()
 
+var _spawn_pool: Array[EnemyType] = []
 var spawnTimer: float = 0.0
 var wave_counter: int = 0  # Track spawning waves for variety
 var difficulty_level: int = 0
+
 
 func _ready() -> void:
 	if spawnAnchor == null:
 		spawnAnchor = $"../spawnpoint"
 	difficulty_increased.connect(_on_difficulty_increased)
+	_build_weighted_spawn_pool()
+
+func _build_weighted_spawn_pool():
+	_spawn_pool.clear()
+	for enemy_type in enemy_types:
+		if enemy_type and enemy_type.scene:
+			var weight = enemy_type.spawn_weight
+			# Adjust weight based on difficulty
+			if "heavy" in enemy_type.scene.resource_path and difficulty_level < 1:
+				weight = 0
+			elif "shooter" in enemy_type.scene.resource_path and difficulty_level < 2:
+				weight = 0
+			# Basic and wave always available
+			if weight > 0:
+				var count = max(1, int(weight * 10))
+				for i in range(count):
+					_spawn_pool.append(enemy_type)
 
 func _process(delta: float) -> void:
 	var spawnPoint:Vector2 = Vector2(randf_range(-400, 400), spawnAnchor.position.y)
@@ -31,39 +52,13 @@ func _process(delta: float) -> void:
 					newEnemy.enemy_landed.connect(world._on_enemy_landed)
 
 func spawn_enemy_variation(spawn_point: Vector2) -> Enemy:
-	# Vary enemy types based on wave or randomness
-	var variation = randi() % 4  # 0=basic, 1=wave, 2=heavy, 3=shooter
+	if _spawn_pool.is_empty():
+		return null
 	
-	var newEnemy: Enemy
-	var enemy_base = preload("res://scenes/enemy.tscn")
-	
-	match variation:
-		0:
-			# BasicEnemy
-			newEnemy = enemy_base.instantiate()
-			newEnemy.set_script(preload("res://scripts/enemy/basic_enemy.gd"))
-		1:
-			# WaveEnemy
-			newEnemy = enemy_base.instantiate()
-			newEnemy.set_script(preload("res://scripts/enemy/wave_enemy.gd"))
-		2:
-			if wave_counter > 3:  # Only spawn heavy after wave 3
-				newEnemy = enemy_base.instantiate()
-				newEnemy.set_script(preload("res://scripts/enemy/heavy_enemy.gd"))
-			else:
-				newEnemy = enemy_base.instantiate()
-				newEnemy.set_script(preload("res://scripts/enemy/basic_enemy.gd"))
-		3:
-			if wave_counter > 5:  # Only spawn shooters after wave 5
-				newEnemy = enemy_base.instantiate()
-				newEnemy.set_script(preload("res://scripts/enemy/shooter_enemy.gd"))
-			else:
-				newEnemy = enemy_base.instantiate()
-				newEnemy.set_script(preload("res://scripts/enemy/basic_enemy.gd"))
-	
-	add_child(newEnemy)
+	var selected_type = _spawn_pool[randi() % _spawn_pool.size()]
+	var newEnemy = selected_type.scene.instantiate()
 	newEnemy.position = spawn_point
-	wave_counter += 1
+	add_child(newEnemy)
 	return newEnemy
 
 
@@ -71,3 +66,4 @@ func _on_difficulty_increased() -> void:
 	difficulty_level += 1
 	spawnRate = max(0.5, spawnRate - 0.3)  # Make spawning more frequent
 	maxEnemies += 1  # Allow more enemies on screen
+	_build_weighted_spawn_pool()  # Update spawn pool with new difficulty

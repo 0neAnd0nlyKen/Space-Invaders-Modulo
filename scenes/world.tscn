@@ -53,3 +53,5 @@ offset_top = -489.0
 offset_right = 417.0
 offset_bottom = -466.0
 text = "0"
+
+[connection signal="get_hurt" from="player" to="." method="_on_player_get_hurt"]

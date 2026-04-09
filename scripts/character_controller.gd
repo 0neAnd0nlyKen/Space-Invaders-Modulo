@@ -13,6 +13,7 @@ var fire
 var fireRate:float
 var count:float = 0
 var spinned:bool = false
+signal get_hurt(lost_health: float)
 
 var rifle_sound = preload("res://assets/sound/laserShoot1.wav")
 var sniper_sound = preload("res://assets/sound/laserShoot2.wav")

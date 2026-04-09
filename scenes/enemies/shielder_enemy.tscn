@@ -3,14 +3,15 @@
 [ext_resource type="PackedScene" uid="uid://cmug4h23scmuq" path="res://scenes/enemy.tscn" id="1_hn7s1"]
 [ext_resource type="Script" uid="uid://c0m8dqbus26m7" path="res://scripts/enemy/shielder_enemy.gd" id="2_wunss"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iybbw"]
-
-[node name="ShielderEnemy" unique_id=58177044 instance=ExtResource("1_hn7s1")]
+[node name="ShielderEnemy" unique_id=58177044 node_paths=PackedStringArray("shieldNode") instance=ExtResource("1_hn7s1")]
 script = ExtResource("2_wunss")
+shieldNode = NodePath("ShieldNode")
 
 [node name="ShieldNode" type="Area2D" parent="." index="5" unique_id=1944729850]
+z_index = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldNode" index="0" unique_id=257599564]
-shape = SubResource("RectangleShape2D_iybbw")
+
+[node name="Sprite2D" type="Sprite2D" parent="ShieldNode" index="1" unique_id=571038634]
 
 [connection signal="area_entered" from="ShieldNode" to="." method="_on_shield_node_area_entered"]

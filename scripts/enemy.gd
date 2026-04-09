@@ -1,5 +1,6 @@
 extends CharacterBody2D
 class_name Enemy
+@onready var hit_sound = $HitSound
 
 @export var hitbox: Area2D
 @export var max_health: float = 15
@@ -8,6 +9,9 @@ class_name Enemy
 
 var health: float
 var time_alive: float = 0.0
+
+var hit_sfx = preload("res://assets/sound/hitHurt.wav")
+var death_sfx = preload("res://assets/sound/explosion.wav")
 
 signal enemy_defeated(score_value: float)
 signal enemy_landed(enemy_health: float)
@@ -30,10 +34,21 @@ func move_enemy(_delta: float) -> void:
 
 func take_damage(damage: float) -> void:
 	health -= damage
+	
+	if hit_sound: #Memanggil sound
+		hit_sound.stream = hit_sfx
+		hit_sound.pitch_scale = randf_range(0.9, 1.1) # biar variatif
+		hit_sound.play()
+		
 	if health <= 0:
 		die()
 
 func die() -> void:
+	if hit_sound:
+		hit_sound.stream = death_sfx
+		hit_sound.play()
+		await hit_sound.finished
+		
 	enemy_defeated.emit(enemy_score)
 	queue_free()
 

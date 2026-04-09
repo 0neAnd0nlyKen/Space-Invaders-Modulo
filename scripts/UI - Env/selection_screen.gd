@@ -7,6 +7,8 @@ extends Control
 @onready var C1:TextureButton = $Card1
 @onready var C2:TextureButton = $Card2
 @onready var C3:TextureButton = $Card3
+@onready var select_sound = $SelectSound
+@onready var click_sound = $ClickSound
 var picked:bool
 var nextScene:String
 var selected:Array = []
@@ -20,6 +22,9 @@ var icons:Array = [
 	"res://assets/weapon sprites/sword.png", "res://assets/weapon sprites/saw.png",
 	"res://assets/weapon sprites/repulsar.png"
 	]
+
+var select_sfx = preload("res://assets/sound/next.wav")
+var click_sfx = preload("res://assets/sound/click.wav")
 
 func _ready() -> void:
 	setup(SelectionInstructions.data)
@@ -68,17 +73,32 @@ func FillData(itemID:String):
 	}
 
 func _on_card_1_pressed() -> void:
+	play_select_sound()
 	FillData(selected[0])
 	picked = true
 
 func _on_card_2_pressed() -> void:
+	play_select_sound()
 	FillData(selected[1])
 	picked = true
 
 func _on_card_3_pressed() -> void:
+	play_select_sound()
 	FillData(selected[2])
 	picked = true
 
 func _on_next_button_pressed() -> void:
+	play_click_sound()
 	if SelectionInstructions.data["type"] == 0:
+		await click_sound.finished
 		get_tree().change_scene_to_file(nextScene)
+
+# Fungsi sound
+func play_select_sound():
+	select_sound.stream = select_sfx
+	select_sound.pitch_scale = randf_range(0.95, 1.05)
+	select_sound.play()
+
+func play_click_sound():
+	click_sound.stream = click_sfx
+	click_sound.play()

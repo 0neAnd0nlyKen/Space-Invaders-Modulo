@@ -1,7 +1,10 @@
 extends Control
+@onready var click_sound = $ClickSound
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
+		click_sound.play()
+		await click_sound.finished
 		SelectionInstructions.data = {
 			"type": 0,
 			"next": "world",

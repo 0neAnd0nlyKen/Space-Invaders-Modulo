@@ -74,15 +74,18 @@ func CheckGunType():
 		2:
 			weapon = load("res://scenes/shotgun.tscn")
 			
-func play_shoot_sound(): #Fungsi sound tembak
+func play_shoot_sound(): #fungsi sound
 	match weaponType:
-		0:
+		"rifle":
 			shoot_sound.stream = rifle_sound
-		1:
+		"sniper":
 			shoot_sound.stream = sniper_sound
-		2:
+		"shotgun":
 			shoot_sound.stream = shotgun_sound
+		_:
+			return # kalau weapon lain gak ada sound
 	
+	shoot_sound.pitch_scale = randf_range(0.95, 1.05)
 	shoot_sound.play()
 	
 		

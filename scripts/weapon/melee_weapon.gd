@@ -17,8 +17,6 @@ func setup(type:String, pos:Vector2):
 	position = pos
 	origin = pos
 	wType = type
-	if SelectionInstructions.throw:
-		speed = 15
 	match type:
 		"sword":
 			reach = 170

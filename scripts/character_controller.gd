@@ -22,7 +22,7 @@ var fireRate:float
 var count:float = 0
 var dur:Array = []
 var activated:Array = []
-var spinned:bool = false
+var isSpinning:bool = false
 signal get_hurt(lost_health: float)
 
 var rifle_sound = preload("res://assets/sound/laserShoot1.wav")
@@ -32,6 +32,7 @@ var shotgun_sound = preload("res://assets/sound/laserShoot3.wav")
 func _ready() -> void:
 	setup(SelectionInstructions.playerData)
 	SelectionInstructions.on_bonus_select.connect(_on_bonus_recived)
+	SelectionInstructions.phoenix_consume.connect(_on_revive_consumed)
 
 func setup(data:Dictionary):
 	match data["type"]:
@@ -69,9 +70,7 @@ func _physics_process(delta: float) -> void:
 	castPerks()
 	
 	if weaponType == "saw":
-		if get_child_count() == 4:
-			spinned = false
-		if fire and not spinned:
+		if fire and not isSpinning:
 			summonWeaponSawblade()
 	elif fire and count >= fireRate:
 		summonWeapon()
@@ -79,15 +78,15 @@ func _physics_process(delta: float) -> void:
 	moveChar(xMove, yMove)
 
 func castPerks():
-	if perk1 and len(perks) > 0 and cooldowns[0] <= 0:
+	if perk1 and len(perks) > 0 and cooldowns[0] <= 0 and activated[0] == 0:
 		perk.UsePerk(perks[0], 0)
 		cooldowns[0] = baseCDs[0]
 		activated[0] = 1
-	if perk2 and len(perks) > 1 and cooldowns[1] <= 0:
+	if perk2 and len(perks) > 1 and cooldowns[1] <= 0 and activated[1] == 0:
 		perk.UsePerk(perks[1], 1)
 		cooldowns[1] = baseCDs[1]
 		activated[1] = 1
-	if perk3 and len(perks) > 2 and cooldowns[2] <= 0:
+	if perk3 and len(perks) > 2 and cooldowns[2] <= 0 and activated[2] == 0:
 		perk.UsePerk(perks[2], 2)
 		cooldowns[2] = baseCDs[2]
 		activated[2] = 1
@@ -121,7 +120,8 @@ func summonWeaponSawblade():
 	var sawblade:FriendlyWeapon = weapon.instantiate()
 	add_child(sawblade)
 	sawblade.setup(weaponType, muzzle.position)
-	spinned = true
+	sawblade.sawblade_off.connect(_on_saw_deactivation)
+	isSpinning = true
 
 func moveChar(xMove:float, yMove:float):
 	velocity.y = yMove
@@ -141,7 +141,19 @@ func selectShootSound(): #Fungsi sound tembak
 			shoot_sound.stream = sniper_sound
 		"shotgun":
 			shoot_sound.stream = shotgun_sound
-		
+
+func _on_saw_deactivation():
+	isSpinning = false
 
 func _on_bonus_recived():
 	setup(SelectionInstructions.playerData)
+
+func _on_revive_consumed():
+	var index = perks.find("revive")
+	perk.StopPerk("revive", index)
+	perks.erase("revive")
+	baseCDs.remove_at(index)
+	cooldowns.remove_at(index)
+	dur.remove_at(index)
+	activated.remove_at(index)
+	SelectionInstructions.playerPerks.erase("revive")

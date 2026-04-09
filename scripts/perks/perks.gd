@@ -19,7 +19,8 @@ func UsePerk(perkName:String, slot:int):
 			parent.dur[slot] = 0.1
 			SelectionInstructions.repair_perk.emit(3)
 		"revive":
-			pass
+			#parent.cooldowns[slot] = 0
+			SelectionInstructions.phoenix_init.emit()
 
 func StopPerk(perkName:String, slot:int):
 	var parent = get_parent()

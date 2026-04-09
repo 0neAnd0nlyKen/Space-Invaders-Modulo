@@ -11,9 +11,11 @@ var difficulty_level: int = 0
 var next_difficulty_score: int = 100
 var selectionOverlayLayer
 var bonusTaken:int = 0
+var perksTaken:int = 0
 var maxHealth: int = 0
 var shield = preload("res://scenes/shield.tscn")
 var shieldExists:bool = false
+var reviveAvailable:bool = false
 
 signal take_damage(amount:int)
 
@@ -22,6 +24,8 @@ func _ready() -> void:
 	SelectionInstructions.repair_perk.connect(_on_repair_recived)
 	SelectionInstructions.shield_create.connect(_on_shield_recived)
 	SelectionInstructions.shield_destroy.connect(_on_shield_destroyed)
+	SelectionInstructions.phoenix_init.connect(_on_phoenix_recive)
+	SelectionInstructions.phoenix_consume.connect(_on_phoenix_consume)
 	updateLabel(healthLabel, health)
 	updateLabel(scoreLabel, score)
 
@@ -40,12 +44,13 @@ func _on_enemy_defeated(enemyScore: float): #hardcoded newEnemy.(signal).connect
 	if score >= 1200 + (bonusTaken*1200):
 		var bonusType
 		var selectionText
-		if bonusTaken >= 2:
-			bonusType = 2
-			selectionText = "Choose Upgrade"
-		else:
+		if perksTaken < 3:
 			bonusType = 1
 			selectionText = "Choose Perk"
+			perksTaken += 1
+		else:
+			bonusType = 2
+			selectionText = "Choose Upgrade"
 		var selectionMenu = load("res://scenes/selection_screen.tscn")
 		SelectionInstructions.data = {
 			"type": bonusType,
@@ -57,7 +62,6 @@ func _on_enemy_defeated(enemyScore: float): #hardcoded newEnemy.(signal).connect
 		get_tree().root.add_child(selectionOverlayLayer)
 		bonusTaken += 1
 		get_tree().paused = true
-		
 
 func _on_shield_recived(shieldHealth:int):
 	var newShield:ShieldPerk = shield.instantiate()
@@ -65,9 +69,15 @@ func _on_shield_recived(shieldHealth:int):
 	newShield.health = shieldHealth
 	take_damage.connect(newShield._on_taking_damage)
 	shieldExists = true
-
 func _on_shield_destroyed():
 	shieldExists = false
+
+func _on_phoenix_recive():
+	reviveAvailable = true
+func _on_phoenix_consume():
+	health = maxHealth
+	reviveAvailable = false
+	perksTaken -= 1
 
 func _on_repair_recived(amount:int):
 	if health < maxHealth:
@@ -89,7 +99,10 @@ func lose_health(lost_health: float):
 		health -= int(lost_health)
 	updateLabel(healthLabel, health)
 	if health <= 0:
-		gameOver()
+		if reviveAvailable:
+			SelectionInstructions.phoenix_consume.emit()
+		else:
+			gameOver()
 
 func gameOver():
 	get_tree().paused = true

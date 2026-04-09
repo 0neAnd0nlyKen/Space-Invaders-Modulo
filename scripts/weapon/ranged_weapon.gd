@@ -12,7 +12,10 @@ var hitbox:CollisionShape2D
 var sprite:Sprite2D
 var objHit:Node2D
 var die:bool = false
+
 const meleeWeapons:Array = ["sword", "saw", "repulsar"]
+
+signal sawblade_off()
 
 func setup(type:String, pos:Vector2):
 	hitbox = $CollisionShape2D

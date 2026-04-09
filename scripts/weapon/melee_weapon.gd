@@ -64,6 +64,7 @@ func _physics_process(delta: float) -> void:
 						enemy.take_damage(damage)
 			sprite.rotate(rotateSpeed)
 			if count > 1 and not press:
+				sawblade_off.emit()
 				queue_free()
 		"repulsar":
 			count += delta

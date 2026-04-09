@@ -6,12 +6,16 @@ class_name EnemySpawner
 @export var spawnRate: float = 2.0
 @export var world: World
 
+signal difficulty_increased() # activated by world node
+
 var spawnTimer: float = 0.0
 var wave_counter: int = 0  # Track spawning waves for variety
+var difficulty_level: int = 0
 
 func _ready() -> void:
 	if spawnAnchor == null:
 		spawnAnchor = $"../spawnpoint"
+	difficulty_increased.connect(_on_difficulty_increased)
 
 func _process(delta: float) -> void:
 	var spawnPoint:Vector2 = Vector2(randf_range(-400, 400), spawnAnchor.position.y)
@@ -27,7 +31,7 @@ func _process(delta: float) -> void:
 					newEnemy.enemy_landed.connect(world._on_enemy_landed)
 
 func spawn_enemy_variation(spawn_point: Vector2) -> Enemy:
-	# Vary enemy types based on wave or randomness
+	# Vary enemy types based on difficulty level
 	var variation = randi() % 4  # 0=basic, 1=wave, 2=heavy, 3=shooter
 	
 	var newEnemy: Enemy
@@ -43,7 +47,6 @@ func spawn_enemy_variation(spawn_point: Vector2) -> Enemy:
 			newEnemy = enemy_base.instantiate()
 			newEnemy.set_script(preload("res://scripts/enemy/wave_enemy.gd"))
 		2:
-			if wave_counter > 3:  # Only spawn heavy after wave 3
 				newEnemy = enemy_base.instantiate()
 				newEnemy.set_script(preload("res://scripts/enemy/heavy_enemy.gd"))
 			else:

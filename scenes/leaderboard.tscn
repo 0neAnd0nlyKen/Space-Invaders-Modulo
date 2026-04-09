@@ -1,10 +1,47 @@
 [gd_scene format=3 uid="uid://bgkrgfyjdcbu8"]
 
-[ext_resource type="Texture2D" uid="uid://b64y6jixhrni3" path="res://icon.svg" id="1_mrg81"]
+[ext_resource type="Texture2D" uid="uid://bpfrput2k42i0" path="res://assets/Gambar/BG_Leaderboard.png" id="1_mrg81"]
+[ext_resource type="Script" uid="uid://duokkil6oyen1" path="res://scripts/leaderboard.gd" id="1_wgq7h"]
+[ext_resource type="Texture2D" uid="uid://ekury0yx0s7w" path="res://assets/Gambar/Back1.png" id="3_e4dr1"]
+[ext_resource type="Texture2D" uid="uid://o5ihk0puhawt" path="res://assets/Gambar/Back2.png" id="4_jfen3"]
 
-[node name="Leaderboard" type="Node2D" unique_id=1533360782]
+[node name="Leaderboard" type="Control" unique_id=584679960]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wgq7h")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1194892965]
-offset_right = 40.0
-offset_bottom = 40.0
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_mrg81")
+
+[node name="Title" type="Label" parent="." unique_id=677413426]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "LEADERBOARD 
+CHECK YOUR SCORE"
+horizontal_alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="." unique_id=1535120327]
+layout_mode = 0
+offset_right = 45.0
+offset_bottom = 31.0
+texture_normal = ExtResource("3_e4dr1")
+texture_pressed = ExtResource("4_jfen3")
+texture_hover = ExtResource("4_jfen3")
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

@@ -20,3 +20,5 @@ scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_4flbx")
 
 [node name="muzzle" type="Node2D" parent="." unique_id=1564871202]
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=1197756562]

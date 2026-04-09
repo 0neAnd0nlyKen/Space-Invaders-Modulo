@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bg34xc1ff3duq"]
+
+[ext_resource type="Script" uid="uid://dg2di34bsog4j" path="res://scripts/credit.gd" id="1_5egdn"]
+[ext_resource type="Texture2D" uid="uid://b2g020pir826o" path="res://assets/Gambar/BG_Credit.png" id="1_kmqx5"]
+[ext_resource type="Texture2D" uid="uid://ekury0yx0s7w" path="res://assets/Gambar/Back1.png" id="3_st0h4"]
+[ext_resource type="Texture2D" uid="uid://o5ihk0puhawt" path="res://assets/Gambar/Back2.png" id="4_32mfc"]
+
+[node name="Credit" type="Control" unique_id=314018314]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5egdn")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1708730347]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_kmqx5")
+
+[node name="Label" type="Label" parent="." unique_id=332746456]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CREDITS GAME:
+"
+horizontal_alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="." unique_id=1676715346]
+layout_mode = 0
+offset_right = 377.0
+offset_bottom = 234.0
+texture_normal = ExtResource("3_st0h4")
+texture_pressed = ExtResource("4_32mfc")
+texture_hover = ExtResource("4_32mfc")
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

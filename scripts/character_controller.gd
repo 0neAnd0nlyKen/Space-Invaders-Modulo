@@ -65,6 +65,7 @@ func setup(data:Dictionary):
 			if upgrades.has("metal pipe") and SelectionInstructions.pipe == false:
 				SelectionInstructions.pipe = true
 				shoot_sound.stream = load("res://assets/sound/pipe.wav")
+			print_debug(data["ID"])
 
 func get_input():
 	moveDir = Input.get_axis("left", "right")
@@ -86,6 +87,7 @@ func _physics_process(delta: float) -> void:
 		if fire and not isSpinning:
 			summonWeaponSawblade()
 	elif fire and count >= fireRate:
+		print_debug(SelectionInstructions.recast)
 		if SelectionInstructions.recast > 0 and weaponType != "explosive":
 			var a:int = 0
 			while a < SelectionInstructions.recast:

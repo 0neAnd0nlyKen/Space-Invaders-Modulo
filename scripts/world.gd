@@ -11,7 +11,7 @@ var difficulty_level: int = 0
 var next_difficulty_score: int = 100
 var selectionOverlayLayer
 var bonusTaken:int = 0
-var perksTaken:int = 0
+var perksTaken:int = 3
 var maxHealth: int = 0
 var shield = preload("res://scenes/shield.tscn")
 var shieldExists:bool = false

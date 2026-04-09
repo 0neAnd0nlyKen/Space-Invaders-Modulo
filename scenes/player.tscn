@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2ueiii8ikh7g" path="res://scripts/character_controller.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://b487eiqq4yk3b" path="res://scripts/perks/perks.gd" id="2_g2els"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_g2els"]
-size = Vector2(40, 40)
+[ext_resource type="Texture2D" uid="uid://btnxrtf73lo6g" path="res://assets/player.png" id="2_qhqgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
 
@@ -12,7 +10,8 @@ size = Vector2(40, 40)
 script = ExtResource("1_4flbx")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2062061380]
-texture = SubResource("PlaceholderTexture2D_g2els")
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1404395139]
 scale = Vector2(2, 2)

@@ -10,7 +10,6 @@ var press
 var enemies:Array = []
 var enemySpeed
 
-
 func setup(type:String, pos:Vector2):
 	hitbox = $CollisionShape2D
 	body_entered.connect(_bullet_hit)
@@ -26,8 +25,8 @@ func setup(type:String, pos:Vector2):
 			radius = -(position.distance_to(pos))
 		"saw":
 			reach = 140
-			damage = 0.2 + SelectionInstructions.dmgMulti
-			fireRate = 0.1 - (SelectionInstructions.fireRateUp * 0.5)
+			damage = 0.4 + (SelectionInstructions.dmgMulti * 0.5)
+			fireRate = 0.06 - (SelectionInstructions.fireRateUp * 0.5)
 			position.y += -(reach/2 + 20)
 			rotateSpeed = -1
 			sprite = $Sprite
@@ -68,7 +67,7 @@ func _physics_process(delta: float) -> void:
 				queue_free()
 
 func throwSword():
-	rotate(rotateSpeed)
+	rotate(.3)
 	position.y -= 15
 	position.x = origin.x
 	if position.y < -1000:

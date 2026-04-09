@@ -19,6 +19,7 @@ var weapon
 var fireRate:float
 var count:float = 0
 var dur:Array = []
+var activated:Array = []
 var spinned:bool = false
 
 func _ready() -> void:
@@ -40,6 +41,9 @@ func setup(data:Dictionary):
 			baseCDs.append(data["CDs"])
 			cooldowns.append(0)
 			dur.append(0)
+			activated.append(0)
+			SelectionInstructions.playerPerks.append(data["ID"])
+			print_debug(perks[-1], ": ", baseCDs[-1])
 
 func get_input():
 	moveDir = Input.get_axis("left", "right")
@@ -52,45 +56,52 @@ func _physics_process(delta: float) -> void:
 	count += delta
 	get_input()
 	var xMove:float = moveDir * speed
+	var yMove:float = 0
 	
 	get_cd_and_durs(delta)
 	castPerks()
 	
-	if len(get_children()) < 4:
-		spinned = false
-	
 	if weaponType == "saw":
+		if get_child_count() == 4:
+			spinned = false
 		if fire and not spinned:
 			summonWeaponSawblade()
 	elif fire and count >= fireRate:
 		summonWeapon()
 	
-	moveChar(xMove)
+	moveChar(xMove, yMove)
 
 func castPerks():
-	if perk1 and perks[0] != null and cooldowns[0] <= 0:
+	if perk1 and len(perks) > 0 and cooldowns[0] <= 0:
 		perk.UsePerk(perks[0], 0)
 		cooldowns[0] = baseCDs[0]
-	if perk2 and perks[1] != null and cooldowns[1] <= 0:
+		activated[0] = 1
+	if perk2 and len(perks) > 1 and cooldowns[1] <= 0:
 		perk.UsePerk(perks[1], 1)
 		cooldowns[1] = baseCDs[1]
-	if perk3 and perks[2] != null and cooldowns[2] <= 0:
+		activated[1] = 1
+	if perk3 and len(perks) > 2 and cooldowns[2] <= 0:
 		perk.UsePerk(perks[2], 2)
 		cooldowns[2] = baseCDs[2]
+		activated[2] = 1
 
 func get_cd_and_durs(delta:float):
 	var a:int = 0
 	var a2:int = 0
 	for d in dur:
 		if d > 0:
-			d -= delta
-		elif d <= 0:
-			perk.StopPerk(perks[a])
-			d = 0
+			dur[a] -= delta
+			#print_debug("Duration ablility ", a, ":", d)
+		elif d < 0:
+			dur[a] = 0
+			if activated[a] == 1:
+				perk.StopPerk(perks[a], a)
 		a+=1
 	for c in cooldowns:
 		if c > 0 and dur[a2] <= 0:
-			c -= delta
+			cooldowns[a2] -= delta
+			#print_debug("CD ablility ", a2, ":", c)
+		a2+=1
 
 func summonWeapon():
 	count = 0
@@ -104,7 +115,8 @@ func summonWeaponSawblade():
 	sawblade.setup(weaponType, muzzle.position)
 	spinned = true
 
-func moveChar(xMove:float):
+func moveChar(xMove:float, yMove:float):
+	velocity.y = yMove
 	if xMove:
 		velocity.x = xMove
 	else:

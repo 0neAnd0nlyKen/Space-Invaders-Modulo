@@ -63,7 +63,7 @@ func _physics_process(delta: float) -> void:
 					if enemy.name != "Body":
 						enemy.take_damage(damage)
 			sprite.rotate(rotateSpeed)
-			if count > 1:
+			if count > 1 and not press:
 				queue_free()
 		"repulsar":
 			count += delta

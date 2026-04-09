@@ -3,17 +3,16 @@
 [ext_resource type="Script" uid="uid://b2ueiii8ikh7g" path="res://scripts/character_controller.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://b487eiqq4yk3b" path="res://scripts/perks/perks.gd" id="2_g2els"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_sh265"]
-radius = 20.0
-height = 40.0
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_g2els"]
+size = Vector2(40, 40)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
 
 [node name="Body" type="CharacterBody2D" unique_id=339184942]
 script = ExtResource("1_4flbx")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1479625545]
-mesh = SubResource("SphereMesh_sh265")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2062061380]
+texture = SubResource("PlaceholderTexture2D_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1404395139]
 scale = Vector2(2, 2)

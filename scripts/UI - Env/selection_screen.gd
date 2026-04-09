@@ -51,10 +51,10 @@ func setup(instructions:Dictionary) -> void:
 		1:
 			while selected.size() < 3:
 				var pick = perks.pick_random()
-				if pick not in selected:
+				if pick not in selected and pick not in SelectionInstructions.playerPerks:
 					var index = perks.find(pick)
 					selected.append(pick)
-					selectedCDs.append(index)
+					selectedCDs.append(perkCDs[index])
 					selectedIcons.append(perkIcons[index])
 		2:
 			while selected.size() < 3:

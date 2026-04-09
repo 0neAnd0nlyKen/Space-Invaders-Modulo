@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://66h234sln7di"]
+
+[ext_resource type="Script" uid="uid://6mvioue0utd8" path="res://scripts/perks/shield.gd" id="1_vtru8"]
+
+[node name="Shield" type="Node2D" unique_id=802609019]
+script = ExtResource("1_vtru8")

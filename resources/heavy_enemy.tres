@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="EnemyType" format=3 uid="uid://heavy_enemy_res"]
+[gd_resource type="Resource" script_class="EnemyType" format=3 uid="uid://doggvfi2s0u5v"]
 
+[ext_resource type="Script" uid="uid://ca878t2am588e" path="res://resources/enemy_type.gd" id="1_enemy_type"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/heavy_enemy.tscn" id="1_heavy"]
-[ext_resource type="Script" path="res://resources/enemy_type.gd" id="1_enemy_type"]
 
 [resource]
 script = ExtResource("1_enemy_type")

@@ -1,8 +1,8 @@
 extends CharacterBody2D
 class_name Player
-@onready var shoot_sound = $ShootSound #Sound tembak
 
 #@export var charVis:Sprite2D
+@onready var shoot_sound = $ShootSound #Sound tembak
 @onready var muzzle:Node2D = $muzzle
 @onready var perk:Node2D = $perks
 @export var speed:float = 300

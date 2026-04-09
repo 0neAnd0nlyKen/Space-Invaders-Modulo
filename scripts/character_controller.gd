@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 @onready var shoot_sound = $ShootSound #Sound tembak
 
 #@export var charVis:Sprite2D
@@ -63,17 +64,6 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide() #move
 	
-
-func get_input():
-	moveDir = Input.get_axis("left", "right")
-	fire = Input.is_action_pressed("fire")
-	if Input.is_action_just_pressed("weapon 1"):
-			weaponType = 0
-	elif Input.is_action_just_pressed("weapon 2"):
-		weaponType = 1
-	elif Input.is_action_just_pressed("weapon 3"):
-		weaponType = 2
-
 func CheckGunType():
 	match weaponType:
 		0:

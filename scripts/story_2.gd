@@ -2,4 +2,9 @@ extends Control
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
-		get_tree().change_scene_to_file("res://scenes/world.tscn")
+		SelectionInstructions.data = {
+			"type": 0,
+			"next": "world",
+			"title": "Choose Weapon"
+		}
+		get_tree().change_scene_to_file("res://scenes/selection_screen.tscn")

@@ -30,8 +30,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Di masa depan, bumi diserang oleh makhluk misterius...
-Mereka menculik para penjaga terakhir umat manusia..."
+text = "Di masa depan, umat manusia telah menyebar ke berbagai planet
+
+Namun kedamaian itu tidak bertahan lama
+
+Monster misterius dari luar galaksi menyerang tanpa peringatan
+
+Mereka menghancurkan armada pertahanan satu per satu"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1

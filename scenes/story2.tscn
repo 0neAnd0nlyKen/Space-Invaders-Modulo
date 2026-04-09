@@ -28,9 +28,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Satu harapan tersisa...
-Seorang heroine yang akan menyelamatkan dunia.
-Kamu adalah pilot terakhir."
+text = "Kini, hanya satu planet yang tersisa
+
+Planet terakhir umat manusia
+
+Pertahanan telah runtuh
+Armada pasukan telah musnah
+
+Hanya satu pesawat tempur yang masih aktif
+
+Kamu adalah harapan terakhir planet ini
+
+Lindungi planet ini dari kehancuran"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1

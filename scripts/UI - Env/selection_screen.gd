@@ -1,4 +1,5 @@
 extends Control
+class_name Select
 
 #@export var card: = preload("res://scenes/card.tscn")
 #@export var player: = preload("res://scenes/player.tscn")

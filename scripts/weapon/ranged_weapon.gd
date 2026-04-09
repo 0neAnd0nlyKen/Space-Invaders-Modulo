@@ -26,27 +26,30 @@ func setup(type:String, pos:Vector2):
 	wType = type
 	match type:
 		"rifle":
-			speed = -40
+			speed = -1600
 			damage = 3.0 + SelectionInstructions.dmgMulti
 			fireRate = 0.2 - SelectionInstructions.fireRateUp
 		"sniper":
-			speed = -100
+			speed = -2800
 			damage = 12.0 + SelectionInstructions.dmgMulti
 			fireRate = 1.0 - SelectionInstructions.fireRateUp
 		"shotgun":
-			speed = -40
+			speed = -1600
 			damage = 2.0 + SelectionInstructions.dmgMulti
 			fireRate = 0.65 - SelectionInstructions.fireRateUp
 		"explosive":
-			speed = -20
+			speed = -1000
 			damage = 0.0
 			fireRate = 1.2 - SelectionInstructions.fireRateUp
 	
 
-func _process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if not meleeWeapons.has(wType):
-		position.y += speed
-		position.x = origin.x
+		if wType == "shotgun":
+			position += Vector2(0, speed).rotated(rotation) * delta
+		else:
+			position.y += speed * delta
+		#position.x = origin.x
 		if (is_instance_valid(objHit) and objHit is Enemy) or position.y < -1000:
 			if wType == "explosive":
 				if SelectionInstructions.recast > 0:

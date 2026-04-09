@@ -6,6 +6,9 @@ class_name World
 @export var healthLabel: Label
 @export var scoreLabel: Label
 @export var spawnerNode: Node2D
+@export var perkUI1:Control
+@export var perkUI2:Control
+@export var perkUI3:Control
 
 var difficulty_level: int = 0
 var next_difficulty_score: int = 100
@@ -28,6 +31,9 @@ func _ready() -> void:
 	SelectionInstructions.phoenix_consume.connect(_on_phoenix_consume)
 	updateLabel(healthLabel, health)
 	updateLabel(scoreLabel, score)
+	perkUI1.hide()
+	perkUI2.hide()
+	perkUI3.hide()
 
 func updateLabel(label: Label, num: int):
 	label.text = str(num)

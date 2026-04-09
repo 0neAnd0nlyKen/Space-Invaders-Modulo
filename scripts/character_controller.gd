@@ -23,7 +23,9 @@ var count:float = 0
 var dur:Array = []
 var activated:Array = []
 var isSpinning:bool = false
+
 signal get_hurt(lost_health: float)
+signal obtain_skill(ID:String, path:String)
 
 var rifle_sound = preload("res://assets/sound/laserShoot1.wav")
 var sniper_sound = preload("res://assets/sound/laserShoot2.wav")
@@ -55,6 +57,7 @@ func setup(data:Dictionary):
 				activated.append(1)
 			activated.append(0)
 			SelectionInstructions.playerPerks.append(data["ID"])
+			Select.perkIcons[Select.perks.find(data["ID"])]
 		2:
 			upgrades.append(data["ID"])
 			SelectionInstructions.dmgMulti = (1.2 * upgrades.count("damage"))
@@ -95,7 +98,7 @@ func _physics_process(delta: float) -> void:
 				a+=1
 		else:
 			summonWeapon()
-	
+	velocity
 	moveChar(xMove, yMove)
 
 func castPerks():
@@ -131,11 +134,23 @@ func get_cd_and_durs(delta:float):
 		a2+=1
 
 func summonWeapon():
-	count = 0
-	shoot_sound.play()
-	var bullet:FriendlyWeapon = weapon.instantiate()
-	add_child(bullet)
-	bullet.setup(weaponType, muzzle.position)
+	if weaponType == "shotgun":
+		count = 0
+		var bulletCount = 6
+		var spread = 0.3
+		for i in bulletCount:
+			var bullet:FriendlyWeapon = weapon.instantiate()
+			add_child(bullet)
+			bullet.setup(weaponType, muzzle.position)
+			bullet.rotation_degrees = -45
+			var angleOffset = lerp(-spread, spread, float(i) / (bulletCount - 1))
+			bullet.rotation = rotation + angleOffset
+	else:
+		count = 0
+		shoot_sound.play()
+		var bullet:FriendlyWeapon = weapon.instantiate()
+		add_child(bullet)
+		bullet.setup(weaponType, muzzle.position)
 
 func summonWeaponSawblade():
 	var sawblade:FriendlyWeapon = weapon.instantiate()

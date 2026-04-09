@@ -38,6 +38,7 @@ func setup(data:Dictionary):
 		0:
 			weapon = load("res://scenes/weapons/" + data["ID"] + ".tscn")
 			weaponType = data["ID"]
+			selectShootSound()
 			var initial:FriendlyWeapon = weapon.instantiate()
 			add_child(initial)
 			initial.setup(weaponType, muzzle.position)
@@ -50,7 +51,6 @@ func setup(data:Dictionary):
 			dur.append(0)
 			activated.append(0)
 			SelectionInstructions.playerPerks.append(data["ID"])
-			print_debug(perks[-1], ": ", baseCDs[-1])
 
 func get_input():
 	moveDir = Input.get_axis("left", "right")
@@ -112,6 +112,7 @@ func get_cd_and_durs(delta:float):
 
 func summonWeapon():
 	count = 0
+	shoot_sound.play()
 	var bullet:FriendlyWeapon = weapon.instantiate()
 	add_child(bullet)
 	bullet.setup(weaponType, muzzle.position)
@@ -124,12 +125,6 @@ func summonWeaponSawblade():
 
 func moveChar(xMove:float, yMove:float):
 	velocity.y = yMove
-	if xMove:
-		count = 0
-		play_shoot_sound()
-		var bullet:FriendlyWeapon = weapon.instantiate()
-		add_child(bullet)
-		bullet.setup(weaponType, muzzle.position)
 	
 	if xMove: #apply horizontal movement
 		velocity.x = xMove
@@ -137,27 +132,15 @@ func moveChar(xMove:float, yMove:float):
 		velocity.x = move_toward(velocity.x, 0, speed)
 	
 	move_and_slide() #move
-	
-func CheckGunType():
-	match weaponType:
-		0:
-			weapon = load("res://scenes/rifle.tscn")
-		1:
-			weapon = load("res://scenes/sniper.tscn")
-		2:
-			weapon = load("res://scenes/shotgun.tscn")
 			
-func play_shoot_sound(): #Fungsi sound tembak
+func selectShootSound(): #Fungsi sound tembak
 	match weaponType:
-		0:
+		"rifle":
 			shoot_sound.stream = rifle_sound
-		1:
+		"sniper":
 			shoot_sound.stream = sniper_sound
-		2:
+		"shotgun":
 			shoot_sound.stream = shotgun_sound
-	
-	shoot_sound.play()
-	
 		
 
 func _on_bonus_recived():

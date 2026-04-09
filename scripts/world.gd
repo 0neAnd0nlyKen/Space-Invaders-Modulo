@@ -30,7 +30,6 @@ func updateLabel(label: Label, num: int):
 func is_difficulty_cleared() -> bool:
 	return score >= next_difficulty_score
 
-
 func _on_enemy_defeated(enemyScore: float): #hardcoded newEnemy.(signal).connect in spawner node
 	score += int(enemyScore)
 	if is_difficulty_cleared():
@@ -85,9 +84,9 @@ func _on_player_get_hurt(lost_health: float) -> void:
 
 func lose_health(lost_health: float):
 	if shieldExists:
-		take_damage.emit(enemyHealth)
+		take_damage.emit(lost_health)
 	else:
-		health -= int(enemyHealth)
+		health -= int(lost_health)
 	updateLabel(healthLabel, health)
 	if health <= 0:
 		gameOver()

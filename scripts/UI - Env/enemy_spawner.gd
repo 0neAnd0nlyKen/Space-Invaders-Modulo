@@ -15,7 +15,7 @@ var difficulty_level: int = 0
 func _ready() -> void:
 	if spawnAnchor == null:
 		spawnAnchor = $"../spawnpoint"
-	difficulty_increased.connect(_on_difficulty_increased)
+		difficulty_increased.connect(_on_difficulty_increased)
 
 func _process(delta: float) -> void:
 	var spawnPoint:Vector2 = Vector2(randf_range(-400, 400), spawnAnchor.position.y)
@@ -47,6 +47,7 @@ func spawn_enemy_variation(spawn_point: Vector2) -> Enemy:
 			newEnemy = enemy_base.instantiate()
 			newEnemy.set_script(preload("res://scripts/enemy/wave_enemy.gd"))
 		2:
+			if wave_counter > 3:  # Only spawn heavy after wave 3
 				newEnemy = enemy_base.instantiate()
 				newEnemy.set_script(preload("res://scripts/enemy/heavy_enemy.gd"))
 			else:
@@ -64,3 +65,8 @@ func spawn_enemy_variation(spawn_point: Vector2) -> Enemy:
 	newEnemy.position = spawn_point
 	wave_counter += 1
 	return newEnemy
+
+func _on_difficulty_increased() -> void:
+	difficulty_level += 1
+	spawnRate = max(0.5, spawnRate - 0.3)  # Make spawning more frequent
+	maxEnemies += 1  # Allow more enemies on screen

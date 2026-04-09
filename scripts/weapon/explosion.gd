@@ -1,8 +1,8 @@
 extends FriendlyWeapon
 var delTime:float = 0.0
 
-func explode(pos:Vector2):
-	damage = 20.0
+func explode(pos:Vector2, dmgUp:float):
+	damage = 20.0 + dmgUp
 	position = pos
 
 func _process(delta: float) -> void:

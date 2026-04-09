@@ -28,7 +28,7 @@ const perkIcons:Array = ["res://assets/perk_sprites/shield.png", "res://assets/p
 	"res://assets/perk_sprites/revive.png"
 	]
 const upgradeIcons:Array = []
-const perkCDs:Array = [8.0, 3.0, 20.0, 8.0, 90.0]
+const perkCDs:Array = [8.0, 3.0, 20.0, 8.0, 0.0]
 
 func _ready() -> void:
 	setup(SelectionInstructions.data)

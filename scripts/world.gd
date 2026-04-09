@@ -5,6 +5,10 @@ class_name World
 @export var health: int = 9
 @export var healthLabel: Label
 @export var scoreLabel: Label
+@export var spawnerNode: Node2D
+
+var difficulty_level: int = 0
+var next_difficulty_score: int = 100
 var selectionOverlayLayer
 var bonusTaken:int = 0
 var maxHealth: int = 0
@@ -23,9 +27,15 @@ func _ready() -> void:
 
 func updateLabel(label: Label, num: int):
 	label.text = str(num)
+func is_difficulty_cleared() -> bool:
+	return score >= next_difficulty_score
 
-func _on_enemy_defeated(enemyScore: int):
-	score += enemyScore
+
+func _on_enemy_defeated(enemyScore: float): #hardcoded newEnemy.(signal).connect in spawner node
+	score += int(enemyScore)
+	if is_difficulty_cleared():
+		spawnerNode.difficulty_increased.emit()
+		next_difficulty_score += 100
 	updateLabel(scoreLabel, score)
 	print("detected death")
 	if score >= 1200 + (bonusTaken*1200):
@@ -67,12 +77,20 @@ func _on_repair_recived(amount:int):
 		else:
 			health = maxHealth
 
-func _on_enemy_landed(enemyHealth: float):
+func _on_enemy_landed(enemyHealth: float): #hardcoded newEnemy.(signal).connect in spawner node
+	lose_health(enemyHealth)
+
+func _on_player_get_hurt(lost_health: float) -> void:
+	lose_health(lost_health)
+
+func lose_health(lost_health: float):
 	if shieldExists:
 		take_damage.emit(enemyHealth)
 	else:
 		health -= int(enemyHealth)
-		updateLabel(healthLabel, health)
+	updateLabel(healthLabel, health)
+	if health <= 0:
+		gameOver()
 
 func gameOver():
 	get_tree().paused = true

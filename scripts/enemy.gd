@@ -9,7 +9,7 @@ class_name Enemy
 var health: float
 var time_alive: float = 0.0
 
-signal enemy_defeated(score_value: int)
+signal enemy_defeated(score_value: float)
 signal enemy_landed(enemy_health: float)
 
 func _ready() -> void:

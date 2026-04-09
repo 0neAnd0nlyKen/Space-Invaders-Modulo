@@ -22,3 +22,5 @@ shape = SubResource("CircleShape2D_4flbx")
 
 [node name="perks" type="Node2D" parent="." unique_id=1011605627]
 script = ExtResource("2_g2els")
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=1197756562]

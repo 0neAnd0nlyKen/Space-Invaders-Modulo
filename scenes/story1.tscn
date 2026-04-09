@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://brnentt5agbl"]
+
+[ext_resource type="Script" uid="uid://8pa5044yojr7" path="res://scripts/story_1.gd" id="1_0ydi0"]
+
+[node name="Story1" type="Control" unique_id=1188889740]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 10.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0ydi0")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=588473273]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1578634662]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Di masa depan, bumi diserang oleh makhluk misterius...
+Mereka menculik para penjaga terakhir umat manusia..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1

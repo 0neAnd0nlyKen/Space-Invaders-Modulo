@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bj05bthmdn2ob"
-path="res://.godot/imported/play_button.svg-d9274ed323f8844bc0e0e3f9b1dcc9dd.ctex"
+uid="uid://b2g020pir826o"
+path="res://.godot/imported/BG_Credit.png-957dbe341757a3d07806167f71f63100.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/main_menu/play/play_button.svg"
-dest_files=["res://.godot/imported/play_button.svg-d9274ed323f8844bc0e0e3f9b1dcc9dd.ctex"]
+source_file="res://assets/Gambar/BG_Credit.png"
+dest_files=["res://.godot/imported/BG_Credit.png-957dbe341757a3d07806167f71f63100.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

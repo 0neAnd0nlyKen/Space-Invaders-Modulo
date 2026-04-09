@@ -1,4 +1,6 @@
 extends CharacterBody2D
+class_name Player
+@onready var shoot_sound = $ShootSound #Sound tembak
 
 #@export var charVis:Sprite2D
 @onready var muzzle:Node2D = $muzzle
@@ -21,6 +23,11 @@ var count:float = 0
 var dur:Array = []
 var activated:Array = []
 var spinned:bool = false
+signal get_hurt(lost_health: float)
+
+var rifle_sound = preload("res://assets/sound/laserShoot1.wav")
+var sniper_sound = preload("res://assets/sound/laserShoot2.wav")
+var shotgun_sound = preload("res://assets/sound/laserShoot3.wav")
 
 func _ready() -> void:
 	setup(SelectionInstructions.playerData)
@@ -118,11 +125,40 @@ func summonWeaponSawblade():
 func moveChar(xMove:float, yMove:float):
 	velocity.y = yMove
 	if xMove:
+		count = 0
+		play_shoot_sound()
+		var bullet:FriendlyWeapon = weapon.instantiate()
+		add_child(bullet)
+		bullet.setup(weaponType, muzzle.position)
+	
+	if xMove: #apply horizontal movement
 		velocity.x = xMove
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 	
 	move_and_slide() #move
+	
+func CheckGunType():
+	match weaponType:
+		0:
+			weapon = load("res://scenes/rifle.tscn")
+		1:
+			weapon = load("res://scenes/sniper.tscn")
+		2:
+			weapon = load("res://scenes/shotgun.tscn")
+			
+func play_shoot_sound(): #Fungsi sound tembak
+	match weaponType:
+		0:
+			shoot_sound.stream = rifle_sound
+		1:
+			shoot_sound.stream = sniper_sound
+		2:
+			shoot_sound.stream = shotgun_sound
+	
+	shoot_sound.play()
+	
+		
 
 func _on_bonus_recived():
 	setup(SelectionInstructions.playerData)

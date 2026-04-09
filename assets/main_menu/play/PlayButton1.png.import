@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cd0n3h36cvtc0"
-path="res://.godot/imported/leaderboard_button.svg-18038f3e071665ae6660afe0dfa3e3c2.ctex"
+uid="uid://cbig0fjnduyge"
+path="res://.godot/imported/PlayButton1.png-703827dff4e664c8f5d5fede066264c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/main_menu/leaderboard/leaderboard_button.svg"
-dest_files=["res://.godot/imported/leaderboard_button.svg-18038f3e071665ae6660afe0dfa3e3c2.ctex"]
+source_file="res://assets/main_menu/play/PlayButton1.png"
+dest_files=["res://.godot/imported/PlayButton1.png-703827dff4e664c8f5d5fede066264c0.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

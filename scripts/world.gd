@@ -86,6 +86,7 @@ func _on_phoenix_consume():
 	health = maxHealth
 	reviveAvailable = false
 	perksTaken -= 1
+	updateLabel(healthLabel, health)
 
 func _on_repair_recived(amount:int):
 	if health < maxHealth:
@@ -93,6 +94,7 @@ func _on_repair_recived(amount:int):
 			health += amount
 		else:
 			health = maxHealth
+	updateLabel(healthLabel, health)
 
 func _on_enemy_landed(enemyHealth: float): #hardcoded newEnemy.(signal).connect in spawner node
 	print_debug("enemy landed ", enemyHealth )
@@ -114,10 +116,9 @@ func lose_health(lost_health: float):
 			gameOver()
 
 func gameOver():
-	get_tree().paused = true
+	#get_tree().paused = true
 	save_score(SelectionInstructions.playerDetail["name"], SelectionInstructions.playerDetail["score"])
-	# buka scene/overlay game over
-	pass
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 	
 func save_score(playerName: String, score: int) -> void:
 	var scores = load_scores()

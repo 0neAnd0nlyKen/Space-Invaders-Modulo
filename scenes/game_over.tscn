@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cmhdl8ekybvv2"]
 
-[ext_resource type="Script" uid="uid://dj1jrd25uwwcq" path="res://scenes/game_over.gd" id="1_2jtsn"]
+[ext_resource type="Script" uid="uid://dj1jrd25uwwcq" path="res://scripts/UI - Env/game_over.gd" id="1_2jtsn"]
 [ext_resource type="Texture2D" uid="uid://bjx0q60i8tgvn" path="res://assets/game_over/bg.png" id="2_8bugq"]
 [ext_resource type="AudioStream" uid="uid://2pu2as7bac0i" path="res://assets/sound/click.wav" id="5_8bugq"]
 [ext_resource type="Texture2D" uid="uid://xsmfvjgm7nup" path="res://assets/game_over/play-again off.png" id="5_wawo4"]

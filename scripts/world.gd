@@ -11,6 +11,7 @@ var difficulty_level: int = 0
 var next_difficulty_score: int = 100
 
 func _ready() -> void:
+	BGM.play_music("res://assets/sound/UndertaleSong.mp3")
 	updateLabel(healthLabel, health)
 	updateLabel(scoreLabel, score)
 

@@ -31,9 +31,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "CREDITS GAME:
-"
+text = "CREDITS GAME
+
+Game Developer:
+Kendrick Raphael Ticoalu
+Ngakan Putu Bagus Ananta Wijaya
+Esa Sulistyo Aji Nugroho
+
+
+Engine:
+Godot Engine 
+
+Thank you for playing our game"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BackButton" type="TextureButton" parent="." unique_id=1676715346]
 layout_mode = 0

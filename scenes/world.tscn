@@ -4,12 +4,25 @@
 [ext_resource type="Script" uid="uid://08onpqgp8kdv" path="res://scripts/world.gd" id="1_k0juu"]
 [ext_resource type="PackedScene" uid="uid://dl2giksr5stij" path="res://scenes/wall.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://bqc8atpjvo1x1" path="res://scenes/spawner.tscn" id="3_tlwt5"]
+[ext_resource type="Texture2D" uid="uid://cpourbx001gys" path="res://assets/Gambar/BG_World.png" id="5_71j4m"]
 
 [node name="world" type="Node2D" unique_id=1081092939 node_paths=PackedStringArray("healthLabel", "scoreLabel", "spawnerNode")]
 script = ExtResource("1_k0juu")
 healthLabel = NodePath("HealthLabel")
 scoreLabel = NodePath("ScoreLabel")
 spawnerNode = NodePath("Environment/enemy_environmnet/spawner")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1500852891]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -578.0
+offset_top = -548.0
+offset_right = 582.0
+offset_bottom = 476.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_71j4m")
 
 [node name="player" parent="." unique_id=339184942 instance=ExtResource("1_fj7yv")]
 position = Vector2(0, 20)

@@ -5,6 +5,8 @@ class_name ShooterEnemy
 
 @export var shoot_rate: float = 1.5
 @export var shoot_offset: Vector2 = Vector2(0, 20)
+@export var projectile: Area2D
+
 
 var shoot_timer: float = 0.0
 
@@ -13,6 +15,7 @@ func _ready() -> void:
 	health = max_health
 	enemy_score = 150
 	base_speed = 25
+	$EnemyProjectile.disable_mode = true
 	super()
 
 func move_enemy(_delta: float) -> void:
@@ -30,25 +33,14 @@ func _process(delta: float) -> void:
 		shoot()
 
 func shoot() -> void:
-	# Create a simple projectile Area2D
-	var projectile = Area2D.new()
-	projectile.name = "EnemyProjectile"
+	if projectile == null:
+		return
 	
-	# Add collision shape
-	var shape = CollisionShape2D.new()
-	shape.shape = CircleShape2D.new()
-	shape.shape.radius = 3
-	projectile.add_child(shape)
+	var newProjectile = projectile.duplicate()
+	newProjectile.position = global_position + shoot_offset
+	newProjectile.disable_mode = false
+	get_parent().add_child(newProjectile)
 	
-	# Create visual representation (sprite)
-	var sprite = ColorRect.new()
-	sprite.size = Vector2(6, 6)
-	sprite.color = Color.RED
-	projectile.add_child(sprite)
-	
-	get_parent().add_child(projectile)
-	projectile.position = global_position + shoot_offset
-	
-	# Add custom velocity property
-	projectile.set_meta("velocity", Vector2(0, 200))
-	projectile.set_meta("damage", 5)
+	# Play animation if it has AnimatedSprite2D
+	if newProjectile.has_node("AnimatedSprite2D"):
+		newProjectile.get_node("AnimatedSprite2D").play()

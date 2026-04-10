@@ -19,57 +19,90 @@ func setup(type:String, pos:Vector2):
 	match type:
 		"sword":
 			reach = 170
-			damage = 13.0
-			fireRate = 1.0
+			damage = 13.0 + SelectionInstructions.dmgMulti
+			fireRate = 1.0 - SelectionInstructions.fireRateUp
 			position.y += (reach/2 + 30)
 			radius = -(position.distance_to(pos))
 		"saw":
 			reach = 140
-			damage = 0.2
-			fireRate = 0.1
+			damage = 0.4 + (SelectionInstructions.dmgMulti * 0.5)
+			fireRate = 0.06 - (SelectionInstructions.fireRateUp * 0.5)
 			position.y += -(reach/2 + 20)
 			rotateSpeed = -1
 			sprite = $Sprite
 		"repulsar":
 			reach = 180
-			damage = 8.0
-			fireRate = 0.8
+			damage = 8.0 + SelectionInstructions.dmgMulti
+			fireRate = 0.8 - SelectionInstructions.fireRateUp
 			#position.y += -(reach/2 + 10)
 	
 
 func _physics_process(delta: float) -> void:
 	match wType:
 		"sword":
-			if rotateTimer > .35:
-				doneRotating = true
-			if not doneRotating:
-				rotateTimer += delta
-				rotateAngle += rotateSpeed * delta
-				position = Vector2(
-					cos(rotateAngle) * radius,
-					sin(rotateAngle) * radius
-				)
-				rotation = (rotateAngle + 29.8)
+			if not SelectionInstructions.throw:
+				if rotateTimer > .35:
+					doneRotating = true
+				if not doneRotating:
+					rotateTimer += delta
+					rotateAngle += rotateSpeed * delta
+					position = Vector2(
+						cos(rotateAngle) * radius,
+						sin(rotateAngle) * radius
+					)
+					rotation = (rotateAngle + 29.8)
+				else:
+					queue_free()
 			else:
-				queue_free()
+				throwSword()
 		"saw":
 			count += delta
-			press = Input.is_action_pressed("fire")
-			if press and count >= fireRate:
-				for enemy in enemies:
-					if not is_instance_valid(enemy):
-						enemies.erase(enemy)
-						continue
-					if enemy.name != "Body":
-						enemy.take_damage(damage)
-			sprite.rotate(rotateSpeed)
-			if count > 1:
-				queue_free()
+			if SelectionInstructions.throw:
+				sawThrow()
+			else:
+				sawNormal()
 		"repulsar":
 			count += delta
 			if count > .2:
 				queue_free()
-		
+
+func throwSword():
+	rotate(.3)
+	position.y -= 15
+	position.x = origin.x
+	if position.y < -1000:
+		queue_free()
+
+func sawNormal():
+	press = Input.is_action_pressed("fire")
+	if press and count >= fireRate:
+		for enemy in enemies:
+			if not is_instance_valid(enemy):
+				enemies.erase(enemy)
+				continue
+			if enemy.name != "Body":
+				enemy.take_damage(damage)
+		count = 0
+	sprite.rotate(rotateSpeed)
+	if count > 1:
+		sawblade_off.emit()
+		queue_free()
+
+func sawThrow():
+	position.y -= 30
+	position.x = origin.x
+	if count >= fireRate:
+		for enemy in enemies:
+			if not is_instance_valid(enemy):
+				enemies.erase(enemy)
+				continue
+			if enemy.name != "Body":
+				enemy.take_damage(damage)
+				count = 0
+	sprite.rotate(rotateSpeed)
+	if position.y < -1000:
+		sawblade_off.emit()
+		queue_free()
 
 func _bullet_hit(target:Node2D):
 	if is_instance_valid(target) and target is Enemy:

@@ -6,7 +6,7 @@ class_name EnemySpawner
 @export var spawnRate: float = 2.0
 @export var world: World
 
-signal difficulty_increased()
+signal difficulty_increased() # activated by world node
 
 var spawnTimer: float = 0.0
 var wave_counter: int = 0  # Track spawning waves for variety
@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 					newEnemy.enemy_landed.connect(world._on_enemy_landed)
 
 func spawn_enemy_variation(spawn_point: Vector2) -> Enemy:
-	# Vary enemy types based on wave or randomness
+	# Vary enemy types based on difficulty level
 	var variation = randi() % 4  # 0=basic, 1=wave, 2=heavy, 3=shooter
 	
 	var newEnemy: Enemy
@@ -65,7 +65,6 @@ func spawn_enemy_variation(spawn_point: Vector2) -> Enemy:
 	newEnemy.position = spawn_point
 	wave_counter += 1
 	return newEnemy
-
 
 func _on_difficulty_increased() -> void:
 	difficulty_level += 1

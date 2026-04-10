@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://diji0b6osyma5"]
 
 [ext_resource type="Script" uid="uid://d0oh3dv2utfo" path="res://scripts/UI - Env/selection_screen.gd" id="1_dyftk"]
+[ext_resource type="Texture2D" uid="uid://pen6q4eceruu" path="res://assets/selection_screen/weapon selection.png" id="2_ddptc"]
 [ext_resource type="PackedScene" uid="uid://ld7yg6n3wn6v" path="res://scenes/card.tscn" id="2_ednkh"]
 [ext_resource type="Texture2D" uid="uid://i8yd1esvtkdt" path="res://assets/next_button.svg" id="3_2nlgg"]
+[ext_resource type="Texture2D" uid="uid://bqnifs1ahi8bf" path="res://assets/next_button off.png" id="3_syhfi"]
 
 [node name="Selection_Screen" type="Control" unique_id=1460960415]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,6 +24,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.1, 0.1, 0.2, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=148178140]
+layout_mode = 0
+offset_right = 643.0
+offset_bottom = 390.0
+scale = Vector2(1.79, 1.79)
+texture = ExtResource("2_ddptc")
 
 [node name="Title" type="Label" parent="." unique_id=2094188417]
 layout_mode = 1
@@ -45,6 +55,8 @@ offset_left = 76.0
 offset_top = 220.0
 offset_right = 376.0
 offset_bottom = 580.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Card2" parent="." unique_id=145042403 instance=ExtResource("2_ednkh")]
 layout_mode = 0
@@ -55,6 +67,8 @@ offset_left = 426.0
 offset_top = 220.0
 offset_right = 726.0
 offset_bottom = 580.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Card3" parent="." unique_id=62717962 instance=ExtResource("2_ednkh")]
 layout_mode = 0
@@ -65,6 +79,8 @@ offset_left = 776.0
 offset_top = 220.0
 offset_right = 1076.0
 offset_bottom = 580.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Next_Button" type="TextureButton" parent="." unique_id=961357624]
 layout_mode = 1
@@ -76,7 +92,9 @@ offset_top = 152.0
 offset_right = 470.0
 offset_bottom = 192.0
 grow_horizontal = 2
-texture_normal = ExtResource("3_2nlgg")
+texture_normal = ExtResource("3_syhfi")
+texture_pressed = ExtResource("3_syhfi")
+texture_hover = ExtResource("3_2nlgg")
 
 [connection signal="pressed" from="Card1" to="." method="_on_card_1_pressed"]
 [connection signal="pressed" from="Card2" to="." method="_on_card_2_pressed"]

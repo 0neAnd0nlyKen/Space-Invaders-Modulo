@@ -1,24 +1,25 @@
 [gd_scene format=3 uid="uid://bca2fj0u0tbni"]
 
 [ext_resource type="Script" uid="uid://b2ueiii8ikh7g" path="res://scripts/character_controller.gd" id="1_4flbx"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_sh265"]
-radius = 20.0
-height = 40.0
+[ext_resource type="Script" uid="uid://b487eiqq4yk3b" path="res://scripts/perks/perks.gd" id="2_g2els"]
+[ext_resource type="Texture2D" uid="uid://btnxrtf73lo6g" path="res://assets/player.png" id="2_qhqgy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
 
-[node name="Body" type="CharacterBody2D" unique_id=339184942 node_paths=PackedStringArray("muzzle")]
+[node name="Body" type="CharacterBody2D" unique_id=339184942]
 script = ExtResource("1_4flbx")
-muzzle = NodePath("muzzle")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1479625545]
-mesh = SubResource("SphereMesh_sh265")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2062061380]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1404395139]
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_4flbx")
 
 [node name="muzzle" type="Node2D" parent="." unique_id=1564871202]
+
+[node name="perks" type="Node2D" parent="." unique_id=1011605627]
+script = ExtResource("2_g2els")
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=1197756562]

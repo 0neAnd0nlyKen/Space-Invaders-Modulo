@@ -1,38 +1,35 @@
 [gd_scene format=3 uid="uid://ld7yg6n3wn6v"]
 
 [ext_resource type="Script" uid="uid://brmyv8vgvmqpc" path="res://scripts/UI - Env/card.gd" id="1_6u4wf"]
+[ext_resource type="Texture2D" uid="uid://bt00eh5aivs14" path="res://assets/selection_screen/bg off.png" id="1_kg30u"]
 [ext_resource type="Texture2D" uid="uid://bj83oy8jrndh1" path="res://assets/weapon sprites/repulsar.png" id="2_6u4wf"]
+[ext_resource type="Texture2D" uid="uid://lwigq5bijs1o" path="res://assets/selection_screen/bg.png" id="2_sy11y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_up0cc"]
-font_size = 25
+font_size = 18
 
 [sub_resource type="LabelSettings" id="LabelSettings_d81rb"]
+font_size = 12
 
 [node name="Card" type="TextureButton" unique_id=956046575]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -852.0
-offset_bottom = -298.0
+offset_bottom = -251.0
 grow_horizontal = 2
 grow_vertical = 2
+texture_normal = ExtResource("1_kg30u")
+texture_pressed = ExtResource("1_kg30u")
+texture_hover = ExtResource("2_sy11y")
+stretch_mode = 0
 script = ExtResource("1_6u4wf")
-
-[node name="Background2" type="ColorRect" parent="." unique_id=792466693]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(150, 200)
-color = Color(0.23154128, 0.015890138, 0.08664464, 1)
 
 [node name="Title" type="Label" parent="." unique_id=1715314504]
 layout_mode = 0
-offset_top = 140.0
+offset_top = 135.0
 offset_right = 300.0
-offset_bottom = 175.0
+offset_bottom = 161.0
 theme_override_font_sizes/font_size = 26
 text = "Standard Rifle"
 label_settings = SubResource("LabelSettings_up0cc")
@@ -42,9 +39,9 @@ autowrap_mode = 2
 
 [node name="Description" type="Label" parent="." unique_id=48564874]
 layout_mode = 0
-offset_top = 176.0
+offset_top = 170.0
 offset_right = 300.0
-offset_bottom = 356.0
+offset_bottom = 209.0
 theme_override_font_sizes/font_size = 20
 text = "DPS: 15.0
 Fire Rate: 0.2"
@@ -57,10 +54,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -50.0
-offset_top = 30.0
-offset_right = 50.0
+offset_left = -79.0
+offset_top = 10.0
+offset_right = 81.0
 offset_bottom = 130.0
 grow_horizontal = 2
 texture = ExtResource("2_6u4wf")
-expand_mode = 1
+stretch_mode = 3
+
+[connection signal="mouse_entered" from="." to="." method="_on_hovered"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

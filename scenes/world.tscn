@@ -4,12 +4,24 @@
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_k0juu"]
 [ext_resource type="PackedScene" uid="uid://dl2giksr5stij" path="res://scenes/wall.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://bqc8atpjvo1x1" path="res://scenes/spawner.tscn" id="3_tlwt5"]
+[ext_resource type="Texture2D" uid="uid://bia4k50n7lub5" path="res://assets/perk_sprites/perk UI neutral.png" id="5_71j4m"]
+[ext_resource type="Script" uid="uid://dxnhpgsprnv5b" path="res://scripts/UI - Env/perk_UI.gd" id="5_i7141"]
+[ext_resource type="Texture2D" uid="uid://cg3udj76iroi3" path="res://assets/perk_sprites/repair.png" id="6_qfnet"]
+[ext_resource type="Script" uid="uid://t48mdharnxm0" path="res://scenes/perk_UI2.gd" id="8_4mrxx"]
+[ext_resource type="Script" uid="uid://dqkes0ls7lfef" path="res://scenes/perk_UI3.gd" id="9_7r4gi"]
 
-[node name="world" type="Node2D" unique_id=1081092939 node_paths=PackedStringArray("healthLabel", "scoreLabel", "spawnerNode")]
+[sub_resource type="LabelSettings" id="LabelSettings_7r4gi"]
+line_spacing = 0.0
+font_size = 65
+
+[node name="world" type="Node2D" unique_id=1081092939 node_paths=PackedStringArray("healthLabel", "scoreLabel", "spawnerNode", "p1", "p2", "p3")]
 script = ExtResource("1_k0juu")
 healthLabel = NodePath("HealthLabel")
 scoreLabel = NodePath("ScoreLabel")
 spawnerNode = NodePath("Environment/enemy_environmnet/spawner")
+p1 = NodePath("Perk1")
+p2 = NodePath("Perk2")
+p3 = NodePath("Perk3")
 
 [node name="player" parent="." unique_id=339184942 instance=ExtResource("1_fj7yv")]
 position = Vector2(0, 20)
@@ -55,4 +67,211 @@ offset_right = 417.0
 offset_bottom = -466.0
 text = "0"
 
+[node name="Perk1" type="Control" parent="." unique_id=791121915 node_paths=PackedStringArray("background", "icon", "idLabel", "cdLabel")]
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 400.0
+offset_top = -400.0
+offset_right = 440.0
+offset_bottom = -360.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("5_i7141")
+background = NodePath("bg")
+icon = NodePath("icon")
+idLabel = NodePath("Label")
+cdLabel = NodePath("cd")
+
+[node name="bg" type="TextureRect" parent="Perk1" unique_id=79484997]
+layout_mode = 0
+offset_right = 274.0
+offset_bottom = 262.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_71j4m")
+
+[node name="Label" type="Label" parent="Perk1" unique_id=1727147477]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 88.0
+offset_right = 110.0
+offset_bottom = 111.0
+text = "name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="Perk1" unique_id=499498990]
+layout_mode = 0
+offset_left = 47.5
+offset_top = 10.0
+offset_right = 147.5
+offset_bottom = 110.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_qfnet")
+
+[node name="cd" type="Label" parent="Perk1" unique_id=569992805]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -40.0
+offset_right = 88.0
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "#"
+label_settings = SubResource("LabelSettings_7r4gi")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Perk2" type="Control" parent="." unique_id=1040277265 node_paths=PackedStringArray("background", "icon", "idLabel", "cdLabel")]
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 400.0
+offset_top = -260.0
+offset_right = 440.0
+offset_bottom = -220.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("8_4mrxx")
+background = NodePath("bg")
+icon = NodePath("icon")
+idLabel = NodePath("Label")
+cdLabel = NodePath("cd")
+
+[node name="bg" type="TextureRect" parent="Perk2" unique_id=1115390262]
+layout_mode = 0
+offset_right = 274.0
+offset_bottom = 262.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_71j4m")
+
+[node name="Label" type="Label" parent="Perk2" unique_id=1077015377]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 88.0
+offset_right = 110.0
+offset_bottom = 111.0
+text = "name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="Perk2" unique_id=20215400]
+layout_mode = 0
+offset_left = 47.5
+offset_top = 10.0
+offset_right = 147.5
+offset_bottom = 110.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_qfnet")
+
+[node name="cd" type="Label" parent="Perk2" unique_id=1302558286]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -40.0
+offset_right = 88.0
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "#"
+label_settings = SubResource("LabelSettings_7r4gi")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Perk3" type="Control" parent="." unique_id=259851302 node_paths=PackedStringArray("background", "icon", "idLabel", "cdLabel")]
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 400.0
+offset_top = -120.0
+offset_right = 440.0
+offset_bottom = -80.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("9_7r4gi")
+background = NodePath("bg")
+icon = NodePath("icon")
+idLabel = NodePath("Label")
+cdLabel = NodePath("cd")
+
+[node name="bg" type="TextureRect" parent="Perk3" unique_id=1700658452]
+layout_mode = 0
+offset_right = 274.0
+offset_bottom = 262.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_71j4m")
+
+[node name="Label" type="Label" parent="Perk3" unique_id=297505510]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 88.0
+offset_right = 110.0
+offset_bottom = 111.0
+text = "name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="Perk3" unique_id=967207340]
+layout_mode = 0
+offset_left = 47.5
+offset_top = 10.0
+offset_right = 147.5
+offset_bottom = 110.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_qfnet")
+
+[node name="cd" type="Label" parent="Perk3" unique_id=410388193]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -40.0
+offset_right = 88.0
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "#"
+label_settings = SubResource("LabelSettings_7r4gi")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [connection signal="get_hurt" from="player" to="." method="_on_player_get_hurt"]
+[connection signal="go_off_cooldown" from="player" to="Perk1" method="_on_player_go_off_cooldown"]
+[connection signal="go_off_cooldown" from="player" to="Perk2" method="_on_player_go_off_cooldown"]
+[connection signal="go_off_cooldown" from="player" to="Perk3" method="_on_player_go_off_cooldown"]
+[connection signal="go_on_cooldown" from="player" to="Perk1" method="_on_player_go_on_cooldown"]
+[connection signal="go_on_cooldown" from="player" to="Perk2" method="_on_player_go_on_cooldown"]
+[connection signal="go_on_cooldown" from="player" to="Perk3" method="_on_player_go_on_cooldown"]
+[connection signal="obtain_skill" from="player" to="Perk1" method="_on_player_obtain_skill"]
+[connection signal="obtain_skill" from="player" to="Perk2" method="_on_player_obtain_skill"]
+[connection signal="obtain_skill" from="player" to="Perk3" method="_on_player_obtain_skill"]
+[connection signal="update_perk_cd_label" from="player" to="Perk1" method="_on_player_update_perk_cd_label"]
+[connection signal="update_perk_cd_label" from="player" to="Perk2" method="_on_player_update_perk_cd_label"]
+[connection signal="update_perk_cd_label" from="player" to="Perk3" method="_on_player_update_perk_cd_label"]
+[connection signal="while_activated" from="player" to="Perk1" method="_on_player_while_activated"]
+[connection signal="while_activated" from="player" to="Perk2" method="_on_player_while_activated"]
+[connection signal="while_activated" from="player" to="Perk3" method="_on_player_while_activated"]

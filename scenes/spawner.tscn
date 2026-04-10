@@ -7,7 +7,8 @@
 [ext_resource type="Resource" uid="uid://cs87sf5ecmwf5" path="res://resources/wave_enemy.tres" id="4_wave"]
 [ext_resource type="Resource" uid="uid://doggvfi2s0u5v" path="res://resources/heavy_enemy.tres" id="5_heavy"]
 [ext_resource type="Resource" uid="uid://ct48ppx4k84h2" path="res://resources/shooter_enemy.tres" id="6_shooter"]
+[ext_resource type="Resource" uid="uid://be0hy0yj6np7y" path="res://resources/buffer_enemy.tres" id="8_p5s3f"]
 
 [node name="spawner" type="Node2D" unique_id=908297173]
 script = ExtResource("1_yp5lu")
-enemy_types = Array[ExtResource("2_tx2ig")]([ExtResource("3_cmhla"), ExtResource("4_wave"), ExtResource("5_heavy"), ExtResource("6_shooter"), ExtResource("3_6bbd6")])
+enemy_types = Array[ExtResource("2_tx2ig")]([ExtResource("3_cmhla"), ExtResource("4_wave"), ExtResource("5_heavy"), ExtResource("6_shooter"), ExtResource("3_6bbd6"), ExtResource("8_p5s3f")])

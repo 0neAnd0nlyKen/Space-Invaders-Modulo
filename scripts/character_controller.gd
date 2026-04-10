@@ -31,6 +31,7 @@ func setup(data:Dictionary):
 		initial.setup(weaponType, muzzle.position)
 		fireRate = initial.fireRate
 		initial.queue_free()
+	$AnimatedSprite2D.play()
 
 func get_input():
 	moveDir = Input.get_axis("left", "right")

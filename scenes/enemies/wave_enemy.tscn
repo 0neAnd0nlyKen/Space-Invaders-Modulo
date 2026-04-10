@@ -31,6 +31,6 @@ script = ExtResource("2_wave")
 wave_amplitude = 100.0
 wave_frequency = 2.0
 
-[node name="AnimatedSprite2D" parent="." index="4" unique_id=166286304]
+[node name="AnimatedSprite2D" parent="." index="5" unique_id=166286304]
 sprite_frames = SubResource("SpriteFrames_h0iox")
 frame_progress = 0.17469059

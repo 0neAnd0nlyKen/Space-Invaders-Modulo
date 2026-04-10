@@ -57,7 +57,6 @@ func spawn_enemy_variation(spawn_point: Vector2) -> Enemy:
 		return null
 	
 	var selected_type = _spawn_pool[randi() % _spawn_pool.size()]
-	selected_type = _spawn_pool[3]
 	var newEnemy = selected_type.scene.instantiate()
 	newEnemy.position = spawn_point
 	add_child(newEnemy)

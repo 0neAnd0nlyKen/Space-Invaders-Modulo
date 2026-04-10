@@ -27,6 +27,7 @@ func _on_enemy_defeated(enemyScore: float): #hardcoded newEnemy.(signal).connect
 	updateLabel(scoreLabel, score)
 
 func _on_enemy_landed(enemyHealth: float): #hardcoded newEnemy.(signal).connect in spawner node
+	print_debug("enemy landed ", enemyHealth )
 	lose_health(enemyHealth)
 
 func _on_player_get_hurt(lost_health: float) -> void:

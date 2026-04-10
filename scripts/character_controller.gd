@@ -84,5 +84,7 @@ func play_shoot_sound(): #Fungsi sound tembak
 			shoot_sound.stream = shotgun_sound
 	
 	shoot_sound.play()
-	
-		
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area is EnemyProjectile:
+		get_hurt.emit(area.damage)

@@ -49,6 +49,7 @@ func _process(delta: float) -> void:
 			if newEnemy:
 				if world != null and world.has_method("_on_enemy_defeated"):
 					newEnemy.enemy_defeated.connect(world._on_enemy_defeated)
+				if world != null and world.has_method("_on_enemy_landed"):
 					newEnemy.enemy_landed.connect(world._on_enemy_landed)
 
 func spawn_enemy_variation(spawn_point: Vector2) -> Enemy:
@@ -56,6 +57,7 @@ func spawn_enemy_variation(spawn_point: Vector2) -> Enemy:
 		return null
 	
 	var selected_type = _spawn_pool[randi() % _spawn_pool.size()]
+	selected_type = _spawn_pool[3]
 	var newEnemy = selected_type.scene.instantiate()
 	newEnemy.position = spawn_point
 	add_child(newEnemy)

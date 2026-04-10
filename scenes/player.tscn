@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://b2ueiii8ikh7g" path="res://scripts/character_controller.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://cw0r1i5s1q7j0" path="res://assets/enemy sprites/rocket.png" id="2_g2els"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
+radius = 24.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
@@ -45,6 +48,11 @@ animations = [{
 script = ExtResource("1_4flbx")
 muzzle = NodePath("muzzle")
 
+[node name="Area2D" type="Area2D" parent="." unique_id=899368996]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=218422085]
+shape = SubResource("CircleShape2D_g2els")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1404395139]
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_4flbx")
@@ -56,3 +64,5 @@ shape = SubResource("CircleShape2D_4flbx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1545508466]
 sprite_frames = SubResource("SpriteFrames_tuyoq")
 frame_progress = 0.876778
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

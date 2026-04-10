@@ -15,7 +15,7 @@ func _on_play_pressed():
 	click_sound.play() #Pake panggi fungsi sound
 	print("Play button pressed - Starting game...")
 	await click_sound.finished #sound diklick ya
-	get_tree().change_scene_to_file("res://scenes/story1.tscn")
+	get_tree().change_scene_to_file("res://scenes/input.tscn")
 
 func _on_credits_pressed():
 	click_sound.play()

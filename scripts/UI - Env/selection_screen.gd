@@ -11,6 +11,8 @@ class_name Select
 @onready var C2:TextureButton = $Card2
 @onready var C3:TextureButton = $Card3
 
+@onready var select_sound = $SelectSound
+@onready var click_sound = $ClickSound
 var picked:bool
 var nextScene:String
 var selected:Array = []
@@ -33,6 +35,9 @@ const perkIcons:Array = ["res://assets/perk_sprites/shield.png", "res://assets/p
 const upgradeIcons:Array = ["res://assets/upgrade_sprites/damage.png", "res://assets/upgrade_sprites/HF.png",
 	"res://assets/upgrade_sprites/throwable.png", "res://assets/upgrade_sprites/recast.png",
 	"res://assets/upgrade_sprites/pipe.png"]
+
+var select_sfx = preload("res://assets/sound/next.wav")
+var click_sfx = preload("res://assets/sound/click.wav")
 
 func _ready() -> void:
 	setup(SelectionInstructions.data)
@@ -92,21 +97,36 @@ func FillData(itemID:String, cd:float):
 	}
 
 func _on_card_1_pressed() -> void:
+	play_select_sound()
 	FillData(selected[0], selectedCDs[0])
 	picked = true
 
 func _on_card_2_pressed() -> void:
+	play_select_sound()
 	FillData(selected[1], selectedCDs[1])
 	picked = true
 
 func _on_card_3_pressed() -> void:
+	play_select_sound()
 	FillData(selected[2], selectedCDs[2])
 	picked = true
 
 func _on_next_button_pressed() -> void:
+	play_click_sound()
 	if SelectionInstructions.data["type"] == 0:
+		await click_sound.finished
 		get_tree().change_scene_to_file(nextScene)
 	else:
 		get_tree().paused = false
 		SelectionInstructions.on_bonus_select.emit()
 		queue_free()
+
+# Fungsi sound
+func play_select_sound():
+	select_sound.stream = select_sfx
+	select_sound.pitch_scale = randf_range(0.95, 1.05)
+	select_sound.play()
+
+func play_click_sound():
+	click_sound.stream = click_sfx
+	click_sound.play()

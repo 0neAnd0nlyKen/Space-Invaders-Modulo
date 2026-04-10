@@ -55,6 +55,8 @@ shape = SubResource("CircleShape2D_7p1mj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=166286304]
 sprite_frames = SubResource("SpriteFrames_c4w8v")
 frame_progress = 0.30349952
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=1898184411]
+volume_db = 9.72
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

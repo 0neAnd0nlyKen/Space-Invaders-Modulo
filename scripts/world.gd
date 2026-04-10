@@ -29,6 +29,7 @@ func _ready() -> void:
 	SelectionInstructions.shield_destroy.connect(_on_shield_destroyed)
 	SelectionInstructions.phoenix_init.connect(_on_phoenix_recive)
 	SelectionInstructions.phoenix_consume.connect(_on_phoenix_consume)
+	BGM.play_music("res://assets/sound/UndertaleSong.mp3")
 	updateLabel(healthLabel, health)
 	updateLabel(scoreLabel, score)
 	p1.hide()

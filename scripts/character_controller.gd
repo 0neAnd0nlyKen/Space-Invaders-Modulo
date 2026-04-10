@@ -187,6 +187,8 @@ func moveChar(xMove:float, yMove:float):
 	move_and_slide() #move
 			
 func selectShootSound(): #Fungsi sound tembak
+	pass
+func play_shoot_sound(): #fungsi sound
 	match weaponType:
 		"rifle":
 			shoot_sound.stream = rifle_sound
@@ -194,6 +196,11 @@ func selectShootSound(): #Fungsi sound tembak
 			shoot_sound.stream = sniper_sound
 		"shotgun":
 			shoot_sound.stream = shotgun_sound
+		_:
+			return # kalau weapon lain gak ada sound
+	
+	shoot_sound.pitch_scale = randf_range(0.95, 1.05)
+	shoot_sound.play()
 
 func _on_saw_deactivation():
 	isSpinning = false
@@ -216,3 +223,5 @@ func _on_revive_consumed():
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is EnemyProjectile:
 		get_hurt.emit(area.damage)
+	
+		

@@ -79,7 +79,6 @@ func sawNormal():
 	press = Input.is_action_pressed("fire")
 	if press and count >= fireRate:
 		for enemy in enemies:
-			print_debug(enemy.health)
 			if not is_instance_valid(enemy):
 				enemies.erase(enemy)
 				continue

@@ -15,7 +15,7 @@ var next_difficulty_score: int = 100
 var selectionOverlayLayer
 var bonusTaken:int = 0
 var perksTaken:int = 0
-var maxHealth: int = 0
+var maxHealth: int = 30
 var shield = preload("res://scenes/shield.tscn")
 var shieldExists:bool = false
 var reviveAvailable:bool = false
@@ -23,6 +23,7 @@ var reviveAvailable:bool = false
 signal take_damage(amount:int)
 
 func _ready() -> void:
+	health = maxHealth
 	selectionOverlayLayer = CanvasLayer.new()
 	SelectionInstructions.repair_perk.connect(_on_repair_recived)
 	SelectionInstructions.shield_create.connect(_on_shield_recived)
@@ -90,11 +91,10 @@ func _on_phoenix_consume():
 	updateLabel(healthLabel, health)
 
 func _on_repair_recived(amount:int):
-	if health < maxHealth:
-		if health+amount <= maxHealth:
-			health += amount
-		else:
-			health = maxHealth
+	print_debug("work bitch", amount, " ", health, " ", maxHealth)
+	health = (health + amount)
+	#if health < maxHealth:
+		#health = maxHealth
 	updateLabel(healthLabel, health)
 
 func _on_enemy_landed(enemyHealth: float): #hardcoded newEnemy.(signal).connect in spawner node

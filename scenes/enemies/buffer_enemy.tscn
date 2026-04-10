@@ -55,3 +55,4 @@ visible = false
 texture = ExtResource("5_rwgye")
 
 [connection signal="body_entered" from="BuffArea" to="." method="_on_buff_area_body_entered"]
+[connection signal="body_exited" from="BuffArea" to="." method="_on_buff_area_body_exited"]

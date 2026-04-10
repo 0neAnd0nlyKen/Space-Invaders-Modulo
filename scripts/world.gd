@@ -10,7 +10,7 @@ class_name World
 @export var p2:Control
 @export var p3:Control
 
-var difficulty_level: int = 0
+var difficulty_level: int = 0 
 var next_difficulty_score: int = 100
 var selectionOverlayLayer
 var bonusTaken:int = 0
@@ -29,7 +29,8 @@ func _ready() -> void:
 	SelectionInstructions.shield_destroy.connect(_on_shield_destroyed)
 	SelectionInstructions.phoenix_init.connect(_on_phoenix_recive)
 	SelectionInstructions.phoenix_consume.connect(_on_phoenix_consume)
-	BGM.play_music("res://assets/sound/UndertaleSong.mp3")
+	BGM.play_music("res://assets/sound/Gameplay.mp3")
+	BGM.bgm_player.volume_db = -15
 	updateLabel(healthLabel, health)
 	updateLabel(scoreLabel, score)
 	p1.hide()

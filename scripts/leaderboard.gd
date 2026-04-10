@@ -2,16 +2,19 @@ extends Control
 
 @onready var back_button = $BackButton
 @onready var click_sound = $ClickSound
+@onready var highscoreList = $RichTextLabel
 
 func _ready():
 	back_button.grab_focus()
+	display_leaderboard()
 
 func display_leaderboard() -> void:
 	var scores = load_scores()
-	for i in range(min(10, scores.size())):  # top 10
+	highscoreList.clear()
+	for i in range(min(10, scores.size())):
 		var entry = scores[i]
-		# add a label or row to your UI
-		print(entry["name"], ": ", entry["score"])
+		#highscoreList.append_text(str(i + 1) + ". " + entry["name"] + ": " + str(entry["score"]) + "\n")
+		highscoreList.append_text("[b]" + entry["name"] + "[/b]: [color=yellow]" + str(entry["score"]) + "[/color]\n")
 
 func load_scores() -> Array:
 	if not FileAccess.file_exists("user://scores.json"):

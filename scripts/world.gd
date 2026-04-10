@@ -117,6 +117,7 @@ func lose_health(lost_health: float):
 
 func gameOver():
 	#get_tree().paused = true
+	SelectionInstructions.playerDetail["score"] = score
 	save_score(SelectionInstructions.playerDetail["name"], SelectionInstructions.playerDetail["score"])
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 	

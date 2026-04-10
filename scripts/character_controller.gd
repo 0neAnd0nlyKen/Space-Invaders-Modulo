@@ -24,7 +24,6 @@ var dur:Array = []
 var activated:Array = []
 var isSpinning:bool = false
 
-
 signal get_hurt(lost_health: float)
 signal obtain_skill(ID:String, path:String, slot:int)
 signal while_activated(id:String)
@@ -132,7 +131,7 @@ func get_cd_and_durs(delta:float):
 		if d > 0:
 			dur[a] -= delta
 			#print_debug("Duration ablility ", a, ":", d)
-		elif activated[a] == 1:
+		elif activated[a] == 1 and perks[a] != "revive":
 			if d < 0:
 				dur[a] = 0
 			perk.StopPerk(perks[a], a)
@@ -218,7 +217,6 @@ func _on_revive_consumed():
 	dur.remove_at(index)
 	activated.remove_at(index)
 	SelectionInstructions.playerPerks.erase("revive")
-	
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is EnemyProjectile:

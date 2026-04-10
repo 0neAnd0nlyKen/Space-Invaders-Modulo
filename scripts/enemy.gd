@@ -42,9 +42,9 @@ func die() -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is FriendlyWeapon:
-		print_debug(health, " area.dmg ", area.damage)
+		# print_debug(health, " area.dmg ", area.damage)
 		take_damage(area.damage)
-		print_debug("after", health, " area.dmg ", area.damage)
+		# print_debug("after", health, " area.dmg ", area.damage)
 
 
 func enemy_lands() -> void:

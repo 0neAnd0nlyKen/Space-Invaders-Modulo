@@ -22,12 +22,6 @@ var reviveAvailable:bool = false
 
 signal take_damage(amount:int)
 
-var difficulty_level: int = 0
-var next_difficulty_score: int = 100
-
-var difficulty_level: int = 0
-var next_difficulty_score: int = 100
-
 func _ready() -> void:
 	selectionOverlayLayer = CanvasLayer.new()
 	SelectionInstructions.repair_perk.connect(_on_repair_recived)
@@ -45,6 +39,7 @@ func updateLabel(label: Label, num: int):
 	label.text = str(num)
 func is_difficulty_cleared() -> bool:
 	return score >= next_difficulty_score
+
 
 func _on_enemy_defeated(enemyScore: float): #hardcoded newEnemy.(signal).connect in spawner node
 	score += int(enemyScore)

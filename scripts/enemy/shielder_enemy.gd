@@ -38,6 +38,4 @@ func setup_shield():
 
 func _on_shield_node_area_entered(area: Area2D) -> void:
 	if area is FriendlyWeapon:
-		print("area damage before: ", area.damage)
 		area.damage *= 0.7
-		print("area damage after: ", area.damage)

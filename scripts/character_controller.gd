@@ -24,6 +24,7 @@ var dur:Array = []
 var activated:Array = []
 var isSpinning:bool = false
 
+
 signal get_hurt(lost_health: float)
 signal obtain_skill(ID:String, path:String, slot:int)
 signal while_activated(id:String)

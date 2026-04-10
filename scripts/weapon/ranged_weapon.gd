@@ -21,6 +21,7 @@ func setup(type:String, pos:Vector2):
 	hitbox = $CollisionShape2D
 	body_entered.connect(_bullet_hit)
 	body_exited.connect(_left)
+	area_entered.connect(_also_bullet_hit)
 	origin = pos
 	position = pos
 	wType = type
@@ -69,8 +70,14 @@ func explota():
 	hit.explode(position, SelectionInstructions.dmgMulti)
 
 func _bullet_hit(target:Node2D):
-	if is_instance_valid(target) and target is Enemy:
-		objHit = target
+	#print_debug("hit")
+	if is_instance_valid(target) and target.get_parent() is Enemy:
+		#print_debug("body")
+		objHit = target.get_parent()
+
+func _also_bullet_hit(target:Node2D):
+	if is_instance_valid(target) and target.get_parent() is Enemy:
+		body_entered.emit(target)
 
 func _left(target:Node2D):
 	pass

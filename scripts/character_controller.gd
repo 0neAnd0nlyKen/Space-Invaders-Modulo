@@ -100,7 +100,7 @@ func _physics_process(delta: float) -> void:
 		if fire and not isSpinning:
 			summonWeaponSawblade()
 	elif fire and count >= fireRate:
-		print_debug(SelectionInstructions.recast)
+		#print_debug(SelectionInstructions.recast)
 		if SelectionInstructions.recast > 0 and weaponType != "explosive":
 			var a:int = 0
 			while a < SelectionInstructions.recast:

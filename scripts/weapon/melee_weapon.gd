@@ -13,6 +13,8 @@ var enemySpeed
 func setup(type:String, pos:Vector2):
 	hitbox = $CollisionShape2D
 	body_entered.connect(_bullet_hit)
+	body_exited.connect(_left)
+	area_entered.connect(_also_bullet_hit)
 	position = pos
 	origin = pos
 	wType = type
@@ -77,6 +79,7 @@ func sawNormal():
 	press = Input.is_action_pressed("fire")
 	if press and count >= fireRate:
 		for enemy in enemies:
+			print_debug(enemy.health)
 			if not is_instance_valid(enemy):
 				enemies.erase(enemy)
 				continue
@@ -105,17 +108,25 @@ func sawThrow():
 		queue_free()
 
 func _bullet_hit(target:Node2D):
-	if is_instance_valid(target) and target is Enemy:
-		enemies.append(target)
-		enemySpeed = target.base_speed
+	var trueTarget = target.get_parent()
+	if is_instance_valid(trueTarget) and trueTarget is Enemy:
+		print_debug(trueTarget)
+		enemies.append(trueTarget)
+		enemySpeed = trueTarget.base_speed
 		match wType:
 			"saw":
-				if target.base_speed > (target.base_speed * 7)/ 10:
-					target.base_speed = (target.base_speed * 7)/ 10
+				if trueTarget.base_speed > (trueTarget.base_speed * 7)/ 10:
+					trueTarget.base_speed = (trueTarget.base_speed * 7)/ 10
 			"repulsar":
-				target.position.y -= 100
+				trueTarget.position.y -= 100
+
+func _also_bullet_hit(target:Node2D):
+	if is_instance_valid(target) and target.get_parent() is Enemy:
+		body_entered.emit(target)
 
 func _left(target:Node2D):
-	if target.base_speed < enemySpeed:
-		target.base_speed = enemySpeed
-	enemies.erase(target)
+	var trueTarget = target.get_parent()
+	if is_instance_valid(target) and trueTarget is Enemy:
+		if trueTarget.base_speed < enemySpeed:
+			trueTarget.base_speed = enemySpeed
+	enemies.erase(trueTarget)

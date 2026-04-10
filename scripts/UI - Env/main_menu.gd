@@ -8,7 +8,7 @@ extends Control
 
 func _ready():
 	# Set focus to play button by default
-	BGM.play_music("res://assets/sound/SoundTetris.mp3")
+	BGM.play_music("res://assets/sound/BG_music.mp3")
 	play_button.grab_focus()
 
 func _on_play_pressed():

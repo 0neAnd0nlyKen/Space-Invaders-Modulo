@@ -12,5 +12,5 @@ func play_music(path: String):
 	
 	bgm_player.stop()
 	bgm_player.stream = load(path)
-	bgm_player.volume_db = -15
+	bgm_player.volume_db = -5
 	bgm_player.play()

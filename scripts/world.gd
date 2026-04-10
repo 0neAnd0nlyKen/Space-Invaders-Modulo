@@ -7,11 +7,12 @@ class_name World
 @export var scoreLabel: Label
 @export var spawnerNode: Node2D
 
-var difficulty_level: int = 0
+var difficulty_level: int = 0 
 var next_difficulty_score: int = 100
 
 func _ready() -> void:
-	BGM.play_music("res://assets/sound/UndertaleSong.mp3")
+	BGM.play_music("res://assets/sound/Gameplay.mp3")
+	BGM.bgm_player.volume_db = -15
 	updateLabel(healthLabel, health)
 	updateLabel(scoreLabel, score)
 

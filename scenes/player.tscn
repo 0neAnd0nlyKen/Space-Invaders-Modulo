@@ -1,19 +1,49 @@
 [gd_scene format=3 uid="uid://bca2fj0u0tbni"]
 
 [ext_resource type="Script" uid="uid://b2ueiii8ikh7g" path="res://scripts/character_controller.gd" id="1_4flbx"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_sh265"]
-radius = 20.0
-height = 40.0
+[ext_resource type="Texture2D" uid="uid://cw0r1i5s1q7j0" path="res://assets/enemy sprites/rocket.png" id="2_g2els"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("2_g2els")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("2_g2els")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("2_g2els")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("2_g2els")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tuyoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2els")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Body" type="CharacterBody2D" unique_id=339184942 node_paths=PackedStringArray("muzzle")]
 script = ExtResource("1_4flbx")
 muzzle = NodePath("muzzle")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1479625545]
-mesh = SubResource("SphereMesh_sh265")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1404395139]
 scale = Vector2(2, 2)
@@ -22,3 +52,7 @@ shape = SubResource("CircleShape2D_4flbx")
 [node name="muzzle" type="Node2D" parent="." unique_id=1564871202]
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=1197756562]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1545508466]
+sprite_frames = SubResource("SpriteFrames_tuyoq")
+frame_progress = 0.876778

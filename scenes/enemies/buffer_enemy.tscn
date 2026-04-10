@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://omroquh8ykgv"]
+
+[ext_resource type="PackedScene" uid="uid://cmug4h23scmuq" path="res://scenes/enemy.tscn" id="1_sv0vt"]
+[ext_resource type="Script" uid="uid://cbj21p3ii7v6f" path="res://scripts/buffer_enemy.gd" id="2_jvji0"]
+[ext_resource type="Texture2D" uid="uid://esnmgqom4tg6" path="res://resources/circle.tres" id="3_jvji0"]
+[ext_resource type="Texture2D" uid="uid://6qpftolv4f6b" path="res://assets/enemy sprites/smallEnemy 8.png" id="3_rwgye"]
+[ext_resource type="Texture2D" uid="uid://c2lk00h70rjkx" path="res://resources/buff_aura.tres" id="5_rwgye"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ny6m7"]
+radius = 240.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfub7"]
+atlas = ExtResource("3_rwgye")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3mfs"]
+atlas = ExtResource("3_rwgye")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_61k1u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfub7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3mfs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" unique_id=58177044 node_paths=PackedStringArray("buff_aura") instance=ExtResource("1_sv0vt")]
+script = ExtResource("2_jvji0")
+speed_multiplier = 1.5
+buff_aura = NodePath("BuffAura")
+
+[node name="BuffArea" type="Area2D" parent="." index="0" unique_id=76211668]
+
+[node name="Sprite2D" type="Sprite2D" parent="BuffArea" index="0" unique_id=1684909710]
+z_index = -1
+scale = Vector2(8, 8)
+texture = ExtResource("3_jvji0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuffArea" index="1" unique_id=1081730005]
+shape = SubResource("CircleShape2D_ny6m7")
+
+[node name="AnimatedSprite2D" parent="." index="6" unique_id=166286304]
+sprite_frames = SubResource("SpriteFrames_61k1u")
+frame_progress = 0.0036553976
+
+[node name="BuffAura" type="Sprite2D" parent="." index="7" unique_id=796724613]
+visible = false
+texture = ExtResource("5_rwgye")
+
+[connection signal="body_entered" from="BuffArea" to="." method="_on_buff_area_body_entered"]

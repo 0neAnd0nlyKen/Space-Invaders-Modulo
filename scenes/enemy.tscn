@@ -1,29 +1,49 @@
 [gd_scene format=3 uid="uid://cmug4h23scmuq"]
 
 [ext_resource type="Script" uid="uid://cdql3sdk22x2x" path="res://scripts/enemy.gd" id="1_7k104"]
+[ext_resource type="Texture2D" uid="uid://8tm7xy0btocp" path="res://assets/enemy sprites/smallEnemy 1.png" id="2_md0e3"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_8tegq"]
-radius = 3.5
-height = 7.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
+radius = 40.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7p1mj"]
-radius = 48.4
+radius = 32.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=58177044 node_paths=PackedStringArray("hitbox")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ra3w"]
+atlas = ExtResource("2_md0e3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uy6h"]
+atlas = ExtResource("2_md0e3")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c4w8v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ra3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uy6h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=58177044 node_paths=PackedStringArray("hitbox", "animated_sprite")]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_7k104")
 hitbox = NodePath("Area2D")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=632733248]
-position = Vector2(1, 0)
-scale = Vector2(10, 10)
-mesh = SubResource("SphereMesh_8tegq")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=258113007]
-shape = SubResource("CircleShape2D_7p1mj")
+animated_sprite = NodePath("AnimatedSprite2D")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=883453361]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=552375236]
+shape = SubResource("CircleShape2D_md0e3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=58177045]
 shape = SubResource("CircleShape2D_7p1mj")
 
 [node name="EnemyMovementNode" type="Node" parent="." unique_id=1218931699]
@@ -31,6 +51,10 @@ shape = SubResource("CircleShape2D_7p1mj")
 [node name="EnemyHealthNode" type="Node" parent="." unique_id=1675518477]
 
 [node name="EnemyScoreNode" type="Node" parent="." unique_id=680154934]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=166286304]
+sprite_frames = SubResource("SpriteFrames_c4w8v")
+frame_progress = 0.30349952
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

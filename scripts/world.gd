@@ -25,6 +25,9 @@ signal take_damage(amount:int)
 var difficulty_level: int = 0
 var next_difficulty_score: int = 100
 
+var difficulty_level: int = 0
+var next_difficulty_score: int = 100
+
 func _ready() -> void:
 	selectionOverlayLayer = CanvasLayer.new()
 	SelectionInstructions.repair_perk.connect(_on_repair_recived)
@@ -96,6 +99,7 @@ func _on_repair_recived(amount:int):
 			health = maxHealth
 
 func _on_enemy_landed(enemyHealth: float): #hardcoded newEnemy.(signal).connect in spawner node
+	print_debug("enemy landed ", enemyHealth )
 	lose_health(enemyHealth)
 
 func _on_player_get_hurt(lost_health: float) -> void:

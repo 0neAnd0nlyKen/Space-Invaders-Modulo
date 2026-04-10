@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://c54nbvus4823w"]
+
+[ext_resource type="PackedScene" uid="uid://cmug4h23scmuq" path="res://scenes/enemy.tscn" id="1_7jpia"]
+[ext_resource type="Script" uid="uid://dbpcweparq4yy" path="res://scripts/enemy/wave_enemy.gd" id="2_wave"]
+[ext_resource type="Texture2D" uid="uid://bfklvr4lqv5h5" path="res://assets/enemy sprites/smallEnemy 4.png" id="3_kccls"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xk7m"]
+atlas = ExtResource("3_kccls")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_of6m1"]
+atlas = ExtResource("3_kccls")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h0iox"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xk7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_of6m1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" unique_id=58177044 instance=ExtResource("1_7jpia")]
+script = ExtResource("2_wave")
+wave_amplitude = 100.0
+wave_frequency = 2.0
+
+[node name="AnimatedSprite2D" parent="." index="5" unique_id=166286304]
+sprite_frames = SubResource("SpriteFrames_h0iox")
+frame_progress = 0.17469059

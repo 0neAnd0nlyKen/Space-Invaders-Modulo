@@ -1,5 +1,4 @@
 extends Node
-
 var data:Dictionary = {}
 var playerData:Dictionary = {}
 var playerPerks:Array = []

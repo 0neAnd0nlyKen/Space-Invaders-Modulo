@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://by2khtps1cptq"]
+
+[ext_resource type="PackedScene" uid="uid://cmug4h23scmuq" path="res://scenes/enemy.tscn" id="1_7jpia"]
+[ext_resource type="Script" uid="uid://ddqdntkp2d57f" path="res://scripts/enemy/shooter_enemy.gd" id="2_shooter"]
+[ext_resource type="Texture2D" uid="uid://bteo58j8a8fpq" path="res://assets/enemy sprites/smallEnemy 7.png" id="3_au8bl"]
+[ext_resource type="PackedScene" uid="uid://ceidobsy1w2jd" path="res://scenes/enemies/enemy_projectile.tscn" id="4_moan8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_moan8"]
+atlas = ExtResource("3_au8bl")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yb54f"]
+atlas = ExtResource("3_au8bl")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6466e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_moan8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yb54f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" unique_id=58177044 node_paths=PackedStringArray("projectile") instance=ExtResource("1_7jpia")]
+script = ExtResource("2_shooter")
+shoot_rate = 1.5
+shoot_offset = Vector2(0, 20)
+projectile = NodePath("EnemyProjectile")
+
+[node name="AnimatedSprite2D" parent="." index="5" unique_id=166286304]
+sprite_frames = SubResource("SpriteFrames_6466e")
+frame_progress = 0.0
+
+[node name="EnemyProjectile" parent="." index="6" unique_id=4958133 instance=ExtResource("4_moan8")]

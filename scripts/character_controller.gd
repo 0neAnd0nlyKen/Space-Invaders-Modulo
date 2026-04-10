@@ -41,6 +41,8 @@ func _ready() -> void:
 	SelectionInstructions.phoenix_consume.connect(_on_revive_consumed)
 
 func setup(data:Dictionary):
+	$AnimatedSprite2D.play()
+
 	match data["type"]:
 		0:
 			weapon = load("res://scenes/weapons/" + data["ID"] + ".tscn")
@@ -208,3 +210,8 @@ func _on_revive_consumed():
 	dur.remove_at(index)
 	activated.remove_at(index)
 	SelectionInstructions.playerPerks.erase("revive")
+	
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area is EnemyProjectile:
+		get_hurt.emit(area.damage)

@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://da4cc68rchv1q"]
+
+[ext_resource type="PackedScene" uid="uid://cmug4h23scmuq" path="res://scenes/enemy.tscn" id="1_hn7s1"]
+[ext_resource type="Script" uid="uid://c0m8dqbus26m7" path="res://scripts/enemy/shielder_enemy.gd" id="2_wunss"]
+[ext_resource type="Texture2D" uid="uid://cbp6yot2xu30a" path="res://assets/enemy sprites/smallEnemy 5.png" id="3_wunss"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hn7s1"]
+
+[sub_resource type="Gradient" id="Gradient_wunss"]
+colors = PackedColorArray(1, 0.49803922, 0, 0.19607843, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iybbw"]
+gradient = SubResource("Gradient_wunss")
+width = 20
+height = 20
+fill_to = Vector2(0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iybbw"]
+atlas = ExtResource("3_wunss")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltaed"]
+atlas = ExtResource("3_wunss")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nh1w4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iybbw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltaed")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ShielderEnemy" unique_id=58177044 node_paths=PackedStringArray("shieldNode", "shieldCol", "shieldSprite") instance=ExtResource("1_hn7s1")]
+script = ExtResource("2_wunss")
+shieldNode = NodePath("ShieldNode")
+shieldCol = NodePath("ShieldNode/CollisionShape2D")
+shieldSprite = NodePath("ShieldNode/Sprite2D")
+
+[node name="ShieldNode" type="Area2D" parent="." index="0" unique_id=1944729850]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShieldNode" index="0" unique_id=257599564]
+shape = SubResource("RectangleShape2D_hn7s1")
+
+[node name="Sprite2D" type="Sprite2D" parent="ShieldNode" index="1" unique_id=571038634]
+texture = SubResource("GradientTexture2D_iybbw")
+
+[node name="AnimatedSprite2D" parent="." index="6" unique_id=166286304]
+sprite_frames = SubResource("SpriteFrames_nh1w4")
+frame_progress = 0.0
+
+[connection signal="area_entered" from="ShieldNode" to="." method="_on_shield_node_area_entered"]

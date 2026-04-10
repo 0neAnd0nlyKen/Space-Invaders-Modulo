@@ -115,9 +115,24 @@ func lose_health(lost_health: float):
 
 func gameOver():
 	get_tree().paused = true
-	updateHighscore()
+	save_score(SelectionInstructions.playerDetail["name"], SelectionInstructions.playerDetail["score"])
 	# buka scene/overlay game over
 	pass
 	
-func updateHighscore():
-	pass
+func save_score(playerName: String, score: int) -> void:
+	var scores = load_scores()
+	scores.append({"name": playerName, "score": score})
+	scores.sort_custom(func(a, b): return a["score"] > b["score"])  # sort high to low
+	
+	var file = FileAccess.open("user://scores.json", FileAccess.WRITE)
+	file.store_string(JSON.stringify(scores))
+	file.close()
+
+func load_scores() -> Array:
+	if not FileAccess.file_exists("user://scores.json"):
+		return []
+		
+	var file = FileAccess.open("user://scores.json", FileAccess.READ)
+	var data = JSON.parse_string(file.get_as_text())
+	file.close()
+	return data if data != null else []

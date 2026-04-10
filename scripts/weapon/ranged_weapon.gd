@@ -35,8 +35,8 @@ func setup(type:String, pos:Vector2):
 			fireRate = 1.0 - SelectionInstructions.fireRateUp
 		"shotgun":
 			speed = -1600
-			damage = 2.0 + SelectionInstructions.dmgMulti
-			fireRate = 0.65 - SelectionInstructions.fireRateUp
+			damage = 1.8 + SelectionInstructions.dmgMulti
+			fireRate = 0.75 - SelectionInstructions.fireRateUp
 		"explosive":
 			speed = -1000
 			damage = 0.0

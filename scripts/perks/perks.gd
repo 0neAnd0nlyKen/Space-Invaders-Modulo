@@ -5,21 +5,25 @@ func UsePerk(perkName:String, slot:int):
 	match perkName:
 		"shield":
 			parent.dur[slot] = 10.0
+			parent.while_activated.emit(perkName)
 			SelectionInstructions.shield_create.emit(6)
 		"sprint":
 			parent.dur[slot] = 4.0
+			parent.while_activated.emit(perkName)
 			parent.speed = 450
 		"ZAWARUDO":
 			parent.dur[slot] = 7.0
 			parent.process_mode = Node.PROCESS_MODE_ALWAYS
 			parent.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_ON
 			process_mode = Node.PROCESS_MODE_ALWAYS
+			parent.while_activated.emit(perkName)
 			get_tree().paused = true
 		"repair":
 			parent.dur[slot] = 0.1
+			parent.while_activated.emit(perkName)
 			SelectionInstructions.repair_perk.emit(3)
 		"revive":
-			#parent.cooldowns[slot] = 0
+			parent.while_activated.emit(perkName)
 			SelectionInstructions.phoenix_init.emit()
 
 func StopPerk(perkName:String, slot:int):

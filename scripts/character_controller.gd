@@ -25,7 +25,11 @@ var activated:Array = []
 var isSpinning:bool = false
 
 signal get_hurt(lost_health: float)
-signal obtain_skill(ID:String, path:String)
+signal obtain_skill(ID:String, path:String, slot:int)
+signal while_activated(id:String)
+signal go_on_cooldown(id:String)
+signal go_off_cooldown(id:String)
+signal update_perk_cd_label(id:String, cd:String)
 
 var rifle_sound = preload("res://assets/sound/laserShoot1.wav")
 var sniper_sound = preload("res://assets/sound/laserShoot2.wav")
@@ -57,7 +61,10 @@ func setup(data:Dictionary):
 				activated.append(1)
 			activated.append(0)
 			SelectionInstructions.playerPerks.append(data["ID"])
-			Select.perkIcons[Select.perks.find(data["ID"])]
+			obtain_skill.emit(data["ID"], 
+				Select.perkIcons[Select.perks.find(data["ID"])], 
+				perks.find(data["ID"])
+			)
 		2:
 			upgrades.append(data["ID"])
 			SelectionInstructions.dmgMulti = (1.2 * upgrades.count("damage"))
@@ -98,7 +105,7 @@ func _physics_process(delta: float) -> void:
 				a+=1
 		else:
 			summonWeapon()
-	velocity
+	
 	moveChar(xMove, yMove)
 
 func castPerks():
@@ -122,15 +129,21 @@ func get_cd_and_durs(delta:float):
 		if d > 0:
 			dur[a] -= delta
 			#print_debug("Duration ablility ", a, ":", d)
-		elif d < 0:
-			dur[a] = 0
-			if activated[a] == 1:
-				perk.StopPerk(perks[a], a)
+		elif activated[a] == 1:
+			if d < 0:
+				dur[a] = 0
+			perk.StopPerk(perks[a], a)
+			go_on_cooldown.emit(perks[a])
+			update_perk_cd_label.emit(perks[a], "%.1f" % cooldowns[a])
 		a+=1
 	for c in cooldowns:
 		if c > 0 and dur[a2] <= 0:
 			cooldowns[a2] -= delta
-			#print_debug("CD ablility ", a2, ":", c)
+			if cooldowns[a2] <= 0:
+				update_perk_cd_label.emit(perks[a2], "0")
+				go_off_cooldown.emit(perks[a2])
+			else:
+				update_perk_cd_label.emit(perks[a2], "%.1f" % cooldowns[a2])
 		a2+=1
 
 func summonWeapon():
@@ -145,6 +158,7 @@ func summonWeapon():
 			bullet.rotation_degrees = -45
 			var angleOffset = lerp(-spread, spread, float(i) / (bulletCount - 1))
 			bullet.rotation = rotation + angleOffset
+		shoot_sound.play()
 	else:
 		count = 0
 		shoot_sound.play()
@@ -185,6 +199,7 @@ func _on_bonus_recived():
 	setup(SelectionInstructions.playerData)
 
 func _on_revive_consumed():
+	go_on_cooldown.emit("revive")
 	var index = perks.find("revive")
 	perk.StopPerk("revive", index)
 	perks.erase("revive")

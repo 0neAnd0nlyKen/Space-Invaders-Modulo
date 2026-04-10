@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://8eu7q62w1bkg"]
+
+[ext_resource type="Script" uid="uid://dxnhpgsprnv5b" path="res://scripts/UI - Env/perk_UI.gd" id="1_l7fwb"]
+[ext_resource type="Texture2D" uid="uid://bia4k50n7lub5" path="res://assets/perk_sprites/perk UI neutral.png" id="2_ddq4q"]
+[ext_resource type="Texture2D" uid="uid://cg3udj76iroi3" path="res://assets/perk_sprites/repair.png" id="3_hwmk6"]
+
+[node name="Perk" type="Control" unique_id=791121915 node_paths=PackedStringArray("background", "icon", "idLabel")]
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 400.0
+offset_top = -400.0
+offset_right = 440.0
+offset_bottom = -360.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("1_l7fwb")
+background = NodePath("bg")
+icon = NodePath("icon")
+idLabel = NodePath("Label")
+
+[node name="bg" type="TextureRect" parent="." unique_id=79484997]
+layout_mode = 0
+offset_right = 274.0
+offset_bottom = 262.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_ddq4q")
+
+[node name="Label" type="Label" parent="." unique_id=1727147477]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 88.0
+offset_right = 110.0
+offset_bottom = 111.0
+text = "name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="." unique_id=499498990]
+layout_mode = 0
+offset_left = 47.5
+offset_top = 10.0
+offset_right = 147.5
+offset_bottom = 110.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_hwmk6")

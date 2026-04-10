@@ -6,15 +6,15 @@ class_name World
 @export var healthLabel: Label
 @export var scoreLabel: Label
 @export var spawnerNode: Node2D
-@export var perkUI1:Control
-@export var perkUI2:Control
-@export var perkUI3:Control
+@export var p1:Control
+@export var p2:Control
+@export var p3:Control
 
 var difficulty_level: int = 0
 var next_difficulty_score: int = 100
 var selectionOverlayLayer
 var bonusTaken:int = 0
-var perksTaken:int = 3
+var perksTaken:int = 0
 var maxHealth: int = 0
 var shield = preload("res://scenes/shield.tscn")
 var shieldExists:bool = false
@@ -31,9 +31,9 @@ func _ready() -> void:
 	SelectionInstructions.phoenix_consume.connect(_on_phoenix_consume)
 	updateLabel(healthLabel, health)
 	updateLabel(scoreLabel, score)
-	perkUI1.hide()
-	perkUI2.hide()
-	perkUI3.hide()
+	p1.hide()
+	p2.hide()
+	p3.hide()
 
 func updateLabel(label: Label, num: int):
 	label.text = str(num)

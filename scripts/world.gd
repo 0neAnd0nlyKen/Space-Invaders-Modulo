@@ -51,7 +51,7 @@ func _on_enemy_defeated(enemyScore: float): #hardcoded newEnemy.(signal).connect
 		next_difficulty_score += 100
 	updateLabel(scoreLabel, score)
 	print("detected death")
-	if score >= 1200 + (bonusTaken*1200):
+	if score >= 1200 + (1200*bonusTaken):
 		var bonusType
 		var selectionText
 		if perksTaken < 3:
@@ -60,6 +60,7 @@ func _on_enemy_defeated(enemyScore: float): #hardcoded newEnemy.(signal).connect
 			perksTaken += 1
 		else:
 			bonusType = 2
+			bonusTaken += 1
 			selectionText = "Choose Upgrade"
 		var selectionMenu = load("res://scenes/selection_screen.tscn")
 		SelectionInstructions.data = {
@@ -122,9 +123,9 @@ func gameOver():
 	save_score(SelectionInstructions.playerDetail["name"], SelectionInstructions.playerDetail["score"])
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 	
-func save_score(playerName: String, score: int) -> void:
+func save_score(playerName: String, point: int) -> void:
 	var scores = load_scores()
-	scores.append({"name": playerName, "score": score})
+	scores.append({"name": playerName, "score": point})
 	scores.sort_custom(func(a, b): return a["score"] > b["score"])  # sort high to low
 	
 	var file = FileAccess.open("user://scores.json", FileAccess.WRITE)

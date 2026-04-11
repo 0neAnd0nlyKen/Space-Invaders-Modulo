@@ -5,7 +5,7 @@ extends Control
 @onready var click_sound = $ClickSound
 
 func _ready():
-	BGM.play_music("res://assets/sound/SoundTetris.mp3")
+	BGM.play_music("res://assets/sound/Gameplay.mp3")
 	playAgain.grab_focus()
 
 func _on_play_again_pressed() -> void:

@@ -50,7 +50,7 @@ func die() -> void:
 	if hit_sound:
 		hit_sound.stream = death_sfx
 		hit_sound.play()
-		await hit_sound.finished
+		#await hit_sound.finished
 		
 	enemy_defeated.emit(enemy_score)
 	queue_free()

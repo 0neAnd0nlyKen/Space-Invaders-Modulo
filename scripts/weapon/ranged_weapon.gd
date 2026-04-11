@@ -29,21 +29,20 @@ func setup(type:String, pos:Vector2):
 	match type:
 		"rifle":
 			speed = -1600
-			damage = 5.0 + SelectionInstructions.dmgMulti
+			damage = 3.5 + SelectionInstructions.dmgMulti
 			fireRate = 0.2 - SelectionInstructions.fireRateUp
 		"sniper":
 			speed = -2800
-			damage = 26.0 + SelectionInstructions.dmgMulti
+			damage = 18.0 + SelectionInstructions.dmgMulti
 			fireRate = 1.0 - SelectionInstructions.fireRateUp
 		"shotgun":
 			speed = -1600
-			damage = 3.8 + SelectionInstructions.dmgMulti
+			damage = 2.8 + SelectionInstructions.dmgMulti
 			fireRate = 0.75 - SelectionInstructions.fireRateUp
 		"explosive":
 			speed = -1000
 			damage = 0.0
 			fireRate = 1.2 - SelectionInstructions.fireRateUp
-	
 
 func _physics_process(delta: float) -> void:
 	if not meleeWeapons.has(wType):
@@ -66,8 +65,8 @@ func _bullet_hit(target:Node2D):
 	if is_instance_valid(target) and target.get_parent() is Enemy:
 		#print_debug("body")
 		objHit = target
-		#trueTarget = target.get_parent()
-		if wType == "explosive":
+		trueTarget = target.get_parent()
+		if wType == "explosive" and target.name != "EnemyProjectile":
 			if SelectionInstructions.recast > 0:
 				var a:int = 0
 				while a < SelectionInstructions.recast:
@@ -75,7 +74,7 @@ func _bullet_hit(target:Node2D):
 					a+=1
 			else:
 				explota()
-		if target.name != "ShieldNode":
+		if target.name != "ShieldNode" or target.name != "EnemyProjectile":
 			queue_free()
 
 func _also_bullet_hit(target:Node2D):

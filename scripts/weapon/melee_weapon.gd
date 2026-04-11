@@ -21,20 +21,20 @@ func setup(type:String, pos:Vector2):
 	match type:
 		"sword":
 			reach = 170
-			damage = 24.0 + SelectionInstructions.dmgMulti
+			damage = 16.0 + SelectionInstructions.dmgMulti
 			fireRate = 1.0 - SelectionInstructions.fireRateUp
 			position.y += (reach/2 + 30)
 			radius = -(position.distance_to(pos))
 		"saw":
 			reach = 140
-			damage = 0.8 + (SelectionInstructions.dmgMulti * 0.5)
+			damage = 0.3 + (SelectionInstructions.dmgMulti * 0.5)
 			fireRate = 0.04 - (SelectionInstructions.fireRateUp * 0.5)
 			position.y += -(reach/2 + 20)
 			rotateSpeed = -1
 			sprite = $Sprite
 		"repulsar":
 			reach = 180
-			damage = 12.0 + SelectionInstructions.dmgMulti
+			damage = 10.0 + SelectionInstructions.dmgMulti
 			fireRate = 0.8 - SelectionInstructions.fireRateUp
 			#position.y += -(reach/2 + 10)
 	
@@ -81,9 +81,10 @@ func sawNormal():
 		for enemy in enemies:
 			if not is_instance_valid(enemy):
 				enemies.erase(enemy)
+				#queue_free()
 				continue
-			if enemy.name != "Body":
-				enemy.take_damage(damage)
+			enemy.take_damage(damage)
+			print_debug(damage)
 		count = 0
 	sprite.rotate(rotateSpeed)
 	if count > 1:
@@ -91,14 +92,14 @@ func sawNormal():
 		queue_free()
 
 func sawThrow():
-	position.y -= 30
+	position.y -= 20
 	position.x = origin.x
 	if count >= fireRate:
 		for enemy in enemies:
 			if not is_instance_valid(enemy):
 				enemies.erase(enemy)
 				continue
-			if enemy.name != "Body":
+			if enemy is not Player:
 				enemy.take_damage(damage)
 				count = 0
 	sprite.rotate(rotateSpeed)

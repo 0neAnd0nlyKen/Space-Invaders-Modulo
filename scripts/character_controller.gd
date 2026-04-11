@@ -58,19 +58,19 @@ func setup(data:Dictionary):
 			baseCDs.append(data["CDs"])
 			cooldowns.append(0)
 			dur.append(0)
+			obtain_skill.emit(data["ID"], 
+				Select.perkIcons[Select.perks.find(data["ID"])], 
+				perks.find(data["ID"])
+			)
 			if data["ID"] == "revive":
 				perk.UsePerk("revive", perks.find("revive"))
 				activated.append(1)
 			activated.append(0)
 			SelectionInstructions.playerPerks.append(data["ID"])
-			obtain_skill.emit(data["ID"], 
-				Select.perkIcons[Select.perks.find(data["ID"])], 
-				perks.find(data["ID"])
-			)
 		2:
 			upgrades.append(data["ID"])
-			SelectionInstructions.dmgMulti = (1.2 * upgrades.count("damage"))
-			SelectionInstructions.fireRateUp = (0.0025 * upgrades.count("HF"))
+			SelectionInstructions.dmgMulti = (0.4 * upgrades.count("damage"))
+			SelectionInstructions.fireRateUp = (0.004 * upgrades.count("HF"))
 			SelectionInstructions.recast = upgrades.count("double")
 			if upgrades.has("throwable") and SelectionInstructions.throw == false:
 				SelectionInstructions.throw = true

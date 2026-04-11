@@ -76,7 +76,7 @@ func _bullet_hit(target:Node2D):
 		#print_debug("body")
 		objHit = target
 		trueTarget = target.get_parent()
-		if wType == "explosive" and target.name != "EnemyProjectile":
+		if wType == "explosive" and (target.name != "EnemyProjectile" or target.name != "BuffArea"):
 			if SelectionInstructions.recast > 0:
 				var a:int = 0
 				while a < SelectionInstructions.recast:

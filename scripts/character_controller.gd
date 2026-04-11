@@ -170,8 +170,12 @@ func summonWeapon():
 		count = 0
 		shoot_sound.play()
 		var bullet:FriendlyWeapon = weapon.instantiate()
-		get_parent().add_child(bullet)
-		bullet.setup(weaponType, global_position, timeStopped)
+		if FriendlyWeapon.meleeWeapons.has(weaponType):
+			add_child(bullet)
+			bullet.setup(weaponType, muzzle.position, timeStopped)
+		else:
+			get_parent().add_child(bullet)
+			bullet.setup(weaponType, global_position, timeStopped)
 		on_timestop.connect(bullet._on_timeStop)
 		
 

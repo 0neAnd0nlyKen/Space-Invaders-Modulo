@@ -21,20 +21,20 @@ func setup(type:String, pos:Vector2):
 	match type:
 		"sword":
 			reach = 170
-			damage = 13.0 + SelectionInstructions.dmgMulti
+			damage = 24.0 + SelectionInstructions.dmgMulti
 			fireRate = 1.0 - SelectionInstructions.fireRateUp
 			position.y += (reach/2 + 30)
 			radius = -(position.distance_to(pos))
 		"saw":
 			reach = 140
-			damage = 0.4 + (SelectionInstructions.dmgMulti * 0.5)
-			fireRate = 0.06 - (SelectionInstructions.fireRateUp * 0.5)
+			damage = 0.8 + (SelectionInstructions.dmgMulti * 0.5)
+			fireRate = 0.04 - (SelectionInstructions.fireRateUp * 0.5)
 			position.y += -(reach/2 + 20)
 			rotateSpeed = -1
 			sprite = $Sprite
 		"repulsar":
 			reach = 180
-			damage = 8.0 + SelectionInstructions.dmgMulti
+			damage = 12.0 + SelectionInstructions.dmgMulti
 			fireRate = 0.8 - SelectionInstructions.fireRateUp
 			#position.y += -(reach/2 + 10)
 	
@@ -107,9 +107,9 @@ func sawThrow():
 		queue_free()
 
 func _bullet_hit(target:Node2D):
-	var trueTarget = target.get_parent()
-	if is_instance_valid(trueTarget) and trueTarget is Enemy:
-		print_debug(trueTarget)
+	#trueTarget = target.get_parent()
+	if is_instance_valid(target) and target.get_parent() is Enemy:
+		trueTarget = target.get_parent()
 		enemies.append(trueTarget)
 		enemySpeed = trueTarget.base_speed
 		match wType:
@@ -124,7 +124,7 @@ func _also_bullet_hit(target:Node2D):
 		body_entered.emit(target)
 
 func _left(target:Node2D):
-	var trueTarget = target.get_parent()
+	trueTarget = target.get_parent()
 	if is_instance_valid(target) and trueTarget is Enemy:
 		if trueTarget.base_speed < enemySpeed:
 			trueTarget.base_speed = enemySpeed

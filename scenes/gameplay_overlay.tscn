@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://b14qhc7heb80q"]
+
+[ext_resource type="Texture2D" uid="uid://y4rw3pldgctu" path="res://assets/enemy sprites/overlayLeft.png" id="1_0xq8i"]
+[ext_resource type="Script" uid="uid://dhitsgsr03l5s" path="res://scripts/gameplay_overlay.gd" id="1_ldeta"]
+[ext_resource type="Texture2D" uid="uid://cjwodu6map7it" path="res://assets/enemy sprites/overlayMid.png" id="2_ldeta"]
+[ext_resource type="Texture2D" uid="uid://b5f5ixj70r4d5" path="res://assets/enemy sprites/overlayRight.png" id="3_dcbi3"]
+
+[node name="GameplayOverlay" type="Control" unique_id=1169867896 node_paths=PackedStringArray("health_Label", "score_Label", "highscore_Label")]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+script = ExtResource("1_ldeta")
+health_Label = NodePath("HBoxContainer/HealthBoxTexture/HealthLabel")
+score_Label = NodePath("HBoxContainer/ScoreBoxTexture/ScoreLabel")
+highscore_Label = NodePath("HBoxContainer/HighscoreBoxTexture/HighscoreLabel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1837278665]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -48.0
+offset_right = 260.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HealthBoxTexture" type="TextureRect" parent="HBoxContainer" unique_id=32214068]
+layout_mode = 2
+texture = ExtResource("1_0xq8i")
+
+[node name="HealthLabel" type="Label" parent="HBoxContainer/HealthBoxTexture" unique_id=1167818254]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreBoxTexture" type="TextureRect" parent="HBoxContainer" unique_id=111019722]
+layout_mode = 2
+texture = ExtResource("2_ldeta")
+
+[node name="ScoreLabel" type="Label" parent="HBoxContainer/ScoreBoxTexture" unique_id=65085921]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighscoreBoxTexture" type="TextureRect" parent="HBoxContainer" unique_id=999749540]
+layout_mode = 2
+texture = ExtResource("3_dcbi3")
+
+[node name="HighscoreLabel" type="Label" parent="HBoxContainer/HighscoreBoxTexture" unique_id=1828385191]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1

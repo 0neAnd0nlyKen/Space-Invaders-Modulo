@@ -3,8 +3,7 @@ class_name World
 
 @export var score: int = 0
 @export var health: int = 9
-@export var healthLabel: Label
-@export var scoreLabel: Label
+@export var scoresOverlay: GameplayOverlay
 @export var spawnerNode: Node2D
 @export var p1:Control
 @export var p2:Control
@@ -32,8 +31,8 @@ func _ready() -> void:
 	SelectionInstructions.phoenix_consume.connect(_on_phoenix_consume)
 	BGM.play_music("res://assets/sound/Gameplay.mp3")
 	BGM.bgm_player.volume_db = -15
-	updateLabel(healthLabel, health)
-	updateLabel(scoreLabel, score)
+	scoresOverlay.update_health_label(health)
+	scoresOverlay.update_score_label(score)
 	p1.hide()
 	p2.hide()
 	p3.hide()
@@ -49,7 +48,7 @@ func _on_enemy_defeated(enemyScore: float): #hardcoded newEnemy.(signal).connect
 	if is_difficulty_cleared():
 		spawnerNode.difficulty_increased.emit()
 		next_difficulty_score += 100
-	updateLabel(scoreLabel, score)
+	scoresOverlay.update_score_label(score)
 	print("detected death")
 	if score >= 1200 + (1200*bonusTaken):
 		var bonusType
@@ -89,14 +88,14 @@ func _on_phoenix_consume():
 	health = maxHealth
 	reviveAvailable = false
 	perksTaken -= 1
-	updateLabel(healthLabel, health)
+	scoresOverlay.update_health_label(health)
 
 func _on_repair_recived(amount:int):
 	print_debug("work bitch", amount, " ", health, " ", maxHealth)
 	health = (health + amount)
 	#if health < maxHealth:
 		#health = maxHealth
-	updateLabel(healthLabel, health)
+	scoresOverlay.update_health_label(health)
 
 func _on_enemy_landed(enemyHealth: float): #hardcoded newEnemy.(signal).connect in spawner node
 	print_debug("enemy landed ", enemyHealth )
@@ -110,7 +109,7 @@ func lose_health(lost_health: float):
 		take_damage.emit(lost_health)
 	else:
 		health -= int(lost_health)
-	updateLabel(healthLabel, health)
+	scoresOverlay.update_health_label(health)
 	if health <= 0:
 		if reviveAvailable:
 			SelectionInstructions.phoenix_consume.emit()

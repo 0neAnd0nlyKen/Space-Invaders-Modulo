@@ -20,9 +20,11 @@ var perk3
 var weapon
 var fireRate:float
 var count:float = 0
+var recastCounter:int = 0
 var dur:Array = []
 var activated:Array = []
 var isSpinning:bool = false
+#var isRecast:bool = false
 var timeStopped:bool = false
 
 signal get_hurt(lost_health: float)
@@ -57,22 +59,26 @@ func setup(data:Dictionary):
 			fireRate = initial.fireRate
 			initial.queue_free()
 		1:
-			perks.append(data["ID"])
-			baseCDs.append(data["CDs"])
-			cooldowns.append(0)
-			dur.append(0)
+			if perks.has("empty"):
+				insertPerks(perks.find("empty"), data)
+			else:
+				perks.append(data["ID"])
+				baseCDs.append(data["CDs"])
+				cooldowns.append(0)
+				dur.append(0)
+				activated.append(0)
 			obtain_skill.emit(data["ID"], 
 				Select.perkIcons[Select.perks.find(data["ID"])], 
 				perks.find(data["ID"])
 			)
 			if data["ID"] == "revive":
-				perk.UsePerk("revive", perks.find("revive"))
-				activated.append(1)
-			activated.append(0)
+				var idx = perks.find("revive")
+				perk.UsePerk("revive", idx)
+				activated[idx] = 1
 			SelectionInstructions.playerPerks.append(data["ID"])
 		2:
 			upgrades.append(data["ID"])
-			SelectionInstructions.dmgMulti = (0.4 * upgrades.count("damage"))
+			SelectionInstructions.dmgMulti = (0.8 * upgrades.count("damage"))
 			SelectionInstructions.fireRateUp = (0.004 * upgrades.count("HF"))
 			SelectionInstructions.recast = upgrades.count("double")
 			if upgrades.has("throwable") and SelectionInstructions.throw == false:
@@ -80,7 +86,6 @@ func setup(data:Dictionary):
 			if upgrades.has("metal pipe") and SelectionInstructions.pipe == false:
 				SelectionInstructions.pipe = true
 				shoot_sound.stream = load("res://assets/sound/pipe.wav")
-			print_debug(data["ID"])
 
 func get_input():
 	moveDir = Input.get_axis("left", "right")
@@ -103,12 +108,14 @@ func _physics_process(delta: float) -> void:
 			summonWeaponSawblade()
 	elif fire and count >= fireRate:
 		#print_debug(SelectionInstructions.recast)
-		if SelectionInstructions.recast > 0 and weaponType != "explosive":
-			var a:int = 0
-			while a < SelectionInstructions.recast:
-				summonWeapon()
-				a+=1
+		if recastCounter < SelectionInstructions.recast and weaponType != "explosive":
+			summonWeapon()
+			recastCounter+=1
+			if recastCounter == SelectionInstructions.recast:
+				count = 0
 		else:
+			count = 0
+			recastCounter = 0
 			summonWeapon()
 	
 	moveChar(xMove, yMove)
@@ -153,7 +160,7 @@ func get_cd_and_durs(delta:float):
 
 func summonWeapon():
 	if weaponType == "shotgun":
-		count = 0
+		#count = 0
 		var bulletCount = 6
 		var spread = 0.3
 		for i in bulletCount:
@@ -167,7 +174,7 @@ func summonWeapon():
 			
 		shoot_sound.play()
 	else:
-		count = 0
+		#count = 0
 		shoot_sound.play()
 		var bullet:FriendlyWeapon = weapon.instantiate()
 		if FriendlyWeapon.meleeWeapons.has(weaponType):
@@ -213,6 +220,24 @@ func play_shoot_sound(): #fungsi sound
 	shoot_sound.pitch_scale = randf_range(0.95, 1.05)
 	shoot_sound.play()
 
+func insertPerks(idx:int, data:Dictionary):
+	perks[idx] = (data["ID"])
+	baseCDs[idx] = (data["CDs"])
+	cooldowns[idx] = (0)
+	dur[idx] = (0)
+	activated[idx] = (0)
+
+func rearrangePerks(arr:Array, idx:int):
+	arr.erase("revive")
+	if len(arr) == 3:
+		if idx == 1:
+			arr.append("a")
+			arr[2] = arr[1]
+			if idx == 0:
+				arr[1] = arr[0]
+			arr[idx] = "empty"
+	return arr
+
 func _on_saw_deactivation():
 	isSpinning = false
 
@@ -223,12 +248,14 @@ func _on_revive_consumed():
 	go_on_cooldown.emit("revive")
 	var index = perks.find("revive")
 	perk.StopPerk("revive", index)
-	perks.erase("revive")
-	baseCDs.remove_at(index)
-	cooldowns.remove_at(index)
-	dur.remove_at(index)
-	activated.remove_at(index)
-	SelectionInstructions.playerPerks.erase("revive")
+	perks = rearrangePerks(perks, index)
+	baseCDs = rearrangePerks(baseCDs, index)
+	cooldowns = rearrangePerks(cooldowns, index)
+	dur = rearrangePerks(dur, index)
+	activated = rearrangePerks(activated, index)
+	SelectionInstructions.playerPerks = rearrangePerks(SelectionInstructions.playerPerks, index)
+	
+	#rearrangePerks()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is EnemyProjectile:

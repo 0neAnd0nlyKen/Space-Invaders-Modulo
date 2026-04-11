@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://fu8k3sc7pxew" path="res://assets/main_menu/leaderboard/Leader1.png" id="9_1ajci"]
 [ext_resource type="Texture2D" uid="uid://rgemgx5r4wf3" path="res://assets/main_menu/leaderboard/Leader2.png" id="10_7b55j"]
 [ext_resource type="AudioStream" uid="uid://2pu2as7bac0i" path="res://assets/sound/click.wav" id="11_lgwnu"]
+[ext_resource type="Texture2D" uid="uid://dj8ldh50pi0br" path="res://assets/game_logo.png" id="12_flqon"]
 
 [sub_resource type="Theme" id="Theme_rtw2f"]
 
@@ -34,22 +35,6 @@ grow_vertical = 2
 texture = ExtResource("2_rtw2f")
 stretch_mode = 1
 
-[node name="Title" type="Label" parent="." unique_id=347096023]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 12.0
-offset_right = 4.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 48
-text = "SPACE INVADERS
-Modulo Planet"
-horizontal_alignment = 1
-
 [node name="PlayButton" type="TextureButton" parent="." unique_id=479115841]
 layout_mode = 1
 anchors_preset = 8
@@ -57,17 +42,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -184.5
-offset_top = -187.0
-offset_right = 184.5
-offset_bottom = 7.0
+offset_left = -110.0
+offset_top = -84.0
+offset_right = 110.0
+offset_bottom = -44.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_rtw2f")
 texture_normal = ExtResource("3_oa1go")
 texture_pressed = ExtResource("4_tbmy8")
 texture_hover = ExtResource("4_tbmy8")
-stretch_mode = 0
+ignore_texture_size = true
+stretch_mode = 3
 
 [node name="CreditsButton" type="TextureButton" parent="." unique_id=1806055324]
 layout_mode = 1
@@ -76,16 +62,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -40.0
-offset_right = 100.0
-offset_bottom = 20.0
+offset_left = -110.0
+offset_top = -4.0
+offset_right = 110.0
+offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("5_5dd4i")
 texture_pressed = ExtResource("6_lgwnu")
 texture_hover = ExtResource("6_lgwnu")
-stretch_mode = 0
+ignore_texture_size = true
+stretch_mode = 3
 
 [node name="ExitButton" type="TextureButton" parent="." unique_id=326411809]
 layout_mode = 1
@@ -94,16 +81,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = 40.0
-offset_right = 100.0
-offset_bottom = 100.0
+offset_left = -110.0
+offset_top = 76.0
+offset_right = 110.0
+offset_bottom = 116.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("7_flqon")
 texture_pressed = ExtResource("8_rcqid")
 texture_hover = ExtResource("8_rcqid")
-stretch_mode = 0
+ignore_texture_size = true
+stretch_mode = 3
 
 [node name="LeaderboardButton" type="TextureButton" parent="." unique_id=87355517]
 layout_mode = 1
@@ -112,19 +100,34 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = 120.0
-offset_right = 100.0
-offset_bottom = 180.0
+offset_left = -110.0
+offset_top = 156.0
+offset_right = 110.0
+offset_bottom = 196.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("9_1ajci")
 texture_pressed = ExtResource("10_7b55j")
 texture_hover = ExtResource("10_7b55j")
-stretch_mode = 0
+ignore_texture_size = true
+stretch_mode = 3
 
 [node name="ClickSound" type="AudioStreamPlayer2D" parent="." unique_id=668545295]
 stream = ExtResource("11_lgwnu")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=168726569]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 466.0
+offset_top = 24.0
+offset_right = -468.0
+offset_bottom = -424.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_flqon")
+expand_mode = 1
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CreditsButton" to="." method="_on_credits_pressed"]

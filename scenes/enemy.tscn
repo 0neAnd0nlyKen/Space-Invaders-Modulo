@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cmug4h23scmuq"]
 
 [ext_resource type="Script" uid="uid://cdql3sdk22x2x" path="res://scripts/enemy.gd" id="1_7k104"]
+[ext_resource type="Texture2D" uid="uid://c2lk00h70rjkx" path="res://resources/buff_aura.tres" id="2_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://8tm7xy0btocp" path="res://assets/enemy sprites/smallEnemy 1.png" id="2_md0e3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
@@ -31,12 +32,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=58177044 node_paths=PackedStringArray("hitbox", "animated_sprite")]
-collision_layer = 0
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=58177044 node_paths=PackedStringArray("hitbox", "animated_sprite", "buff_aura")]
 collision_mask = 0
 script = ExtResource("1_7k104")
 hitbox = NodePath("Area2D")
 animated_sprite = NodePath("AnimatedSprite2D")
+buff_aura = NodePath("BuffAura")
+
+[node name="BuffAura" type="Sprite2D" parent="." unique_id=1840797243]
+visible = false
+texture = ExtResource("2_4ra3w")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=883453361]
 

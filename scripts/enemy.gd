@@ -7,6 +7,7 @@ class_name Enemy
 @export var enemy_score: int = 100
 @export var base_speed: float = 30
 @export var animated_sprite: AnimatedSprite2D
+@export var buff_aura: Sprite2D
 
 var health: float
 var time_alive: float = 0.0

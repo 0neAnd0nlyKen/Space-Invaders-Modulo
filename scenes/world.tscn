@@ -27,6 +27,7 @@ p2 = NodePath("Perk2")
 p3 = NodePath("Perk3")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1500852891]
+z_index = -2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

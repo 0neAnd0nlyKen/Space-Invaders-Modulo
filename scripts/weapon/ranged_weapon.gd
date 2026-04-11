@@ -84,8 +84,7 @@ func _bullet_hit(target:Node2D):
 					a+=1
 			else:
 				explota()
-		if target.name != "ShieldNode" and target.name != "EnemyProjectile":
-			#print_debug(target.name)
+		if target.name != "ShieldNode" and target.name != "EnemyProjectile" and target.name != "BuffArea":
 			queue_free()
 
 func _also_bullet_hit(target:Node2D):

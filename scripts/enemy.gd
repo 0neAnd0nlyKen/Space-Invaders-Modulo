@@ -18,7 +18,6 @@ var death_sfx = preload("res://assets/sound/explosion.wav")
 signal enemy_defeated(score_value: float)
 signal enemy_landed(enemy_health: float)
 
-
 func _ready() -> void:
 	health = max_health
 	
@@ -39,6 +38,8 @@ func move_enemy(_delta: float) -> void:
 func take_damage(damage: float) -> void:
 	health -= damage
 	
+	hit_flash()
+	
 	if hit_sound: #Memanggil sound
 		hit_sound.stream = hit_sfx
 		hit_sound.pitch_scale = randf_range(0.9, 1.1) # biar variatif
@@ -47,6 +48,13 @@ func take_damage(damage: float) -> void:
 	if health <= 0:
 		die()
 
+func hit_flash(): #Fungsi ubah sprite musuh kalo kena hit
+	animated_sprite.modulate = Color(1, 0.3, 0.3)
+	
+	await get_tree().create_timer(0.1).timeout
+	
+	animated_sprite.modulate = Color(1, 1, 1, 1) 
+	
 func die() -> void:
 	if hit_sound:
 		hit_sound.stream = death_sfx

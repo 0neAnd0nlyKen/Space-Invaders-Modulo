@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 #@export var charVis:Sprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var shoot_sound = $ShootSound #Sound tembak
 @onready var muzzle:Node2D = $muzzle
 @onready var perk:Node2D = $perks
@@ -172,10 +173,10 @@ func summonWeapon():
 			var angleOffset = lerp(-spread, spread, float(i) / (bulletCount - 1))
 			bullet.rotation = rotation + angleOffset
 			
-		shoot_sound.play()
+		play_shoot_sound()
 	else:
 		#count = 0
-		shoot_sound.play()
+		play_shoot_sound()
 		var bullet:FriendlyWeapon = weapon.instantiate()
 		if FriendlyWeapon.meleeWeapons.has(weaponType):
 			add_child(bullet)
@@ -206,16 +207,22 @@ func moveChar(xMove:float, yMove:float):
 			
 func selectShootSound(): #Fungsi sound tembak
 	pass
-func play_shoot_sound(): #fungsi sound
+func play_shoot_sound():
 	match weaponType:
-		"rifle":
+		"rifle", "railgun":
 			shoot_sound.stream = rifle_sound
+			
 		"sniper":
 			shoot_sound.stream = sniper_sound
-		"shotgun":
+			
+		"shotgun", "explosive":
 			shoot_sound.stream = shotgun_sound
+			
+		"sword", "saw", "repulsar":
+			shoot_sound.stream = rifle_sound # atau custom feel
+			
 		_:
-			return # kalau weapon lain gak ada sound
+			return
 	
 	shoot_sound.pitch_scale = randf_range(0.95, 1.05)
 	shoot_sound.play()
@@ -259,6 +266,7 @@ func _on_revive_consumed():
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is EnemyProjectile:
+		hit_flash()
 		get_hurt.emit(area.damage)
 
 func _on_time_stopped(state:bool):
@@ -266,3 +274,13 @@ func _on_time_stopped(state:bool):
 		timeStopped = true
 	else:
 		timeStopped = false
+	
+func hit_flash():
+	if sprite == null:
+		return
+		
+	for i in range(2):
+		sprite.modulate = Color(1, 0.3, 0.3) # merah (damage feel)
+		await get_tree().create_timer(0.05).timeout
+		sprite.modulate = Color(1, 1, 1) # balik normal
+		await get_tree().create_timer(0.05).timeout		

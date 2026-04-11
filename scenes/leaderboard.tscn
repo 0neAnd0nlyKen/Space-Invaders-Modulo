@@ -34,7 +34,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 48
 text = "LEADERBOARD 
-CHECK YOUR SCORE"
+"
 horizontal_alignment = 1
 
 [node name="BackButton" type="TextureButton" parent="." unique_id=1535120327]

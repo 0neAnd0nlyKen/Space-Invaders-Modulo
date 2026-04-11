@@ -8,17 +8,19 @@ class_name FriendlyWeapon
 var explosion: = preload("res://scenes/weapons/explosion.tscn")
 var origin:Vector2
 var wType:String
+var oriSpeed:float
 var hitbox:CollisionShape2D
 var sprite:Sprite2D
 var objHit:Node2D
 var trueTarget:Node2D
 var die:bool = false
+var theWorld:bool
 
 const meleeWeapons:Array = ["sword", "saw", "repulsar"]
 
 signal sawblade_off()
 
-func setup(type:String, pos:Vector2):
+func setup(type:String, pos:Vector2, cond:bool):
 	hitbox = $CollisionShape2D
 	body_entered.connect(_bullet_hit)
 	body_exited.connect(_left)
@@ -26,6 +28,7 @@ func setup(type:String, pos:Vector2):
 	origin = pos
 	position = pos
 	wType = type
+	theWorld = cond
 	match type:
 		"rifle":
 			speed = -1600
@@ -43,14 +46,21 @@ func setup(type:String, pos:Vector2):
 			speed = -1000
 			damage = 0.0
 			fireRate = 1.2 - SelectionInstructions.fireRateUp
+	oriSpeed = speed
 
 func _physics_process(delta: float) -> void:
 	if not meleeWeapons.has(wType):
+		if theWorld == true:
+			speed = -10
+		else:
+			speed = oriSpeed
 		if wType == "shotgun":
 			position += Vector2(0, speed).rotated(rotation) * delta
 		else:
 			position.y += speed * delta
+		
 		#position.x = origin.x
+		
 		if position.y < -1000:
 			queue_free()
 
@@ -75,7 +85,7 @@ func _bullet_hit(target:Node2D):
 			else:
 				explota()
 		if target.name != "ShieldNode" and target.name != "EnemyProjectile":
-			print_debug(target.name)
+			#print_debug(target.name)
 			queue_free()
 
 func _also_bullet_hit(target:Node2D):
@@ -84,3 +94,9 @@ func _also_bullet_hit(target:Node2D):
 
 func _left(target:Node2D):
 	pass
+
+func _on_timeStop(state:bool):
+	if state == true:
+		theWorld = true
+	else:
+		theWorld = false

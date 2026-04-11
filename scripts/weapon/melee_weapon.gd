@@ -6,11 +6,12 @@ var rotateAngle:float = 0
 var rotateTimer:float = 0
 var doneRotating: bool = false
 var count:float = 0
+var throwSpeed:float = 15
 var press
 var enemies:Array = []
 var enemySpeed
 
-func setup(type:String, pos:Vector2):
+func setup(type:String, pos:Vector2, cond:bool):
 	hitbox = $CollisionShape2D
 	body_entered.connect(_bullet_hit)
 	body_exited.connect(_left)
@@ -18,6 +19,7 @@ func setup(type:String, pos:Vector2):
 	position = pos
 	origin = pos
 	wType = type
+	theWorld = cond
 	match type:
 		"sword":
 			reach = 170
@@ -40,6 +42,12 @@ func setup(type:String, pos:Vector2):
 	
 
 func _physics_process(delta: float) -> void:
+	if theWorld:
+		rotateSpeed = 0.1
+		throwSpeed = -1
+	else:
+		rotateSpeed = 10
+		throwSpeed = -1
 	match wType:
 		"sword":
 			if not SelectionInstructions.throw:
@@ -70,7 +78,7 @@ func _physics_process(delta: float) -> void:
 
 func throwSword():
 	rotate(.3)
-	position.y -= 15
+	position.y -= throwSpeed
 	position.x = origin.x
 	if position.y < -1000:
 		queue_free()
@@ -92,7 +100,7 @@ func sawNormal():
 		queue_free()
 
 func sawThrow():
-	position.y -= 20
+	position.y -= throwSpeed
 	position.x = origin.x
 	if count >= fireRate:
 		for enemy in enemies:
@@ -130,3 +138,9 @@ func _left(target:Node2D):
 		if trueTarget.base_speed < enemySpeed:
 			trueTarget.base_speed = enemySpeed
 	enemies.erase(trueTarget)
+
+func _on_timeStop(state:bool):
+	if state == true:
+		theWorld = true
+	else:
+		theWorld = false

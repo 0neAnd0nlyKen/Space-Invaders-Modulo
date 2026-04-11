@@ -23,6 +23,7 @@ var count:float = 0
 var dur:Array = []
 var activated:Array = []
 var isSpinning:bool = false
+var timeStopped:bool = false
 
 signal get_hurt(lost_health: float)
 signal obtain_skill(ID:String, path:String, slot:int)
@@ -30,6 +31,7 @@ signal while_activated(id:String)
 signal go_on_cooldown(id:String)
 signal go_off_cooldown(id:String)
 signal update_perk_cd_label(id:String, cd:String)
+signal on_timestop(state:bool)
 
 var rifle_sound = preload("res://assets/sound/laserShoot1.wav")
 var sniper_sound = preload("res://assets/sound/laserShoot2.wav")
@@ -37,6 +39,7 @@ var shotgun_sound = preload("res://assets/sound/laserShoot3.wav")
 
 func _ready() -> void:
 	setup(SelectionInstructions.playerData)
+	on_timestop.connect(_on_time_stopped)
 	SelectionInstructions.on_bonus_select.connect(_on_bonus_recived)
 	SelectionInstructions.phoenix_consume.connect(_on_revive_consumed)
 
@@ -50,7 +53,7 @@ func setup(data:Dictionary):
 			selectShootSound()
 			var initial:FriendlyWeapon = weapon.instantiate()
 			add_child(initial)
-			initial.setup(weaponType, muzzle.position)
+			initial.setup(weaponType, muzzle.position, timeStopped)
 			fireRate = initial.fireRate
 			initial.queue_free()
 		1:
@@ -155,23 +158,28 @@ func summonWeapon():
 		var spread = 0.3
 		for i in bulletCount:
 			var bullet:FriendlyWeapon = weapon.instantiate()
-			add_child(bullet)
-			bullet.setup(weaponType, muzzle.position)
+			get_parent().add_child(bullet)
+			bullet.setup(weaponType, global_position, timeStopped)
+			on_timestop.connect(bullet._on_timeStop)
 			bullet.rotation_degrees = -45
 			var angleOffset = lerp(-spread, spread, float(i) / (bulletCount - 1))
 			bullet.rotation = rotation + angleOffset
+			
 		shoot_sound.play()
 	else:
 		count = 0
 		shoot_sound.play()
 		var bullet:FriendlyWeapon = weapon.instantiate()
-		add_child(bullet)
-		bullet.setup(weaponType, muzzle.position)
+		get_parent().add_child(bullet)
+		bullet.setup(weaponType, global_position, timeStopped)
+		on_timestop.connect(bullet._on_timeStop)
+		
 
 func summonWeaponSawblade():
 	var sawblade:FriendlyWeapon = weapon.instantiate()
 	add_child(sawblade)
-	sawblade.setup(weaponType, muzzle.position)
+	sawblade.setup(weaponType, muzzle.position, timeStopped)
+	on_timestop.connect(sawblade._on_timeStop)
 	sawblade.sawblade_off.connect(_on_saw_deactivation)
 	isSpinning = true
 
@@ -221,5 +229,9 @@ func _on_revive_consumed():
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is EnemyProjectile:
 		get_hurt.emit(area.damage)
-	
-		
+
+func _on_time_stopped(state:bool):
+	if state == true:
+		timeStopped = true
+	else:
+		timeStopped = false

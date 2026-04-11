@@ -17,6 +17,7 @@ func UsePerk(perkName:String, slot:int):
 			parent.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_ON
 			process_mode = Node.PROCESS_MODE_ALWAYS
 			parent.while_activated.emit(perkName)
+			parent.on_timestop.emit(true)
 			get_tree().paused = true
 		"repair":
 			parent.dur[slot] = 0.1
@@ -37,6 +38,7 @@ func StopPerk(perkName:String, slot:int):
 			parent.activated[slot] = 0
 		"ZAWARUDO":
 			get_tree().paused = false
+			parent.on_timestop.emit(false)
 			parent.activated[slot] = 0
 			parent.process_mode = Node.PROCESS_MODE_INHERIT
 			process_mode = Node.PROCESS_MODE_INHERIT
